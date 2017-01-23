@@ -17,7 +17,7 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 
 gem 'active_model_serializers'
-gem 'device'
+gem 'devise'
 gem 'omniauth-facebook'
 gem 'rails_admin'
 gem 'cancancan'

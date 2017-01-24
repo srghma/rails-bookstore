@@ -6,11 +6,11 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand Bookstore
-      %a.shop-link.pull-right.visible-xs{ href: '#' }
+      = link_to 'Bookstore', root_path, class: 'navbar-brand'
+      = link_to '', class: 'shop-link pull-right visible-xs', href: '#' do
         %span.shop-icon
           %span.shop-quantity 3
-    %a.shop-link.pull-right.hidden-xs{ href: '#' }
+    = link_to '', class: 'shop-link pull-right hidden-xs', href: '#' do
       %span.shop-icon
         %span.shop-quantity 3
     #navbar.navbar-collapse.collapse.pl-30{ 'aria-expanded': 'false' }
@@ -19,33 +19,34 @@
           %span{ 'aria-hidden': 'true' } &times;
         %ul.nav.navbar-nav
           %li
-            %a{ href: '#' } Home
+            = link_to 'Home'
           %li
-            %a{ type: 'button', 'data-toggle': 'collapse', href: '#menu', 'aria-expanded': 'false', 'aria-controls': 'menu' } Shop
+            = link_to 'Shop', class: '', type: 'button', 'data-toggle': 'collapse', href: '#menu', 'aria-expanded': 'false', 'aria-controls': 'menu'
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{ 'aria-expanded': 'false' }
               %li
-                %a.collapse-link{ href: '#' } Mobile development
+                = link_to 'Mobile development', class: 'collapse-link', href: '#'
               %li
-                %a.collapse-link{ href: '#' } Photo
+                = link_to 'Photo', class: 'collapse-link', href: '#'
               %li
-                %a.collapse-link{ href: '#' } Web design
+                = link_to 'Web design', class: 'collapse-link', href: '#'
           %li
-            %a{ href: '#' } My account
+            = link_to 'My account', new_user_session_path
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            %a{ href: '#' } Home
+            = link_to 'Home', home_index_path
           %li.dropdown
-            %a.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' } Shop
+            = link_to 'Shop', class: 'dropdown-toggle', href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'
             %ul.dropdown-menu
               %li
-                %a{ href: '#' } Mobile development
+                = link_to 'Mobile development', class: '', href: '#'
               %li
-                %a{ href: '#' } Photo
+                = link_to 'Photo', class: '', href: '#'
               %li
-                %a{ href: '#' } Web design
+                = link_to 'Web design', class: '', href: '#'
               %li.divider{ role: 'separator' }
               %li
-                %a{ href: '#' } Log out
+                = link_to 'Log out', class: '', href: '#'
           %li
-            %a{ href: '#' } My account
+            = link_to 'My account', new_user_session_path
+

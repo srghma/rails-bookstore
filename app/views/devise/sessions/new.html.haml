@@ -1,5 +1,13 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title Log In
+    %a.general-login-icon{ href: "#"}
+      %i.fa.fa-facebook-official
+    %p.general-login-text or
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }) do |f|
+  .form-group.mb-30
+    = f.label :email, 'Enter Email', class: 'control-label font-weight-light'
+    = f.email_field :email, placeholder: "Enter Email", class: 'form-control'
   .field
     = f.label :email
     %br/
@@ -15,3 +23,24 @@
   .actions
     = f.submit "Log in"
 = render "devise/shared/links"
+
+%form.general-form
+  .form-group.mb-30
+    %label.control-label.font-weight-light{for: "password"} Password
+    %input#password.form-control{name:"password", type: "password", placeholder: "Password"}
+    %a.help-block.in-gold-500{href: "#"} Forgot password?
+  .form-group.mb-30
+    %label.control-label.font-weight-light{for: "confirm"} Confirm Password
+    %input#confirm.form-control{name:"confirm", type: "password", placeholder: "Confirm Password"}
+  .form-group.checkbox.text-center.mb-30
+    %label.font-weight-light.pl-0
+      %input.checkbox-input{type: "checkbox", hidden: "true"}
+      %span.checkbox-icon
+        %i.fa.fa-check
+      %span.checkbox-text Remember me
+  .text-center
+    %button.btn.btn-default.mb-20 Back to Store
+%p.general-sign-text.text-center
+  Don’t have an Account?
+  %a.in-gold-500{href: "#"} Sign Up
+

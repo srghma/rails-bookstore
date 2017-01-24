@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bookstore
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    %header.navbar.navbar-default
+      .container
+        .navbar-header
+          %button.navbar-toggle.pull-left.ml-15{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+            %span.sr-only
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand Bookstore
+          %a.shop-link.pull-right.visible-xs{href: "#"}
+            %span.shop-icon
+              %span.shop-quantity 3
+        %a.shop-link.pull-right.hidden-xs{href: "#"}
+          %span.shop-icon
+            %span.shop-quantity 3
+        #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+          .visible-xs
+            %button.close{type: "button", 'aria-label': "Close"}
+              %span{'aria-hidden': "true"} &times;
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li
+                %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
+                %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+                  %li
+                    %a.collapse-link{href: "#"} Mobile development
+                  %li
+                    %a.collapse-link{href: "#"} Photo
+                  %li
+                    %a.collapse-link{href: "#"} Web design
+              %li
+                %a{href: "#"} My account
+          .hidden-xs
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li.dropdown
+                %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+                %ul.dropdown-menu
+                  %li
+                    %a{href: "#"} Mobile development
+                  %li
+                    %a{href: "#"} Photo
+                  %li
+                    %a{href: "#"} Web design
+                  %li.divider{role: "separator"}
+                  %li
+                    %a{href: "#"} Log out
+              %li
+                %a{href: "#"} My account
+    %main.container
+      %h1.general-title-margin Checkout
+      %ul.steps.list-inline
+        %li.step.active
+          %span.step-number 1
+          %span.step-text.hidden-xs Address
+        %li.step-divider
+        %li.step
+          %span.step-number 2
+          %span.step-text.hidden-xs Delivery
+        %li.step-divider
+        %li.step
+          %span.step-number 3
+          %span.step-text.hidden-xs Payment
+        %li.step-divider
+        %li.step
+          %span.step-number 4
+          %span.step-text.hidden-xs Confirm
+        %li.step-divider
+        %li.step
+          %span.step-number 5
+          %span.step-text.hidden-xs Complete
+      %form.res-mb-100
+        .hidden-xs.hidden-sm
+          .row
+            .col-md-5
+              %h3.general-subtitle Billing Address
+              %p.general-info-text all fields are required
+            .col-md-5.col-md-offset-1
+              %h3.general-subtitle Shipping Address
+        .row
+          .col-md-5.mb-40
+            .visible-xs.visible-sm
+              %h3.general-subtitle Billing Address
+              %p.general-info-text all fields are required
+            .form-group.has-error
+              %label.control-label.font-weight-light{for: "firstName"} First Name
+              %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}
+              %span.help-block Please enter your first name
+            .form-group
+              %label.control-label.font-weight-light{for: "lastName"} Last Name
+              %input#lastName.form-control{name:"lname", type: "text", placeholder: "Last Name"}
+            .form-group
+              %label.control-label.font-weight-light{for: "address"} Address
+              %input#address.form-control{name: "address", type: "text", placeholder: "Address"}
+            .form-group
+              %label.control-label.font-weight-light{for: "city"} City
+              %input#city.form-control{name: "city", type: "text", placeholder: "City"}
+            .form-group
+              %label.control-label.font-weight-light{for: "zip"} Zip
+              %input#zip.form-control{name: "zip", type: "text", placeholder: "Zip"}
+            .form-group
+              %label.control-label.font-weight-light{for: "сountry"} Country
+              %input#country.form-control{name: "country", type: "text", placeholder: "Select a country"}
+            .form-group
+              %label.control-label.font-weight-light{for: "phone"} Phone
+              %input#phone.form-control{name: "phone", type: "tel", placeholder: "Example +355 66 123 4567"}
+          .col-md-5.col-md-offset-1.mb-60
+            .visible-xs.visible-sm
+              %h3.general-subtitle Shipping Address
+            .form-group.has-error
+              %label.control-label.font-weight-light{for: "firstName"} First Name
+              %input#firstName.form-control{name:"fname", type: "text", placeholder: "First Name"}
+              %span.help-block Please enter your first name
+            .form-group
+              %label.control-label.font-weight-light{for: "lastName"} Last Name
+              %input#lastName.form-control{name:"lname", type: "text", placeholder: "Last Name"}
+            .form-group
+              %label.control-label.font-weight-light{for: "address"} Address
+              %input#address.form-control{name: "address", type: "text", placeholder: "Address"}
+            .form-group
+              %label.control-label.font-weight-light{for: "city"} City
+              %input#city.form-control{name: "city", type: "text", placeholder: "City"}
+            .form-group
+              %label.control-label.font-weight-light{for: "zip"} Zip
+              %input#zip.form-control{name: "zip", type: "text", placeholder: "Zip"}
+            .form-group
+              %label.control-label.font-weight-light{for: "сountry"} Country
+              %select#country.form-control{name: "country", placeholder: "Select a country"}
+                %option London
+                %option London
+                %option London
+            .form-group
+              %label.control-label.font-weight-light{for: "phone"} Phone
+              %input#phone.form-control{name: "phone", type: "tel", placeholder: "Example +355 66 123 4567"}
+            .form-group.checkbox
+              %label.font-weight-light.pl-0
+                %input.checkbox-input{type: "checkbox", hidden: "true"}
+                %span.checkbox-icon
+                  %i.fa.fa-check
+                %span.checkbox-text Use Billing Adress
+        .general-text-align.mb-60
+          %p.in-gold-500.font-18 Order Summary
+          %table.general-summary-table
+            %tr
+              %td
+                %p.font-16 Item Total:
+              %td
+                %p.font-16 €117.69
+            %tr
+              %td
+                %p.font-16 Order Total:
+              %td
+                %p.font-16 €117.69
+          %button.btn.disabled.center-block.mb-20 Save and Continue
+    %footer.navbar.navbar-inverse.mb-0
+      .container
+        .row
+          .col-sm-9
+            %ul.list-inline.general-align.mb-25
+              %li
+                %a.nav-link{href: "#"} Home
+              %li
+                %a.nav-link{href: "#"} Shop
+              %li
+                %a.nav-link{href: "#"} Orders
+              %li
+                %a.nav-link{href: "#"} Settings
+          .col-sm-3
+            %p.general-nav-mail support@bookstore.com
+            %p.general-nav-number (555)-555-5555
+            %ul.list-inline.general-align
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-facebook{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-twitter{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-google-plus{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-instagram{'aria-hidden': "true"}
+    %script{src: "https://use.fontawesome.com/67602d7308.js"}
+    %script{src: "../../javascripts/jquery.js"}
+    %script{src: "../../javascripts/bootstrap.js"}

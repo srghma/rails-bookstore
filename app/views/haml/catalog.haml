@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bookstore
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    %header.navbar.navbar-default
+      .container
+        .navbar-header
+          %button.navbar-toggle.pull-left.ml-15{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+            %span.sr-only
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand Bookstore
+          %a.shop-link.pull-right.visible-xs{href: "#"}
+            %span.shop-icon
+              %span.shop-quantity 3
+        %a.shop-link.pull-right.hidden-xs{href: "#"}
+          %span.shop-icon
+            %span.shop-quantity 3
+        #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+          .visible-xs
+            %button.close{type: "button", 'aria-label': "Close"}
+              %span{'aria-hidden': "true"} &times;
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li
+                %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
+                %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+                  %li
+                    %a.collapse-link{href: "#"} Mobile development
+                  %li
+                    %a.collapse-link{href: "#"} Photo
+                  %li
+                    %a.collapse-link{href: "#"} Web design
+              %li
+                %a{href: "#"} My account
+          .hidden-xs
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li.dropdown
+                %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+                %ul.dropdown-menu
+                  %li
+                    %a{href: "#"} Mobile development
+                  %li
+                    %a{href: "#"} Photo
+                  %li
+                    %a{href: "#"} Web design
+                  %li.divider{role: "separator"}
+                  %li
+                    %a{href: "#"} Log out
+              %li
+                %a{href: "#"} My account
+    %main.container
+      %h1.general-title-margin Сatalog
+      .hidden-xs.clearfix
+        .pull-right
+          .dropdown
+            %a.dropdown-toggle.dropdown-btn.width-240{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+              Newest first
+              %i.fa.fa-angle-down.dropdown-icon
+            %ul.dropdown-menu
+              %li
+                %a{href: "#"} Newest first
+              %li
+                %a{href: "#"} Popular first
+              %li
+                %a{href: "#"} Price: Low to hight
+              %li
+                %a{href: "#"} Price: Low to hight
+        %ul.list-inline.pt-10.mb-25.mr-240
+          %li.mr-35
+            %a.filter-link{href: "#"}
+              All
+              %span.badge.general-badge 135
+          %li.mr-35
+            %a.filter-link{href: "#"}
+              Mobile Development
+              %span.badge.general-badge 135
+          %li.mr-35
+            %a.filter-link{href: "#"}
+              Photo
+              %span.badge.general-badge 135
+          %li.mr-35
+            %a.filter-link{href: "#"}
+              Web Design
+              %span.badge.general-badge 135
+      .mb-40.visible-xs
+        %p.in-grey-600.small.mb-10 Filter by category
+        .dropdown.mb-20
+          %a.dropdown-toggle.dropdown-btn.width-100{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+            Newest first
+            %i.fa.fa-angle-down.dropdown-icon
+          %ul.dropdown-menu
+            %li
+              %a{href: "#"} Newest first
+            %li
+              %a{href: "#"} Popular first
+            %li
+              %a{href: "#"} Price: Low to hight
+            %li
+              %a{href: "#"} Price: Low to hight
+        %p.in-grey-600.small.mb-10 Sort by
+        .dropdown
+          %a.dropdown-toggle.dropdown-btn.width-100{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+            Newest first
+            %i.fa.fa-angle-down.dropdown-icon
+          %ul.dropdown-menu
+            %li
+              %a{href: "#"} Newest first
+            %li
+              %a{href: "#"} Popular first
+            %li
+              %a{href: "#"} Price: Low to hight
+            %li
+              %a{href: "#"} Price: Low to hight
+      .mb-120
+        .row
+          .col-xs-6.col-sm-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .general-thumb-info
+              %p.general-title Android Programming for Beginners
+              %p.font-16.in-gold-500 €28.50
+              %span.divider-sm
+              %p.in-grey-600.small John Horton
+          .col-xs-6.col-sm-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "https://d31wxntiwn0x96.cloudfront.net/rzgade/productimages/1276.jpg?width=400&height=400&etag=%22a2ebd1488b087bf0e6db43ee8bae0634%22", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .general-thumb-info
+              %p.general-title Android Programming for Beginners
+              %p.font-16.in-gold-500 €28.50
+              %span.divider-sm
+              %p.in-grey-600.small Bass Jobsen, David Cochran, Ian Whitley
+          .col-xs-6.col-sm-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ352GRUKdIFLP3va0Tj7QREidI4lwUABrtUJbQehqIL02O_blo", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .general-thumb-info
+              %p.general-title Android Programming for Beginners
+              %p.font-16.in-gold-500 €28.50
+              %span.divider-sm
+              %p.in-grey-600.small Bass Jobsen, David Cochran, Ian Whitley
+          .col-xs-6.col-sm-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .general-thumb-info
+              %p.general-title Android Programming for Beginners
+              %p.font-16.in-gold-500 €28.50
+              %span.divider-sm
+              %p.in-grey-600.small Bass Jobsen, David Cochran, Ian Whitley
+        .row.mb-25
+          .col-xs-6.col-sm-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .general-thumb-info
+              %p.general-title Android Programming for Beginners
+              %p.font-16.in-gold-500 €28.50
+              %span.divider-sm
+              %p.in-grey-600.small John Horton
+          .col-xs-6.col-sm-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail.disabled
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .general-thumb-info
+              %p.general-title Android Programming for Beginners
+              %p.font-16.in-gold-500 €28.50
+              %span.divider-sm
+              %p.in-grey-600.small Bass Jobsen, David Cochran, Ian Whitley
+          .col-xs-6.col-sm-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .general-thumb-info
+              %p.general-title Android Programming for Beginners
+              %p.font-16.in-gold-500 €28.50
+              %span.divider-sm
+              %p.in-grey-600.small Bass Jobsen, David Cochran, Ian Whitley
+          .col-xs-6.col-sm-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .general-thumb-info
+              %p.general-title Android Programming for Beginners
+              %p.font-16.in-gold-500 €28.50
+              %span.divider-sm
+              %p.in-grey-600.small Bass Jobsen, David Cochran, Ian Whitley
+        .text-center
+          %button.btn.btn-primary View More
+    %footer.navbar.navbar-inverse.mb-0
+      .container
+        .row
+          .col-sm-9
+            %ul.list-inline.general-align.mb-25
+              %li
+                %a.nav-link{href: "#"} Home
+              %li
+                %a.nav-link{href: "#"} Shop
+              %li
+                %a.nav-link{href: "#"} Orders
+              %li
+                %a.nav-link{href: "#"} Settings
+          .col-sm-3
+            %p.general-nav-mail support@bookstore.com
+            %p.general-nav-number (555)-555-5555
+            %ul.list-inline.general-align
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-facebook{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-twitter{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-google-plus{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-instagram{'aria-hidden': "true"}
+    %script{src: "https://use.fontawesome.com/67602d7308.js"}
+    %script{src: "../../javascripts/jquery.js"}
+    %script{src: "../../javascripts/bootstrap.js"}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bootstrap Theme Example
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{rel: "stylesheet", href: "http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    %header.navbar.navbar-default
+      .container
+        .navbar-header
+          %button.navbar-toggle.ml-15{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+            %span.sr-only
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand Dashboard
+        #navbar.navbar-collapse.collapse{'aria-expanded': "false"}
+          .visible-xs
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li
+                %a{href: "#"} Profile
+          .hidden-xs
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li
+                %a{href: "#"} Profile
+    %main.container
+      .mb-60
+        %h1 Documentation
+        %p Find out what's included in your Bootstrap theme and how to compile source files. Includes live examples and code snippets for every new component.
+      .mb-60
+        %h2 Gulpfile.js
+        %p
+          You’ll need to install both Node and Gulp before using our included
+          %code gulpfile.js
+        %p Once node is installed, run the following npm command to install Gulp.
+        %p
+          %code $ npm install gulp -g
+        %p When you’re done, make sure you’ve installed the rest of the theme’s dependencies:
+        %p
+          %code $ npm install
+      .mb-60
+        %h2 Theme source code
+        %p
+          The
+          %code scss/, js/,
+          and
+          %code fonts/
+          directories contain the source code for our CSS, JS, and icon fonts. Within the
+          %code scss/
+          and
+          %code js/
+          directories you’ll find two subdirectories:
+          %ul
+            %li
+              %code bootstrap/
+              , which contains 3 version of Bootstrap.
+            %li
+              %code custom/
+              , which contains all of the custom components and overrides authored specifically for this theme.
+          The
+          %code build/
+          folder includes everything above, built into single CSS and JS files that can easily be integrated into your project.
+      .card.mb-60
+        %h2 Custom builds
+        %p
+          %code scss/variables.scss
+          is home to your theme’s variables. Note that your theme’s
+          %code variables
+          file depends on and overrides an existing Bootstrap variable file (found in
+          %code scss/bootstrap/_variables.scss
+          ) and custom theme variables (
+          %code sass.custom/variables.scss
+          ).
+      .card.mb-60
+        %h2 Basic template
+        %p The basic template is a guideline for how to structure your pages when building with a Bootstrap Theme. Included below are all the necessary bits for using the theme’s CSS and JS, as well as some friendly reminders.
+        :plain
+          <pre>
+            <code class="html">
+              &lt;!DOCTYPE html&gt;
+              &lt;html&gt;
+                &lt;head&gt;
+                  &lt;meta charset="UTF-8"/&gt;
+                  &lt;meta name="viewport" content="width=device-width"/&gt;
+                  &lt;title&gt;Bootstrap Theme Example&lt;/title&gt;
+                  &lt;link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet"/&gt;
+                  &lt;link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css"/&gt;
+                  &lt;link href="../css/style.css" rel="stylesheet"/&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                  &lt;main class="container"&gt;
+                    &lt;h1&gt;Hello, world!&lt;/h1&gt;
+                  &lt;/main&gt;
+                  &lt;script src="https://use.fontawesome.com/67602d7308.js"&gt;&lt;/script&gt;
+                  &lt;script src="../../javascripts/jquery.js"&gt;&lt;/script&gt;
+                  &lt;script src="../../javascripts/bootstrap.js"&gt;&lt;/script&gt;
+                  &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"&gt;&lt;/script&gt;
+                  &lt;script src="../../javascripts/doc.js"&gt;&lt;/script&gt;
+                &lt;/body&gt;
+              &lt;/html&gt;
+            </code>
+          </pre>
+      .card.mb-60
+        %h2 Buttons
+        .mb-30
+          %button.btn.btn-default.mb-10.mr-10 Default
+          %button.btn.btn-primary.mb-10.mr-10 Primary
+          %button.btn.disabled.mb-10.mr-10 Disabled
+        :plain
+          <pre>
+            <code class="html">
+              &lt;button class="btn-btn-default"&gt;Default&lt;/button&gt;
+              &lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+              &lt;button class="btn disabled"&gt;Disabled&lt;/button&gt;
+            </code>
+          </pre>
+      .card.mb-60
+        %h2 Avatar list
+        %p.mb-30
+          Join a series of icons into a single horizontal grouping. Add
+          %code .logo-size
+          to img tag and
+          %code .logo-empty
+          to span to make them look as in the example.
+        %ul.list-inline.mb-30
+          %li
+            %img.img-circle.logo-size{src: 'http://bootstrap-themes.github.io/application/assets/img/avatar-fat.jpg'}
+          %li
+            %span.img-circle.logo-size.logo-empty N
+        :plain
+          <pre>
+            <code class="html">
+              &lt;ul class="list-inline"&gt;
+                &lt;li&gt;
+                  &lt;img src="http://bootstrap-themes.github.io/application/assets/img/avatar-fat.jpg" class="img-circle logo-size"/&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                  &lt;span class="img-circle logo-size logo-empty"&gt;N&lt;/span&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            </code>
+          </pre>
+      .card.mb-60
+        %h2 Thumbnail cover
+        %p.mb-30
+          Join a special cover on regular thumbnail. Use
+          %code .thumb-hover-link-wrap
+          to wrap links in a current way and
+          %code .thumb-hover-link
+          to style them easily.
+        .row
+          .col-sm-3
+            .thumbnail.relative
+              %img{src: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ352GRUKdIFLP3va0Tj7QREidI4lwUABrtUJbQehqIL02O_blo", alt: "design-book"}
+              .thumb-hover
+                .thumb-hover-link-wrap
+                  %a.thumb-hover-link{href: "#"}
+                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                  %a.thumb-hover-link{href: "#"}
+                    %i.fa.fa-shopping-cart.thumb-icon
+        :plain
+          <pre>
+            <code class="html">
+              &lt;div class="thumbnail relative"&gt;
+                &lt;img src../&gt;
+                &lt;div class="thumb-hover"&gt;
+                  &lt;div class="thumb-hover-link-wrap"&gt;
+                    &lt;a href="#" class="thumb-hover-link"&gt;
+                      &lt;i aria-hidden="true" class="fa fa-eye thumb-icon"&gt;&lt;/i&gt;
+                    &lt;/a&gt;
+                    &lt;a href="#" class="thumb-hover-link"&gt;
+                      &lt;i class="fa fa-shopping-cart thumb-icon"&gt;&lt;/i&gt;
+                    &lt;/a&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            </code>
+          </pre>
+      .card.mb-60
+        %h2 Card component
+        %p.mb-30
+          Join a special card component. Use
+          %code .card
+          to wrap and bordered, add and remove information that you need easily.
+        .card
+          .clearfix
+            %p.in-grey-600.pull-right Hardcove, glossy paper
+            %p.break-word Materials
+          %p.in-grey-600.small
+            Smashing Book 5: Real-Life Responsive Web Design is our brand new, upcoming book with smart front-end techniques and design patterns derived from real-life responsive projects. With 13 chapters on responsive workflow, SVG, Flexbox, Web fonts, responsive images, responsive email, content strategy, debugging ...
+            %a.in-gold-500.ml-10{href: "#"} Read More
+        :plain
+          <pre>
+            <code class="html">
+              &lt;div class="card"&gt;
+                ...
+              &lt;/div&gt;
+            </code>
+          </pre>
+      .card.mb-60
+        %h2 Rating component
+        %p.mb-30
+          Join a special rating using font-awesome icons and
+          %code .rate-star
+          to show rating and
+          %code .rate-empty
+          to show that it's empty.
+        .mb-15
+          %i.fa.fa-star.rate-star
+          %i.fa.fa-star.rate-star
+          %i.fa.fa-star.rate-star
+          %i.fa.fa-star.rate-star
+          %i.fa.fa-star.rate-star.rate-empty
+        :plain
+          <pre>
+            <code class="html">
+              &lt;i class="fa fa-star rate-star"&gt;&lt;/i&gt;
+              &lt;i class="fa fa-star rate-star rate-empty"&gt;
+            </code>
+          </pre>
+      .card.mb-60
+        %h2 Checkbox and radio
+        %p.mb-30
+          Use
+          %code .checkbox-icon
+          and
+          %code .checkbox-input
+          to style checkboxes and
+          %code .radio-icon
+          and
+          %code .radio-input
+          to style radio buttons.
+        .mb-30
+          .form-group.radio
+            %label.font-16.font-weight-light
+              %input.radio-input{type: "radio", hidden: "true"}
+              %span.radio-icon
+              %span.radio-text radio
+          .form-group.checkbox
+            %label.font-weight-light
+              %input.checkbox-input{type: "checkbox", hidden: "true"}
+              %span.checkbox-icon
+                %i.fa.fa-check
+              %span.checkbox-text checkbox
+        :plain
+          <pre>
+            <code class="html">
+              &lt;div class="form-group radio"&gt;
+                &lt;label&gt;
+                  &lt;input type="radio" hidden="true" class="radio-input"/&gt;
+                  &lt;span class="radio-icon"&gt;&lt;/span&gt;
+                &lt;/label&gt;
+              &lt;/div&gt;
+              &lt;div class="form-group checkbox"&gt;
+                &lt;label&gt;
+                  &lt;input type="checkbox" hidden="true" class="checkbox-input"/&gt;
+                  &lt;span class="checkbox-icon"&gt;&lt;i class="fa fa-check"&gt;&lt;/i&gt;&lt;/span&gt;
+                &lt;/label&gt;
+              &lt;/div&gt;
+            </code>
+          </pre>
+      .card.mb-60
+        %h2 Gallery images
+        %p.mb-30
+          Use
+          %code .images
+          to create gallery of images and use
+          %code .img-link
+          to place images inline.
+        .mb-20
+          .images.clearfix
+            %a.img-link{href: "#"}
+              %img.width-full{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+            %a.img-link{href: "#"}
+              %img.width-full{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+            %a.img-link{href: "#"}
+              %img.width-full{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+        :plain
+          <pre>
+            <code class="html">
+              &lt;div class="images clearfix"&gt;
+                &lt;a href="#" class="img-link"&gt;
+                  &lt;img src="..."/&gt;
+                &lt;/a&gt;
+                &lt;a href="#" class="img-link"&gt;
+                  &lt;img src="..."/&gt;
+                &lt;/a&gt;
+                &lt;a href="#" class="img-link"&gt;
+                  &lt;img src="..."/&gt;
+                &lt;/a&gt;
+              &lt;/div&gt;
+            </code>
+          </pre>
+      .card.mb-60
+        %h2 Shopping component
+        %p
+          Join special shopping component. Use
+          %code .shop-link .shop-icon
+          and
+          %code .shop-quantity
+          to get shopping basket to look like this.
+        .mb-20
+          %a.shop-link{href: "#"}
+            %span.shop-icon
+              %span.shop-quantity 3
+        :plain
+          <pre>
+            <code class="html">
+              &lt;a href="#" class="shop-link"&gt;
+                &lt;span class="shop-icon"&gt;
+                  &lt;span class="shop-quantity"&gt;3&lt;/span&gt;
+                &lt;/span&gt;
+              &lt;/a&gt;
+            </code>
+          </pre>
+      .card.mb-60
+        %h2 Margin helpers
+        %p
+          Join special helpers. Use
+          %code .mr-* .ml-* .mb-*
+          and to add right, left, bottom margin to the element.
+        :plain
+          <pre>
+            <code class="html">
+              &lt;div class="mr-10"&gt;&lt;/div&gt;
+              &lt;div class="ml-10"&gt;&lt;/div&gt;
+              &lt;div class="mb-20"&gt;&lt;/div&gt;
+            </code>
+          </pre>
+    %footer.navbar.navbar-inverse.mb-0
+      .container
+        .row
+          .col-sm-9
+            %ul.list-inline.general-align.mb-25
+              %li
+                %a.nav-link{href: "#"} Home
+              %li
+                %a.nav-link{href: "#"} Shop
+              %li
+                %a.nav-link{href: "#"} Orders
+              %li
+                %a.nav-link{href: "#"} Settings
+          .col-sm-3
+            %ul.list-inline.general-align
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-facebook{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-twitter{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-google-plus{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-instagram{'aria-hidden': "true"}
+    %script{src: "https://use.fontawesome.com/67602d7308.js"}
+    %script{src: "../../javascripts/jquery.js"}
+    %script{src: "../../javascripts/bootstrap.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"}
+    %script{src: "../../javascripts/doc.js"}

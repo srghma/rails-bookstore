@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bookstore
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    %header.navbar.navbar-default
+      .container
+        .navbar-header
+          %button.navbar-toggle.pull-left.ml-15{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+            %span.sr-only
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand Bookstore
+          %a.shop-link.pull-right.visible-xs{href: "#"}
+            %span.shop-icon
+              %span.shop-quantity 3
+        %a.shop-link.pull-right.hidden-xs{href: "#"}
+          %span.shop-icon
+            %span.shop-quantity 3
+        #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+          .visible-xs
+            %button.close{type: "button", 'aria-label': "Close"}
+              %span{'aria-hidden': "true"} &times;
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li
+                %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
+                %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+                  %li
+                    %a.collapse-link{href: "#"} Mobile development
+                  %li
+                    %a.collapse-link{href: "#"} Photo
+                  %li
+                    %a.collapse-link{href: "#"} Web design
+              %li
+                %a{href: "#"} My account
+          .hidden-xs
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li.dropdown
+                %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+                %ul.dropdown-menu
+                  %li
+                    %a{href: "#"} Mobile development
+                  %li
+                    %a{href: "#"} Photo
+                  %li
+                    %a{href: "#"} Web design
+                  %li.divider{role: "separator"}
+                  %li
+                    %a{href: "#"} Log out
+              %li
+                %a{href: "#"} My account
+    %main.container.general-main-wrap
+      %h1.general-title-margin Order R25314582
+      .row.mb-20
+        .col-sm-3
+          %h3.general-subtitle.mt-0 Shipping Address
+          %p.general-address
+            John Doe
+            %span.general-edit edit
+            %br
+            44 Fifth Ave v231
+            %br
+            New York NY 1001
+            %br
+            United States
+            %br
+            Phone +16507599755
+        .col-sm-3
+          %h3.general-subtitle.mt-0 Billing Address
+          %p.general-address
+            John Doe
+            %span.general-edit edit
+            %br
+            44 Fifth Ave v231
+            %br
+            New York NY 1001
+            %br
+            United States
+            %br
+            Phone +16507599755
+        .col-sm-3
+          %h3.general-subtitle.mt-0 Shipments
+          %p.general-address
+            Delivery Next Day!
+            %span.general-edit edit
+            %br
+            By train
+        .col-sm-3
+          %h3.general-subtitle.mt-0 Payment Information
+          %p.general-address
+            ** ** ** 8756
+            %span.general-edit edit
+            %br
+            12/2018
+      .visible-xs
+        .general-cart-item.divider-lg
+          .general-img-wrap-table
+            %img.cart-img-shadow.width-full{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+          %p.general-title Android Programming for Beginners
+          %P.in-grey-600.font-weight-light A recipe-based book to help you efficiently create amazing PHP-based applications with Laravel 5.x
+          %table.table
+            %tr
+              %td
+                %span.in-grey-600 Price
+              %td
+                %span.font-16.in-gold-500 €28.50
+            %tr
+              %td.vertical-middle
+                %span.in-grey-600 Quantity
+              %td
+                %span 1
+            %tr
+              %td
+                %span.in-grey-600 SubTotal
+              %td
+                %span.font-16.in-gold-500 €32.90
+        .general-cart-item.divider-lg.mb-55
+          .general-img-wrap-table
+            %img.cart-img-shadow.width-full{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+          %p.general-title Android Programming for Beginners
+          %table.table
+            %tr
+              %td
+                %span.in-grey-600 Price
+              %td
+                %span.font-16.in-gold-500 €28.50
+            %tr
+              %td.vertical-middle
+                %span.in-grey-600 Quantity
+              %td
+                .input-group
+                  %a.input-link{href: "#"}
+                    %i.fa.fa-minus.line-height-40
+                  %input.form-control.quantity-input{type: "text"}
+                  %a.input-link{href: "#"}
+                    %i.fa.fa-plus.line-height-40
+            %tr
+              %td
+                %span.in-grey-600 SubTotal
+              %td
+                %span.font-16.in-gold-500 €32.90
+      .hidden-xs.divider-lg.pt-20
+        %table.table.table-hover
+          %thead
+            %tr
+              %th
+                %span.in-grey-600 Book
+              %th.col-method
+              %th
+                %span.in-grey-600 Price
+              %th
+                %span.in-grey-600 Quantity
+              %th
+                %span.in-grey-600 Total
+          %tbody
+            %tr
+              %td
+                .general-img-wrap-table
+                  %img.cart-img-shadow.pull-left.width-full{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              %td
+                %p.general-title Android Programming for Beginners
+                %p.in-grey-600.font-weight-light Maximize the potential of Bootstrap with a collection of real-world site projects for better, faster, more responsive web applications
+              %td
+                %span.font-16.in-gold-500 €28.50
+              %td
+                %span.ml-30 1
+              %td
+                %span.font-16.in-gold-500 €32.90
+      .text-center.general-text-right
+        %p.in-gold-500.font-18 Order Summary
+        %table.general-summary-table.general-summary-table-right.general-text-right
+          %tr
+            %td
+              %p.font-16 Subtotal:
+            %td
+              %p.font-16 €117.69
+          %tr
+            %td
+              %p.font-16 Coupon:
+            %td
+              %p.font-16 €0.00
+          %tr
+            %td
+              %strong.font-18 Order Total:
+            %td
+              %strong.font-18 €117.69
+      .text-center
+        %button.btn.btn-default.mb-20 Place Order
+    %footer.navbar.navbar-inverse.mb-0
+      .container
+        .row
+          .col-sm-9
+            %ul.list-inline.general-align.mb-25
+              %li
+                %a.nav-link{href: "#"} Home
+              %li
+                %a.nav-link{href: "#"} Shop
+              %li
+                %a.nav-link{href: "#"} Orders
+              %li
+                %a.nav-link{href: "#"} Settings
+          .col-sm-3
+            %p.general-nav-mail support@bookstore.com
+            %p.general-nav-number (555)-555-5555
+            %ul.list-inline.general-align
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-facebook{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-twitter{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-google-plus{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-instagram{'aria-hidden': "true"}
+    %script{src: "https://use.fontawesome.com/67602d7308.js"}
+    %script{src: "../../javascripts/jquery.js"}
+    %script{src: "../../javascripts/bootstrap.js"}

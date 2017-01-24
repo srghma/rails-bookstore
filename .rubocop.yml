@@ -7,3 +7,5 @@ Rails:
 Bundler/OrderedGems:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false

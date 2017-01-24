@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bookstore
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    %header.navbar.navbar-default
+      .container
+        .navbar-header
+          %button.navbar-toggle.pull-left.ml-15{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+            %span.sr-only
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand Bookstore
+          %a.shop-link.pull-right.visible-xs{href: "#"}
+            %span.shop-icon
+              %span.shop-quantity 3
+        %a.shop-link.pull-right.hidden-xs{href: "#"}
+          %span.shop-icon
+            %span.shop-quantity 3
+        #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+          .visible-xs
+            %button.close{type: "button", 'aria-label': "Close"}
+              %span{'aria-hidden': "true"} &times;
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li
+                %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
+                %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+                  %li
+                    %a.collapse-link{href: "#"} Mobile development
+                  %li
+                    %a.collapse-link{href: "#"} Photo
+                  %li
+                    %a.collapse-link{href: "#"} Web design
+              %li
+                %a{href: "#"} My account
+          .hidden-xs
+            %ul.nav.navbar-nav
+              %li
+                %a{href: "#"} Home
+              %li.dropdown
+                %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+                %ul.dropdown-menu
+                  %li
+                    %a{href: "#"} Mobile development
+                  %li
+                    %a{href: "#"} Photo
+                  %li
+                    %a{href: "#"} Web design
+                  %li.divider{role: "separator"}
+                  %li
+                    %a{href: "#"} Log out
+              %li
+                %a{href: "#"} My account
+    %main.container
+      #slider.carousel.slide{'data-ride': "carousel"}
+        %ol.carousel-indicators.general-carousel-indicators
+          %li.active{'data-target': "#slider", 'data-slide-to': "0"}
+          %li{'data-target': "#slider", 'data-slide-to': "1"}
+        .carousel-inner{role: "listbox"}
+          .item.active
+            .row
+              .col-sm-5
+                .general-img-wrap
+                  %img.img-shadow.general-thumbnail-img.width-full{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              .col-sm-7
+                .mb-60
+                  %h1 Real-Life Responsive Web Design
+                  %p.lead Smart front-end techniques and design patterns derived from real-life responsive projects
+                  %p.in-grey-600.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
+                  .general-align.pt-20
+                    %button.disabled.btn Buy Now
+          .item
+            .row
+              .col-sm-5
+                .general-img-wrap
+                  %img.img-shadow.general-thumbnail-img.width-full{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              .col-sm-7
+                .mb-60
+                  %h1 Real-Life Responsive Web Design
+                  %p.lead Smart front-end techniques and design patterns derived from real-life responsive projects
+                  %p.in-grey-600.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
+                  .general-align.pt-20
+                    %button.btn.btn-primary Buy Now
+        %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
+          %span.icon-prev{'aria-hidden': "true"}
+          %span.sr-only Previous
+        %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
+          %span.icon-next{'aria-hidden': "true"}
+          %span.sr-only Next
+    .container
+      .jumbotron.text-center.mb-0
+        %h2.h1 Welcome to our amazing Bookstore!
+        .mb-res-50
+          %p.in-grey-600 We pore through hundreds of new books each month and select the five best we can find to share with our members.
+        %button.btn.btn-default Get Started
+      .mb-35
+        %h3 Best Sellers
+        .row
+          .col-sm-6.col-md-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .mb-35
+              .clearfix
+                %p.pull-right.font-16.in-gold-500 €28.50
+                %p.general-title.mr-55 Android Programming for Beginners
+              %span.divider-sm
+              %p.in-grey-600.small John Horton
+          .col-sm-6.col-md-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail.disabled
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .mb-35
+              .clearfix
+                %p.pull-right.font-16.in-gold-500 €28.50
+                %p.general-title.mr-55 Android Programming for Beginners
+              %span.divider-sm
+              %p.in-grey-600.small John Horton
+          .col-sm-6.col-md-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .mb-35
+              .clearfix
+                %p.pull-right.font-16.in-gold-500 €28.50
+                %p.general-title.mr-55 Android Programming for Beginners
+              %span.divider-sm
+              %p.in-grey-600.small John Horton
+          .col-sm-6.col-md-3
+            .general-thumb-wrap
+              .thumbnail.general-thumbnail
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                .thumb-hover
+                  .general-thumb-link-wrap
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                    %a.thumb-hover-link{href: "#"}
+                      %i.fa.fa-shopping-cart.thumb-icon
+            .mb-35
+              .clearfix
+                %p.pull-right.font-16.in-gold-500 €28.50
+                %p.general-title.mr-55 Android Programming for Beginners
+              %span.divider-sm
+              %p.in-grey-600.small John Horton
+    %footer.navbar.navbar-inverse.mb-0
+      .container
+        .row
+          .col-sm-9
+            %ul.list-inline.general-align.mb-25
+              %li
+                %a.nav-link{href: "#"} Home
+              %li
+                %a.nav-link{href: "#"} Shop
+              %li
+                %a.nav-link{href: "#"} Orders
+              %li
+                %a.nav-link{href: "#"} Settings
+          .col-sm-3
+            %p.general-nav-mail support@bookstore.com
+            %p.general-nav-number (555)-555-5555
+            %ul.list-inline.general-align
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-facebook{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-twitter{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-google-plus{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-instagram{'aria-hidden': "true"}
+    %script{src: "https://use.fontawesome.com/67602d7308.js"}
+    %script{src: "../../javascripts/jquery.js"}
+    %script{src: "../../javascripts/bootstrap.js"}

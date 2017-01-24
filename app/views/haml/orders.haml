@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{charset: "UTF-8"}
+    %meta{name: "viewport", content: "width=device-width"}
+    %title Bookstore
+    %link{href: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600", rel: "stylesheet"}
+    %link{href: "../css/style.css", rel: "stylesheet"}
+  %body
+    .general-main-container
+      %header.navbar.navbar-default
+        .container
+          .navbar-header
+            %button.navbar-toggle.pull-left.ml-15{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+              %span.sr-only
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.navbar-brand Bookstore
+            %a.shop-link.pull-right.visible-xs{href: "#"}
+              %span.shop-icon
+                %span.shop-quantity 3
+          %a.shop-link.pull-right.hidden-xs{href: "#"}
+            %span.shop-icon
+              %span.shop-quantity 3
+          #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+            .visible-xs
+              %button.close{type: "button", 'aria-label': "Close"}
+                %span{'aria-hidden': "true"} &times;
+              %ul.nav.navbar-nav
+                %li
+                  %a{href: "#"} Home
+                %li
+                  %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
+                  %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+                    %li
+                      %a.collapse-link{href: "#"} Mobile development
+                    %li
+                      %a.collapse-link{href: "#"} Photo
+                    %li
+                      %a.collapse-link{href: "#"} Web design
+                %li
+                  %a{href: "#"} My account
+            .hidden-xs
+              %ul.nav.navbar-nav
+                %li
+                  %a{href: "#"} Home
+                %li.dropdown
+                  %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+                  %ul.dropdown-menu
+                    %li
+                      %a{href: "#"} Mobile development
+                    %li
+                      %a{href: "#"} Photo
+                    %li
+                      %a{href: "#"} Web design
+                    %li.divider{role: "separator"}
+                    %li
+                      %a{href: "#"} Log out
+                %li
+                  %a{href: "#"} My account
+      %main.container.general-main-wrap
+        %h1.mt-0.mb-25 My Orders
+        %p.in-grey-600.small.mb-10.visible-xs Sort by
+        .dropdown.general-order-dropdown.mb-20
+          %a.dropdown-toggle.dropdown-btn.width-100{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+            Waiting for processing
+            %i.fa.fa-angle-down.dropdown-icon
+          %ul.dropdown-menu
+            %li
+              %a{href: "#"} Newest first
+            %li
+              %a{href: "#"} Popular first
+            %li
+              %a{href: "#"} Price: Low to hight
+            %li
+              %a{href: "#"} Price: Low to hight
+        .visible-xs
+          .general-cart-item.divider-lg-bottom.pt-0
+            %table.table
+              %tr
+                %td.col-half
+                  %span.in-grey-600 Number
+                %td.col-half
+                  %span.general-order-number R25314582
+              %tr
+                %td
+                  %span.in-grey-600 Completed at
+                %td
+                  %span.in-grey-900.font-16.font-weight-light 2016-11-14
+              %tr
+                %td
+                  %span.in-grey-600 Status
+                %td
+                  %span.font-16.in-grey-900.font-weight-light In Progress
+              %tr
+                %td
+                  %span.in-grey-600 Total
+                %td
+                  %strong.font-16 €32.90
+          .general-cart-item
+            %table.table
+              %tr
+                %td.col-half
+                  %span.in-grey-600 Number
+                %td.col-half
+                  %span.general-order-number R25314582
+              %tr
+                %td
+                  %span.in-grey-600 Completed at
+                %td
+                  %span.in-grey-900.font-16.font-weight-light 2016-11-14
+              %tr
+                %td
+                  %span.in-grey-600 Status
+                %td
+                  %span.font-16.font-weight-light.text-success Delivered
+              %tr
+                %td
+                  %span.in-grey-600 Total
+                %td
+                  %strong.font-16 €32.90
+        .hidden-xs.mb-res-50
+          %table.table.table-hover
+            %thead
+              %tr
+                %th
+                  %span.in-grey-600 Number
+                %th
+                  %span.in-grey-600 Completed at
+                %th
+                  %span.in-grey-600 Status
+                %th
+                  %span.in-grey-600 Total
+            %tbody
+              %tr
+                %td
+                  %span.general-order-number R25314582
+                %td
+                  %span.in-grey-900.font-16.font-weight-light 2016-11-14
+                %td
+                  %span.font-16.in-grey-900.font-weight-light In Progress
+                %td
+                  %strong.font-16 €32.90
+              %tr
+                %td
+                  %span.general-order-number R25314582
+                %td
+                  %span.in-grey-900.font-16.font-weight-light 2016-11-14
+                %td
+                  %span.font-16.font-weight-light.text-success Delivered
+                %td
+                  %strong.font-16 €32.90
+    %footer.navbar.navbar-inverse.mb-0
+      .container
+        .row
+          .col-sm-9
+            %ul.list-inline.general-align.mb-25
+              %li
+                %a.nav-link{href: "#"} Home
+              %li
+                %a.nav-link{href: "#"} Shop
+              %li
+                %a.nav-link{href: "#"} Orders
+              %li
+                %a.nav-link{href: "#"} Settings
+          .col-sm-3
+            %p.general-nav-mail support@bookstore.com
+            %p.general-nav-number (555)-555-5555
+            %ul.list-inline.general-align
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-facebook{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-twitter{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-google-plus{'aria-hidden': "true"}
+              %li
+                %a.nav-link{href: "#"}
+                  %i.fa.fa-instagram{'aria-hidden': "true"}
+    %script{src: "https://use.fontawesome.com/67602d7308.js"}
+    %script{src: "../../javascripts/jquery.js"}
+    %script{src: "../../javascripts/bootstrap.js"}

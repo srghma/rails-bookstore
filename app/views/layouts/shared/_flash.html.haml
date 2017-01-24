@@ -1,5 +1,5 @@
 - flash.each do |name, msg|
-  #flash{:class => "alert alert-#{name == :notice || name == :success ? "success" : "error"}"}
+  #flash{ :class => "alert alert-#{ name == :notice || name == :success ? "success" : "error"}"} 
     .container
       %a.close ×
       = msg

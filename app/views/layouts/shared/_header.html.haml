@@ -1,51 +1,51 @@
 %header.navbar.navbar-default.mb-0
   .container
     .navbar-header
-      %button.navbar-toggle.pull-left.ml-15{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+      %button.navbar-toggle.pull-left.ml-15{ type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbar' }
         %span.sr-only
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
       %a.navbar-brand Bookstore
-      %a.shop-link.pull-right.visible-xs{href: "#"}
+      %a.shop-link.pull-right.visible-xs{ href: '#' }
         %span.shop-icon
           %span.shop-quantity 3
-    %a.shop-link.pull-right.hidden-xs{href: "#"}
+    %a.shop-link.pull-right.hidden-xs{ href: '#' }
       %span.shop-icon
         %span.shop-quantity 3
-    #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+    #navbar.navbar-collapse.collapse.pl-30{ 'aria-expanded': 'false' }
       .visible-xs
-        %button.close{type: "button", 'aria-label': "Close"}
-          %span{'aria-hidden': "true"} &times;
+        %button.close{ type: 'button', 'aria-label': 'Close' }
+          %span{ 'aria-hidden': 'true' } &times;
         %ul.nav.navbar-nav
           %li
-            %a{href: "#"} Home
+            %a{ href: '#' } Home
           %li
-            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
-            %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
+            %a{ type: 'button', 'data-toggle': 'collapse', href: '#menu', 'aria-expanded': 'false', 'aria-controls': 'menu' } Shop
+            %ul#menu.collapse.list-unstyled.pl-30.mb-10{ 'aria-expanded': 'false' }
               %li
-                %a.collapse-link{href: "#"} Mobile development
+                %a.collapse-link{ href: '#' } Mobile development
               %li
-                %a.collapse-link{href: "#"} Photo
+                %a.collapse-link{ href: '#' } Photo
               %li
-                %a.collapse-link{href: "#"} Web design
+                %a.collapse-link{ href: '#' } Web design
           %li
-            %a{href: "#"} My account
+            %a{ href: '#' } My account
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            %a{href: "#"} Home
+            %a{ href: '#' } Home
           %li.dropdown
-            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+            %a.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' } Shop
             %ul.dropdown-menu
               %li
-                %a{href: "#"} Mobile development
+                %a{ href: '#' } Mobile development
               %li
-                %a{href: "#"} Photo
+                %a{ href: '#' } Photo
               %li
-                %a{href: "#"} Web design
-              %li.divider{role: "separator"}
+                %a{ href: '#' } Web design
+              %li.divider{ role: 'separator' }
               %li
-                %a{href: "#"} Log out
+                %a{ href: '#' } Log out
           %li
-            %a{href: "#"} My account
+            %a{ href: '#' } My account

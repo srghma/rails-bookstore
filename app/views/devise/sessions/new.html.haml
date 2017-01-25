@@ -1,46 +1,32 @@
 %main.container.general-main-wrap
   .text-center
     %h3.general-login-title Log In
-    %a.general-login-icon{ href: "#"}
+    %a.general-login-icon
       %i.fa.fa-facebook-official
     %p.general-login-text or
-= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "general-form" }) do |f|
-  .form-group.mb-30
-    = f.label :email, 'Enter Email', class: 'control-label font-weight-light'
-    = f.email_field :email, placeholder: "Enter Email", class: 'form-control'
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
-
-%form.general-form
-  .form-group.mb-30
-    %label.control-label.font-weight-light{for: "password"} Password
-    %input#password.form-control{name:"password", type: "password", placeholder: "Password"}
-    %a.help-block.in-gold-500{href: "#"} Forgot password?
-  .form-group.mb-30
-    %label.control-label.font-weight-light{for: "confirm"} Confirm Password
-    %input#confirm.form-control{name:"confirm", type: "password", placeholder: "Confirm Password"}
-  .form-group.checkbox.text-center.mb-30
-    %label.font-weight-light.pl-0
-      %input.checkbox-input{type: "checkbox", hidden: "true"}
-      %span.checkbox-icon
-        %i.fa.fa-check
-      %span.checkbox-text Remember me
-  .text-center
-    %button.btn.btn-default.mb-20 Back to Store
-%p.general-sign-text.text-center
-  Don’t have an Account?
-  %a.in-gold-500{href: "#"} Sign Up
-
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'general-form' }) do |f|
+    .form-group.mb-30
+      = f.label :email, 'Enter Email', class: 'control-label font-weight-light'
+      = f.email_field :email, placeholder: 'Enter Email', class: 'form-control', autofocus: true
+    .form-group.mb-30
+      = f.label :password, 'Password', class: 'control-label font-weight-light'
+      = f.password_field :password, placeholder: 'Password', autocomplete: 'off', class: 'form-control'
+      - if devise_mapping.recoverable?
+        = link_to 'Forgot password?', new_password_path(resource_name), class: 'help-block in-gold-500'
+    .form-group.mb-30
+      = f.label :password_confirmation, 'Confirm Password', class: 'control-label font-weight-light'
+      = f.password_field :password_confirmation, placeholder: 'Confirm Password', autocomplete: 'off', class: 'form-control'
+    - if devise_mapping.rememberable?
+      .form-group.checkbox.text-center.mb-30
+        = f.check_box :remember_me, hidden: true
+        %span.checkbox-icon
+          %i.fa.fa-check
+          .text-center
+        -# %span.checkbox-text Remember me
+        = f.label :remember_me, class: 'checkbox-text'
+    .actions.text-center
+      = f.submit 'Log in', class: 'btn btn-default mb-20'
+  - if devise_mapping.registerable?
+    %p.general-sign-text.text-center
+      Don’t have an Account?
+      = link_to 'Sign up', new_registration_path(resource_name), class: 'in-gold-500'

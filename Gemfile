@@ -26,6 +26,7 @@ gem 'kaminari'
 # File uploader
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'config'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

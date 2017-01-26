@@ -8,4 +8,7 @@ Bundler/OrderedGems:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
-  Enabled: false
+    Enabled: false
+
+Style/Documentation:
+    Enabled: false

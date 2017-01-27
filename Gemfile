@@ -17,6 +17,7 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 
 gem 'config'
+gem 'country_select'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'rails_admin'

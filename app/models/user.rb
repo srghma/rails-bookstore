@@ -1,17 +1,32 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  include ActiveModel::Validations
+
+  before_validation :downcase_email
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
+  validates :email, presence: true, email: true, uniqueness: true
+
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      # If you are using confirmable and the provider(s) you use validate emails,
-      # uncomment the line below to skip the confirmation emails.
-      # user.skip_confirmation!
+    user = find_by(provider: auth.provider, uid: auth.uid)
+    return user if user
+
+    user = find_by(email: auth.info.email)
+    if user
+      update(user.id, provider: auth.provider, uid: auth.uid)
+    else
+      create do |u|
+        u.email = auth.info.email
+        u.password = Devise.friendly_token[0, 20]
+      end
     end
+  end
+
+  private
+
+  def downcase_email
+    self.email = email.downcase if email.present?
   end
 end

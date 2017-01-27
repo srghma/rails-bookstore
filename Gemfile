@@ -16,6 +16,7 @@ gem 'turbolinks', '~> 5'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 
+gem 'config'
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'rails_admin'
@@ -26,7 +27,6 @@ gem 'kaminari'
 # File uploader
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'config'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

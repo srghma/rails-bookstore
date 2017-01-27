@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126181833) do
+ActiveRecord::Schema.define(version: 20170127194802) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "addressable_type"
+    t.integer  "addressable_id"
+    t.string   "country_code",     null: false
+    t.string   "first_name",       null: false
+    t.string   "last_name",        null: false
+    t.string   "street",           null: false
+    t.string   "city",             null: false
+    t.string   "zip",              null: false
+    t.string   "phone",            null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

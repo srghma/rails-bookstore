@@ -107,10 +107,9 @@ GEM
     factory_girl_rails (4.8.0)
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
-    faker (1.7.2)
-      i18n (~> 0.5)
     faraday (0.10.1)
       multipart-post (>= 1.2, < 3)
+    ffaker (2.4.0)
     ffi (1.9.17)
     font-awesome-rails (4.7.0.1)
       railties (>= 3.2, < 5.1)
@@ -218,7 +217,7 @@ GEM
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     public_suffix (2.0.5)
-    puma (3.6.2)
+    puma (3.7.0)
     rack (2.0.1)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -361,7 +360,7 @@ DEPENDENCIES
   database_cleaner
   devise
   factory_girl_rails
-  faker
+  ffaker
   fuubar
   guard-livereload
   guard-rspec
@@ -373,7 +372,7 @@ DEPENDENCIES
   omniauth-facebook
   pg
   puma (~> 3.0)
-  rails (~> 5.0.1)
+  rails (~> 5.0)
   rails_admin
   rspec-rails
   sass-rails (~> 5.0)

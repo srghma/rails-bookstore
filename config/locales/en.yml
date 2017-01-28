@@ -21,3 +21,7 @@
 
 en:
   hello: "Hello world"
+
+  errors:
+    messages:
+      phone: Please enter phone number in format +355 66 123 4567

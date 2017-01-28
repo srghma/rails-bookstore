@@ -16,7 +16,6 @@ gem 'turbolinks', '~> 5'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 
-gem 'config'
 gem 'country_select'
 gem 'devise'
 gem 'omniauth-facebook'
@@ -42,10 +41,12 @@ end
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'sqlite3'
+  gem 'dotenv-rails'
 
   # RSpec
   gem 'rspec-rails'
-  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'email_spec'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
   gem 'ffaker'

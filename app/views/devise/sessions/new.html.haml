@@ -13,9 +13,6 @@
       = f.password_field :password, placeholder: 'Password', autocomplete: 'off', class: 'form-control'
       - if devise_mapping.recoverable?
         = link_to 'Forgot password?', new_password_path(resource_name), class: 'help-block in-gold-500'
-    .form-group.mb-30
-      = f.label :password_confirmation, 'Confirm Password', class: 'control-label font-weight-light'
-      = f.password_field :password_confirmation, placeholder: 'Confirm Password', autocomplete: 'off', class: 'form-control'
     - if devise_mapping.rememberable?
       .form-group.checkbox.text-center.mb-30
         = f.check_box :remember_me, hidden: true

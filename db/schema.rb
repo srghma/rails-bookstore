@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170127194802) do
+ActiveRecord::Schema.define(version: 20170129162148) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "addressable_type"
-    t.integer  "addressable_id"
+    t.string   "addressable_type", null: false
+    t.integer  "addressable_id",   null: false
     t.string   "country_code",     null: false
     t.string   "first_name",       null: false
     t.string   "last_name",        null: false
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20170127194802) do
   end
 
   create_table "authors", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "first_name", null: false
+    t.string   "last_name",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -59,19 +59,36 @@ ActiveRecord::Schema.define(version: 20170127194802) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.decimal  "price"
-    t.integer  "category_id"
+    t.string   "title",       null: false
+    t.text     "description", null: false
+    t.decimal  "price",       null: false
+    t.integer  "category_id", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["category_id"], name: "index_books_on_category_id"
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "quantity",   default: 1, null: false
+    t.integer  "book_id",                null: false
+    t.integer  "order_id",               null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["book_id"], name: "index_order_items_on_book_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

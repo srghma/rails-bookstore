@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
     it { should have_one(:billing_address).dependent(:destroy) }
     it { should have_one(:shipping_address).dependent(:destroy) }
     # it { should have_many(:reviews).dependent(:destroy) }
-    # it { should have_many(:orders).dependent(:nullify) }
+    it { should have_many(:orders).dependent(:nullify) }
   end
 
   describe '.from_omniauth' do

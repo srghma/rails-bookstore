@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 20170130110059) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string   "title",       null: false
-    t.text     "description", null: false
-    t.decimal  "price",       null: false
-    t.integer  "category_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "title",                                            null: false
+    t.text     "description",                         default: ""
+    t.decimal  "price",       precision: 8, scale: 2,              null: false
+    t.integer  "category_id",                                      null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.index ["category_id"], name: "index_books_on_category_id"
   end
 

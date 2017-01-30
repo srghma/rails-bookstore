@@ -7,7 +7,7 @@ RSpec.describe Author, type: :model do
   end
 
   context 'Association' do
-    it { should have_and_belong_to_many(:books).join_table(:authors_books) }
+    it { should have_many(:books).through(:authorships) }
   end
 
   context 'Before save' do

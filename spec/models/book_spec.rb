@@ -11,7 +11,7 @@ RSpec.describe Book, type: :model do
 
   context 'Associations' do
     it { should belong_to(:category) }
-    it { should have_and_belong_to_many(:author).join_table(:authors_books) }
+    it { should have_many(:authors).through(:authorships) }
     # it { should have_many(:reviews).dependent(:destroy) }
     # it { should have_many(:order_items).dependent(:destroy) }
     # it { should have_many(:wishes).dependent(:destroy) }

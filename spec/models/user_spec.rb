@@ -16,19 +16,19 @@ RSpec.describe User, type: :model do
   end
 
   describe '.from_omniauth' do
+    let(:email) { FFaker::Internet.email }
+    let(:info) { double('Info', email: email) }
+    let(:auth) { double('Auth', info: info) }
+
     context 'when user in database' do
       it 'should return user' do
-        user = create :user, :facebook_registered
-        auth = double('Auth', provider: 'facebook', uid: 1)
+        user = create :user, email: email
         expect(User.from_omniauth(auth)).to eq(user)
       end
     end
 
     context 'when user not in database' do
       it 'should create new user from info' do
-        info = double('Info', email: FFaker::Internet.email)
-        auth = double('Auth', provider: 'facebook', uid: 1, info: info)
-
         expect do
           User.from_omniauth(auth)
         end.to change { User.count }.by(1)

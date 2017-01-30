@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :authorship do
-    book nil
-    author nil
+    book
+    author
   end
 end

@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   resources :books
   resources :categories
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 end

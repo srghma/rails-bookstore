@@ -9,16 +9,16 @@ module CurrentOrder
 
     def set_current_order
       # XXX very important to address Order like this, otherwise
-      # rails will not find second time, more here
+      # rails will not find it second time
       # http://urbanautomaton.com/blog/2013/08/27/rails-autoloading-hell/
-      @current_order = ::Order.find(session[:order_id])
+      @current_order = ::Order.find(cookies.signed[:order_id])
     rescue ActiveRecord::RecordNotFound
       create_current_order
     end
 
     def create_current_order
       @current_order = ::Order.create
-      session[:order_id] = @current_order.id
+      cookies.signed[:order_id] = { value: @current_order.id, expires: 1.hour.from_now }
     end
   end
 end

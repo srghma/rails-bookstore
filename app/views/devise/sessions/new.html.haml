@@ -1,30 +1,26 @@
-%main.container.general-main-wrap
-  .text-center
-    %h3.general-login-title Log In
-    %a.general-login-icon
-      %i.fa.fa-facebook-official
-    %p.general-login-text or
-  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'general-form' }) do |f|
-    .form-group.mb-30
-      = f.label :email, 'Enter Email', class: 'control-label font-weight-light'
-      = f.email_field :email, placeholder: 'Enter Email', class: 'form-control', autofocus: true
-    .form-group.mb-30
-      = f.label :password, 'Password', class: 'control-label font-weight-light'
-      = f.password_field :password, placeholder: 'Password', autocomplete: 'off', class: 'form-control'
-      - if devise_mapping.recoverable?
-        = link_to 'Forgot password?', new_password_path(resource_name), class: 'help-block in-gold-500'
-    - if devise_mapping.rememberable?
-      .form-group.checkbox.text-center.mb-30
-        = f.check_box :remember_me, hidden: true
+.text-center
+  %h3.general-login-title Log In
+  = render 'devise/shared/facebook_authorize_link'
+  %p.general-login-text or
+= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'general-form' }) do |f|
+  .form-group.mb-30
+    = f.label :email, 'Enter Email', class: 'control-label font-weight-light'
+    = f.email_field :email, placeholder: 'Enter Email', class: 'form-control', autofocus: true
+  .form-group.mb-30
+    = f.label :password, 'Password', class: 'control-label font-weight-light'
+    = f.password_field :password, placeholder: 'Password', autocomplete: 'off', class: 'form-control'
+    - if devise_mapping.recoverable?
+      = link_to 'Forgot password?', new_password_path(resource_name), class: 'help-block in-gold-500'
+  - if devise_mapping.rememberable?
+    .form-group.checkbox.text-center.mb-30
+      %label.font-weight-light.pl-0
+        = f.check_box :remember_me, class: 'checkbox-input', hidden: true
         %span.checkbox-icon
           %i.fa.fa-check
-          .text-center
-        -# TODO
-        -# %span.checkbox-text Remember me
-        = f.label :remember_me, class: 'checkbox-text'
-    .actions.text-center
-      = f.submit 'Log in', class: 'btn btn-default mb-20'
-  - if devise_mapping.registerable?
-    %p.general-sign-text.text-center
-      Don’t have an Account?
-      = link_to 'Sign up', new_registration_path(resource_name), class: 'in-gold-500'
+        %span.checkbox-text Remember me
+  .actions.text-center
+    = f.submit 'Log in', class: 'btn btn-default mb-20'
+- if devise_mapping.registerable?
+  %p.general-sign-text.text-center
+    Don’t have an Account?
+    = link_to 'Sign up', new_registration_path(resource_name), class: 'in-gold-500'

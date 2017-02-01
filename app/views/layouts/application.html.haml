@@ -9,6 +9,7 @@
   %body{ class: controller_name }
     = render 'layouts/shared/header'
     = render 'layouts/shared/flash'
-    = yield
+    %main.container
+      = yield
     = render 'layouts/shared/footer'
 

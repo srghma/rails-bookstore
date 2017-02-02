@@ -10,8 +10,8 @@
     = f.label :password, 'Password', class: 'control-label font-weight-light'
     = f.password_field :password, placeholder: 'Password', autocomplete: 'off', class: 'form-control'
   .form-group.mb-30
-    = f.label :password, 'Confirm Password', class: 'control-label font-weight-light'
-    = f.password_field :password, placeholder: 'Confirm Password', autocomplete: 'off', class: 'form-control'
+    = f.label :password_confirmation, 'Confirm Password', class: 'control-label font-weight-light'
+    = f.password_field :password_confirmation, placeholder: 'Confirm Password', autocomplete: 'off', class: 'form-control'
   .actions.text-center
     = f.submit 'Sign up', class: 'btn btn-default mb-20'
 - if devise_mapping.registerable?

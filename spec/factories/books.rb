@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :book do
     title       { FFaker::Book.title }
     description { FFaker::Book.description }
-    price       { FFaker.numerify("#.##") }
+    price       { FFaker.numerify('#.##') }
     category    { FFaker::Book.genre }
 
     factory :book_with_authors do
@@ -14,7 +14,6 @@ FactoryGirl.define do
         evaluator.authorships_count.times do
           book.authorships << create(:authorship, book: book)
         end
-        # create_list(:authorhip, evaluator.authorships_count, book: book)
       end
     end
   end

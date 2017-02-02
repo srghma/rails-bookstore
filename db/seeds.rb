@@ -1,12 +1,19 @@
-user = User.create(
-  email:                 'example@gmail.com',
-  password:              '123123123',
-  password_confirmation: '123123123'
-)
+require 'factory_girl_rails'
 
-mobile_dev_category      = Category.create title: 'Mobile development'
-photo_category           = Category.create title: 'Photo'
-web_design_category      = Category.create title: 'Web design'
-web_development_category = Category.create title: 'Web development'
+Book.delete_all
 
+User.find_or_create_by(email: 'example@gmail.com') do |user|
+  user.password = '123123123'
+end
 
+Admin.find_or_create_by(email: 'example@gmail.com') do |admin|
+  admin.password = '123123123'
+end
+
+%w(Mobile\ development Photo Web\ design Web\ development).each do |title|
+  Category.find_or_create_by(title: title)
+end
+
+Category.find_each do |category|
+  3.times { FactoryGirl.create(:book_with_authors, category_id: category.id) }
+end

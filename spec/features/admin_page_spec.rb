@@ -3,9 +3,8 @@ feature 'Admin page:' do
     mock_sign_in :user
 
     scenario 'cannot visit' do
-      visit root_path
-      expect(page).to have_current_path root_path
-      expect(page).to have_content 'My account'
+      visit rails_admin_path
+      expect(current_path).to eq rails_admin_path
     end
   end
 

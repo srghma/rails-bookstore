@@ -4,10 +4,7 @@ Book.delete_all
 
 User.find_or_create_by(email: 'example@gmail.com') do |user|
   user.password = '123123123'
-end
-
-Admin.find_or_create_by(email: 'example@gmail.com') do |admin|
-  admin.password = '123123123'
+  user.is_admin = true
 end
 
 ['Mobile development', 'Photo', 'Web design', 'Web development'].each do |title|

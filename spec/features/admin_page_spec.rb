@@ -1,15 +1,18 @@
-feature 'Admin page' do
-  scenario 'first visit' do
-    visit root_path
-    expect(page).to have_current_path root_path
-    expect(page).to have_content 'Log in'
-    expect(page).to have_content 'Sign up'
+feature 'Admin page:' do
+  context 'when ordinary user' do
+    mock_sign_in :user
+
+    scenario 'cannot visit' do
+      visit root_path
+      expect(page).to have_current_path root_path
+      expect(page).to have_content 'My account'
+    end
   end
 
-  context 'user exists in database' do
-    let(:user) { create :user }
+  context 'when admin' do
+    mock_sign_in :admin
 
-    scenario 'signed user visit', authenticated: true do
+    scenario 'can visit' do
       visit root_path
       expect(page).to have_current_path root_path
       expect(page).to have_content 'My account'

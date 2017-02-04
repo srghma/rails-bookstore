@@ -13,6 +13,8 @@ class Book < ApplicationRecord
     images.first
   end
 
+  mount_uploader :cover, BookCoverUploader
+
   def to_s
     title
   end

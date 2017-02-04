@@ -9,6 +9,8 @@ class Book < ApplicationRecord
   }
   validates :description, length: { maximum: 500 }
 
+  mount_uploader :cover, CoverUploader
+
   def to_s
     title
   end

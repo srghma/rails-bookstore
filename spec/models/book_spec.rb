@@ -22,18 +22,19 @@ RSpec.describe Book, type: :model do
       let(:book) { create :book }
 
       it 'should provide default image url' do
+        require 'pry'; binding.pry;
         expect(book.cover.class).to eq BookCoverUploader
         expect(book.cover.url).to eq ''
       end
     end
 
-    context 'when non empty' do
-      let(:book) { create :book, cover: 'my_file.png' }
+    # context 'when non empty' do
+    #   let(:book) { create :book, cover: 'my_file.png' }
 
-      it 'should provide image url' do
-        book = create :book
-        expect(book.cover.url).to eq ''
-      end
-    end
+    #   it 'should provide image url' do
+    #     book = create :book
+    #     expect(book.cover.url).to eq ''
+    #   end
+    # end
   end
 end

@@ -7,10 +7,10 @@ class Book < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 0.00 }
   validates :description, length: { maximum: 500 }
 
-  has_many :covers, as: :imageable
+  has_many :images, as: :imageable, class_name: 'BookCover'
 
   def cover
-    covers.first
+    images.first
   end
 
   def to_s

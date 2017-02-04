@@ -8,4 +8,8 @@ class Book < ApplicationRecord
     greater_than_or_equal_to: 0.00
   }
   validates :description, length: { maximum: 500 }
+
+  def to_s
+    title
+  end
 end

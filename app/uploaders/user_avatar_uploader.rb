@@ -1,4 +1,4 @@
-class PortraitUploader < BaseImageUploader
+class UserAvatarUploader < BaseImageUploader
   process resize_to_fill: [300, 300]
 
   version :thumb do

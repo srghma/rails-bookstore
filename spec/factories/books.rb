@@ -3,7 +3,7 @@ FactoryGirl.define do
     title       { FFaker::Book.title }
     description { FFaker::Book.description }
     price       { FFaker.numerify('#.##') }
-    category    { FFaker::Book.genre }
+    category
 
     factory :book_with_authors do
       transient do

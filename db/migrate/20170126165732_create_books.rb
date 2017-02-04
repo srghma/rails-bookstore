@@ -5,7 +5,7 @@ class CreateBooks < ActiveRecord::Migration[5.0]
       t.text :description, default: ''
       t.decimal :price, null: false, precision: 8, scale: 2
 
-      t.belongs_to :category, foreign_key: true, null: false
+      t.belongs_to :category, foreign_key: true
 
       t.timestamps
     end

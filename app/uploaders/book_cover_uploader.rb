@@ -1,4 +1,4 @@
-class CoverUploader < BaseImageUploader
+class BookCoverUploader < BaseImageUploader
   process resize_to_fill: [300, 450]
 
   version :thumb do

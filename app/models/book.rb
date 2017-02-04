@@ -4,12 +4,14 @@ class Book < ApplicationRecord
   has_many :authors, through: :authorships
 
   validates :title, :price, presence: true
-  validates :price, numericality: {
-    greater_than_or_equal_to: 0.00
-  }
+  validates :price, numericality: { greater_than_or_equal_to: 0.00 }
   validates :description, length: { maximum: 500 }
 
-  mount_uploader :cover, CoverUploader
+  has_many :covers, as: :imageable
+
+  def cover
+    covers.first
+  end
 
   def to_s
     title

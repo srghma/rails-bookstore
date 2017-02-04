@@ -16,4 +16,24 @@ RSpec.describe Book, type: :model do
     # it { should have_many(:order_items).dependent(:destroy) }
     # it { should have_many(:wishes).dependent(:destroy) }
   end
+
+  context '#cover' do
+    context 'when empty' do
+      let(:book) { create :book }
+
+      it 'should provide default image url' do
+        expect(book.cover.class).to eq BookCoverUploader
+        expect(book.cover.url).to eq ''
+      end
+    end
+
+    context 'when non empty' do
+      let(:book) { create :book, cover: 'my_file.png' }
+
+      it 'should provide image url' do
+        book = create :book
+        expect(book.cover.url).to eq ''
+      end
+    end
+  end
 end

@@ -17,13 +17,13 @@ RSpec.describe Book, type: :model do
     # it { should have_many(:wishes).dependent(:destroy) }
   end
 
-  context '#cover' do
+  context '#covers' do
     context 'when empty' do
       let(:book) { create :book }
 
       it 'should provide default image url' do
-        require 'pry'; binding.pry;
-        expect(book.cover.class).to eq BookCoverUploader
+        book.covers.create(file: 'some.jpg')
+        expect(book.covers.class).to eq CoverUploader
         expect(book.cover.url).to eq ''
       end
     end

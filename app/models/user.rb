@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_one :shipping_address, as: :addressable, dependent: :destroy
   has_many :orders, dependent: :nullify
 
-  has_one :avatar, as: :imageable, dependent: :destroy
+  has_one :avatar, dependent: :nullify
 
   def self.from_omniauth(auth)
     find_or_create_by(email: auth.info.email) do |user|

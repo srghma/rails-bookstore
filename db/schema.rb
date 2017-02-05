@@ -63,12 +63,11 @@ ActiveRecord::Schema.define(version: 20170204133111) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string   "imageable_type"
-    t.integer  "imageable_id"
+    t.string   "type"
+    t.integer  "source_id"
     t.string   "file"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -105,7 +104,7 @@ ActiveRecord::Schema.define(version: 20170204133111) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "is_admin",               default: false
-    t.string   "avatar"
+    t.integer  "avatar_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

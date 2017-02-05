@@ -7,7 +7,7 @@ class Book < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 0.00 }
   validates :description, length: { maximum: 500 }
 
-  has_many :covers, dependent: :nullify
+  mount_uploaders :covers, CoverUploader
 
   def to_s
     title

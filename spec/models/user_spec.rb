@@ -35,4 +35,20 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#avatar' do
+    it 'should return fallback image if none' do
+      user = create :user
+      expect(user.avatar.url).to eq '/images/fallback/avatar_default.png'
+      expect(user.avatar.current_path).to eq nil
+      expect(user.avatar_identifier).to eq nil
+    end
+
+    it 'should return image' do
+      user = create :user, :have_avatar
+      expect(user.avatar.url).to end_with 'user/avatar/1/avatar_example.png'
+      expect(user.avatar.current_path).to end_with 'user/avatar/1/avatar_example.png'
+      expect(user.avatar_identifier).to eq 'avatar_example.png'
+    end
+  end
 end

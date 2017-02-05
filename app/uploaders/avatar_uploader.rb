@@ -1,4 +1,4 @@
-class AvatarUploader < ImageUploader
+class AvatarUploader < BaseImageUploader
   process resize_to_fill: [300, 300]
 
   version :thumb do
@@ -6,7 +6,6 @@ class AvatarUploader < ImageUploader
   end
 
   def default_url
-    # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-    '/images/fallback/' + [version_name, 'default.png'].compact.join('_')
+    '/images/fallback/avatar_default.png'
   end
 end

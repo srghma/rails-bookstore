@@ -24,6 +24,11 @@ gem 'cancancan'
 gem 'aasm'
 gem 'kaminari'
 
+gem 'yotpo'
+gem 'rectify'
+gem 'simple_form'
+gem 'rails_admin_dropzone'
+
 # File uploader
 gem 'carrierwave'
 gem 'mini_magick'

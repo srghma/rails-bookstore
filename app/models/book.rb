@@ -9,6 +9,10 @@ class Book < ApplicationRecord
 
   mount_uploaders :covers, CoverUploader
 
+  def cover
+    covers.first || CoverUploader.new
+  end
+
   def to_s
     title
   end

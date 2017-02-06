@@ -9,8 +9,8 @@
       = link_to 'Bookstore', root_path, class: 'navbar-brand'
     = link_to '#', class: 'shop-link pull-right' do
       %span.shop-icon<
-        - unless @current_order.order_items.empty?
-          %span.shop-quantity= @current_order.order_items.size
+        - unless current_order.order_items.empty?
+          %span.shop-quantity= current_order.order_items.size
     .navbar-collapse.collapse.pl-30#navbar{ aria: { expanded: 'false' } }
       %button.close.visible-xs{ type: 'button', aria: { label: 'Close' }, data: { toggle: 'collapse', target: '#navbar' } }
         %span{ aria: { hidden: 'true' } } &times;
@@ -19,7 +19,7 @@
         %li.dropdown
           %a.dropdown-toggle{ href: '#', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } } Shop
           %ul.dropdown-menu
-            - @categories.each do |category|
+            - categories.each do |category|
               %li= link_to category.title, category
         - if user_signed_in?
           %li= link_to '', new_user_session_path
@@ -29,6 +29,8 @@
               %li= link_to 'Orders', '#'
               %li= link_to 'Settings', '#'
               %li.divider
+              - if current_user.is_admin
+                %li= link_to 'Admin page', rails_admin_path
               %li= link_to 'Log out', destroy_user_session_path, method: :delete
         - else
           %li= link_to 'Log in', new_user_session_path

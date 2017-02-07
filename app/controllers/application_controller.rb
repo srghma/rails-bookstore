@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   attr_reader   :categories
   helper_method :categories
 
-  rescue_from CanCan::AccessDenied do |ex|
+  rescue_from CanCan::AccessDenied do |_|
     redirect_to '/', alert: t('auth.access_denied')
   end
 

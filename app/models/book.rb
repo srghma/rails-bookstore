@@ -4,8 +4,6 @@ class Book < ApplicationRecord
   has_many :authors, through: :authorships
   has_many :covers, dependent: :destroy
 
-  # accepts_nested_attributes_for :covers, reject_if: :reject_covers
-
   validates :title, :price, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.00 }
   validates :description, length: { maximum: 500 }
@@ -14,17 +12,19 @@ class Book < ApplicationRecord
     covers.create file: image
   end
 
-  def cover
-    covers.first || 
+  def covers_urls(size: 1, version: nil)
+    if covers.any?
+      covers.collect(&:file_url)
+    else
+      [CoverUploader.default_url]
+    end
+  end
+
+  def cover_url
+    covers_urls.first
   end
 
   def to_s
     title
   end
-
-  # private
-
-  # def reject_covers(attributes)
-  #   attributes['file'].blank? && attributes['file_cache'].blank?
-  # end
 end

@@ -1,5 +1,6 @@
 module BooksHelper
   def cover_with_link(book)
-    link_to image_tag(book.cover.thumb), book
+    url = book.cover_url(version: :thumb)
+    link_to image_tag(url), book
   end
 end

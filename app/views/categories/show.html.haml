@@ -1,9 +1,9 @@
-%p#notice= notice
+%h1.general-title-margin Сatalog
+.hidden-xs.clearfix
+  .dropdowns.pull-right
+    .dropdown.width-240
+  %ul.list-inline.pt-10.mb-25.mr-240
+    = catalog_header_link_to categories_path, title: 'All', badge: Book.count
+    - categories.each do |category|
+      = catalog_header_link_to category, title: category.title, badge: category.books.count
 
-%p
-  %b Title:
-  = @category.title
-
-= link_to 'Edit', edit_category_path(@category)
-\|
-= link_to 'Back', categories_path

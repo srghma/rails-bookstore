@@ -22,7 +22,6 @@
             - categories.each do |category|
               %li= link_to category.title, category
         - if user_signed_in?
-          %li= link_to '', new_user_session_path
           %li.dropdown
             %a.dropdown-toggle{ href: '#', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } } My account
             %ul.dropdown-menu

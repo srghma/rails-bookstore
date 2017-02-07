@@ -20,16 +20,28 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
+    dropzone do
+      only Book
+    end
   end
 
   # Look firstly for #to_s as label
   config.label_methods = [:to_s].concat(config.label_methods)
 
   config.excluded_models << 'Authorship'
+  config.excluded_models << 'OrderItem'
 
   config.model 'User' do
     exclude_fields :reset_password_sent_at,
                    :remember_created_at,
                    :password_confirmation
   end
+
+  config.model 'Book' do
+  end
+  # config.model 'Order' do
+  #   nested do
+  #     field :order_item
+  #   end
+  # end
 end

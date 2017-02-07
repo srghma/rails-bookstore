@@ -9,6 +9,13 @@ class Book < ApplicationRecord
 
   mount_uploaders :covers, CoverUploader
 
+  def create_associated_image(image)
+    # covers << image
+    require 'pry'; binding.pry;
+    covers = [image]
+    save!
+  end
+
   def cover
     covers.first || CoverUploader.new
   end

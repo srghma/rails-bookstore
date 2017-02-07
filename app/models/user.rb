@@ -7,8 +7,6 @@ class User < ApplicationRecord
   has_one :shipping_address, as: :addressable, dependent: :destroy
   has_many :orders, dependent: :nullify
 
-  mount_uploader :avatar, AvatarUploader
-
   def self.from_omniauth(auth)
     find_or_create_by(email: auth.info.email) do |user|
       user.password = Devise.friendly_token[0, 20]

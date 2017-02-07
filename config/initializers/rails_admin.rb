@@ -28,8 +28,13 @@ RailsAdmin.config do |config|
   # Look firstly for #to_s as label
   config.label_methods = [:to_s].concat(config.label_methods)
 
-  config.excluded_models << 'Authorship'
-  config.excluded_models << 'OrderItem'
+  config.excluded_models.push 'Authorship'
+
+  %w(OrderItem Cover).each do |model|
+    config.model model do
+      visible false
+    end
+  end
 
   config.model 'User' do
     exclude_fields :reset_password_sent_at,
@@ -38,10 +43,14 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Book' do
+    nested do
+      field :covers
+    end
   end
-  # config.model 'Order' do
-  #   nested do
-  #     field :order_item
-  #   end
-  # end
+
+  config.model 'Order' do
+    nested do
+      field :order_items
+    end
+  end
 end

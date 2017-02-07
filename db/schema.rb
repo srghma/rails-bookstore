@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203120347) do
+ActiveRecord::Schema.define(version: 20170207150356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20170203120347) do
     t.string   "title",                                            null: false
     t.text     "description",                         default: ""
     t.decimal  "price",       precision: 8, scale: 2,              null: false
-    t.text     "covers",                              default: [],              array: true
     t.integer  "category_id"
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
@@ -61,6 +60,14 @@ ActiveRecord::Schema.define(version: 20170203120347) do
     t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "covers", force: :cascade do |t|
+    t.integer  "book_id",    null: false
+    t.string   "file",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_covers_on_book_id", using: :btree
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -97,7 +104,6 @@ ActiveRecord::Schema.define(version: 20170203120347) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "is_admin",               default: false
-    t.string   "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -105,5 +111,6 @@ ActiveRecord::Schema.define(version: 20170203120347) do
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
   add_foreign_key "books", "categories"
+  add_foreign_key "covers", "books"
   add_foreign_key "orders", "users"
 end

@@ -1,0 +1,5 @@
+- books = render(partial: 'books/grid', object: @books, as: 'books')
+- button = link_to_next_page(@books, 'View More', remote: true, class: 'btn btn-primary').to_s
+:plain
+  $('#books').append('#{escape_javascript(books)}');
+  $('#paginator').html('#{escape_javascript(button)}');

@@ -1,0 +1,18 @@
+- @books.each_slice(4) do |slice|
+  .row
+    - slice.each do |book|
+      .col-xs-6.col-sm-3
+        .general-thumb-wrap
+          .thumbnail.general-thumbnail
+            = image_tag book.cover_url(version: :thumb), class: 'img-shadow general-thumbnail-img'
+            .thumb-hover
+              .general-thumb-link-wrap
+                = link_to book, class: 'thumb-hover-link' do
+                  %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                %a.thumb-hover-link{href: "#"}
+                  %i.fa.fa-shopping-cart.thumb-icon
+        .general-thumb-info
+          %p.title= book.title
+          %p.font-16.in-gold-500= number_to_currency(book.price)
+          %span.divider-sm
+          %p.in-grey-600.small= book.authors_names

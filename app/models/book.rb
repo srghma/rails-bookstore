@@ -41,6 +41,10 @@ class Book < ApplicationRecord
     covers_urls(version: version).first
   end
 
+  def authors_names
+    authors.map(&:full_name).join(', ')
+  end
+
   def to_s
     title
   end

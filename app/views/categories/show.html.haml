@@ -42,4 +42,7 @@
         %a{href: '#'} Price: Low to hight
       %li
         %a{href: '#'} Price: Low to hight
-
+#books
+  = render partial: 'books/grid', object: @books, as: 'books'
+.text-center.mb-120#paginator
+  = link_to_next_page @books, 'View More', remote: true, class: 'btn btn-primary'

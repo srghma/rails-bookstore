@@ -2,7 +2,7 @@ module YotpoWidgetHelper
   def review_widget(book)
     data = {
       'description': book.description,
-      'image-url':   book.cover.thumb.url,
+      'image-url':   book.cover_url(version: :thumb),
       'name':        book.title,
       'product-id':  book.id,
       'url':         book_url(book)

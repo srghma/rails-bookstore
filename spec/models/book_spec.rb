@@ -13,28 +13,48 @@ RSpec.describe Book, type: :model do
     it { should belong_to(:category) }
     it { should have_many(:authors).through(:authorships) }
     # it { should have_many(:reviews).dependent(:destroy) }
-    # it { should have_many(:order_items).dependent(:destroy) }
+    it { should have_many(:order_items).dependent(:destroy) }
     # it { should have_many(:wishes).dependent(:destroy) }
   end
 
-  context '#covers' do
-    # context 'when empty' do
-    #   let(:book) { create :book, co }
+  context '#cover_url' do
+    context 'when empty' do
+      let(:book) { create :book }
 
-    #   it 'should provide default image url' do
-    #     # require 'pry'; binding.pry;
-    #     expect(book.covers.class).to eq CoverUploader
-    #     expect(book.cover.url).to eq ''
-    #   end
-    # end
+      it 'should provide fallback image url' do
+        expect(book.cover_url).to eq '/images/fallback/cover_default.png'
+      end
 
-    # context 'when non empty' do
-    #   let(:book) { create :book, cover: 'my_file.png' }
+      it 'should provide thumb fallback image url' do
+        expect(book.cover_url(version: :thumb)).to eq '/images/fallback/thumb_cover_default.png'
+      end
+    end
 
-    #   it 'should provide image url' do
-    #     book = create :book
-    #     expect(book.cover.url).to eq ''
-    #   end
-    # end
+    context 'when non empty' do
+      let(:book) { create :book, :with_cover, number_of_covers: 4 }
+
+      it 'should provide image url' do
+        expect(book.cover_url).to end_with '/1/image_example.png'
+      end
+
+      it 'should provide thumb image url' do
+        expect(book.cover_url(version: :thumb)).to end_with '/1/thumb_image_example.png'
+      end
+    end
+  end
+
+  context '#orderded_by_popularity' do
+    before do
+      create(:book, :ordered, number_of_orders: 5)
+      create(:book, :ordered, number_of_orders: 4)
+      create(:book, :ordered, number_of_orders: 5)
+      create(:book, :ordered, number_of_orders: 1)
+      create(:book)
+    end
+
+    it 'should return books, ordered by OrderItem.count * OrderItem.quantity' do
+      books = Book.orderded_by_popularity
+      expect(books.pluck(:id)).to eq [1, 3, 2, 4, 5]
+    end
   end
 end

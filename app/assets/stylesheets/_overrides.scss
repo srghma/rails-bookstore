@@ -4,6 +4,12 @@
     right: 0;
     top: 0;
   }
+
+  // TODO: why there a bug?
+  .container {
+    margin-left:  0;
+    margin-right: 0;
+  }
 }
 
 body {

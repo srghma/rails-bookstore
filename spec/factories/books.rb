@@ -5,15 +5,23 @@ FactoryGirl.define do
     price       { FFaker.numerify('#.##') }
     category
 
-    factory :book_with_authors do
+    trait :ordered do
       transient do
-        authorships_count 1
+        number_of_orders 1
       end
 
       after(:create) do |book, evaluator|
-        evaluator.authorships_count.times do
-          book.authorships << create(:authorship, book: book)
-        end
+        create_list :order_item, evaluator.number_of_orders, book: book
+      end
+    end
+
+    trait :with_cover do
+      transient do
+        number_of_covers 1
+      end
+
+      after(:create) do |book, evaluator|
+        create_list :cover, evaluator.number_of_covers, book: book
       end
     end
   end

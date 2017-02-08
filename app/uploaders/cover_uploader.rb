@@ -6,6 +6,6 @@ class CoverUploader < BaseImageUploader
   end
 
   def default_url
-    '/images/fallback/' + [version_name, 'default.png'].compact.join('_')
+    '/images/fallback/' + [version_name, 'cover', 'default.png'].compact.join('_')
   end
 end

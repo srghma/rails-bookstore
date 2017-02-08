@@ -1,9 +1,45 @@
 %h1.general-title-margin Сatalog
 .hidden-xs.clearfix
-  .dropdowns.pull-right
-    .dropdown.width-240
+  .dropdown.pull-right
+    %a.dropdown-toggle.dropdown-btn.width-240{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+      Newest first
+      %i.fa.fa-angle-down.dropdown-icon
+    %ul.dropdown-menu
+      %li
+        %a{href: '#'} Newest first
+      %li
+        %a{href: '#'} Popular first
+      %li
+        %a{href: '#'} Price: Low to hight
+      %li
+        %a{href: '#'} Price: Low to hight
   %ul.list-inline.pt-10.mb-25.mr-240
-    = catalog_header_link_to categories_path, title: 'All', badge: Book.count
-    - categories.each do |category|
-      = catalog_header_link_to category, title: category.title, badge: category.books.count
+    - iterate_through_categories do |title, path, books_count|
+      %li.mr-35
+        = link_to path, class: 'filter-link' do
+          = title
+          %span.badge.general-badge= books_count
+.visible-xs.mb-40
+  %p.in-grey-600.small.mb-10 Filter by category
+  .dropdown.mb-20
+    %a.dropdown-toggle.dropdown-btn.width-100{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+      Newest first
+      %i.fa.fa-angle-down.dropdown-icon
+    %ul.dropdown-menu
+      - iterate_through_categories do |title, path|
+        %li= link_to title, path
+  %p.in-grey-600.small.mb-10 Sort by
+  .dropdown.mb-20
+    %a.dropdown-toggle.dropdown-btn.width-100{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+      Newest first
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul.dropdown-menu
+      %li
+        %a{href: '#'} Newest first
+      %li
+        %a{href: '#'} Popular first
+      %li
+        %a{href: '#'} Price: Low to hight
+      %li
+        %a{href: '#'} Price: Low to hight
 

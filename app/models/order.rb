@@ -5,6 +5,8 @@ class Order < ApplicationRecord
   has_one :billing_address,  as: :addressable, dependent: :destroy
   has_one :shipping_address, as: :addressable, dependent: :destroy
 
+  scope :with_user, -> { where.not(user_id: nil) }
+
   def to_s
     "Order #{id}"
   end

@@ -8,3 +8,7 @@
       var t = document.getElementsByTagName("script")[0];
       t.parentNode.insertBefore(e, t)
   })();
+  document.addEventListener("turbolinks:load", function() {
+    if (window.yotpo) { yotpo.initWidgets() }
+  })
+

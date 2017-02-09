@@ -45,10 +45,10 @@ RSpec.describe Book, type: :model do
 
   context '#orderded_by_popularity' do
     before do
-      create(:book, :ordered, number_of_orders: 5)
-      create(:book, :ordered, number_of_orders: 4)
-      create(:book, :ordered, number_of_orders: 5)
-      create(:book, :ordered, number_of_orders: 1)
+      create(:book, :with_orders, number_of_orders: 5)
+      create(:book, :with_orders, number_of_orders: 4)
+      create(:book, :with_orders, number_of_orders: 5)
+      create(:book, :with_orders, number_of_orders: 1)
       create(:book)
     end
 

@@ -15,6 +15,12 @@ class Book < ApplicationRecord
   scope :orderded_by_title,      -> { order(:title) }
   scope :orderded_by_title_desc, -> { order(title: :desc) }
 
+  before_save do
+    title.capitalize!
+    materials&.capitalize!
+    description&.capitalize!
+  end
+
   def self.orderded_by_popularity
     joins('LEFT JOIN order_items ON order_items.book_id = books.id')
       .group('books.id')
@@ -43,6 +49,10 @@ class Book < ApplicationRecord
 
   def authors_names
     authors.map(&:full_name).join(', ')
+  end
+
+  def dimensions
+    Dimensions.new(height: height, width: width, depth: depth)
   end
 
   def to_s

@@ -1,20 +1,49 @@
-%p#notice= notice
+= link_to :back, class: 'general-back-link' do
+  %i.fa.fa-long-arrow-left.mr-15
+  Back to results
 
-%p
-  %b Title:
-  = @book.title
-%p
-  %b Description:
-  = @book.description
-%p
-  %b Price:
-  = @book.price
-%p
-  %b Category:
-  = @book.category
+.row
+  .col-sm-6
+    .product-gallery
+      .mb-20
+        = image_tag @book.cover_url, class: 'img-responsive img-shadow'
+      - if @book.covers_urls.size > 1
+        .images.clearfix
+          - @book.covers_urls.each do |url|
+            = link_to '#', class: 'img-link' do
+              = image_tag url, class: 'width-full'
+  .col-sm-6
+    %h1.mt-res-0= @book.title
+    %p.in-grey-600.small= @book.authors_names
+    .row
+      .col-xs-12.col-md-4
+        %p.h1.in-gold-500.mt-10= number_to_currency(@book.price)
+      .col-xs-5.col-md-3
+        .input-group.general-position
+          %a.input-link{href: "#"}
+            %i.fa.fa-minus.line-height-40
+          %input.form-control.quantity-input{type: "text"}
+          %a.input-link{href: "#"}
+            %i.fa.fa-plus.line-height-40
+      .col-xs-7.col-md-5
+        %button.btn.btn-default.pull-right.general-position Add to Cart
+    .general-info-wrap.divider-lg
+      %p Description
+      %p.lead.small.line-height-2
+        = @book.description
+        %a.in-gold-500.ml-10{href: "#"} Read More
+    .general-info-wrap.divider-lg
+      .clearfix
+        %p.pull-left Year of publication
+        %p.lead.small.pull-right= @book.publication_year
+    .general-info-wrap.divider-lg
+      .clearfix
+        %p.pull-left Dimensions
+        %p.lead.small.pull-right= @book.dimensions
+    .general-info-wrap.divider-lg
+      .clearfix
+        %p.pull-left Materials
+        %p.lead.small.pull-right= @book.materials
 
-= link_to 'Edit', edit_book_path(@book)
-\
-= link_to 'Back', books_path
-
-= review_widget(@book)
+.mb-80
+  = review_widget(@book)

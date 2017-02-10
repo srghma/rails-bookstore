@@ -1,4 +1,4 @@
-module YotpoWidgetHelper
+module YotpoHelper
   def review_widget(book)
     data = {
       'description': book.description,

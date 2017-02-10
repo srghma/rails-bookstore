@@ -1,12 +1,10 @@
 class ApplicationController < ActionController::Base
   include CurrentOrder
-  include YotpoWidgetHelper
+  include YotpoHelper
 
   protect_from_forgery with: :exception
 
   before_action :set_categories
-  attr_reader   :categories
-  helper_method :categories
 
   rescue_from CanCan::AccessDenied do |_|
     redirect_to '/', alert: t('auth.access_denied')

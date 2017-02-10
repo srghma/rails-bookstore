@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Rspec.describe Dimensions do
+RSpec.describe Dimensions do
   context '#to_s' do
     context 'when the dimensions are empty' do
       let(:dimensions) { Dimensions.new }

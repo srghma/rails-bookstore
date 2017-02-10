@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20170207150356) do
   create_table "addresses", force: :cascade do |t|
     t.string   "addressable_type", null: false
     t.integer  "addressable_id",   null: false
-    t.string   "country_code",     null: false
+    t.integer  "country_id_id",    null: false
     t.string   "first_name",       null: false
     t.string   "last_name",        null: false
     t.string   "street",           null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170207150356) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
+    t.index ["country_id_id"], name: "index_addresses_on_country_id_id", using: :btree
   end
 
   create_table "authors", force: :cascade do |t|
@@ -47,12 +48,17 @@ ActiveRecord::Schema.define(version: 20170207150356) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string   "title",                                            null: false
-    t.text     "description",                         default: ""
-    t.decimal  "price",       precision: 8, scale: 2,              null: false
+    t.string   "title",                                                 null: false
+    t.text     "description",                              default: ""
+    t.decimal  "price",            precision: 8, scale: 2,              null: false
+    t.integer  "publication_year"
+    t.string   "materials"
+    t.float    "height"
+    t.float    "width"
+    t.float    "depth"
     t.integer  "category_id"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.index ["category_id"], name: "index_books_on_category_id", using: :btree
   end
 
@@ -60,6 +66,13 @@ ActiveRecord::Schema.define(version: 20170207150356) do
     t.string   "title",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_countries_on_name", unique: true, using: :btree
   end
 
   create_table "covers", force: :cascade do |t|

@@ -1,8 +1,7 @@
 require 'factory_girl_rails'
 
 Rake::Task['import_countries'].invoke
-
-Book.delete_all
+Rake::Task['import_books'].invoke
 
 User.find_or_create_by(email: 'example@gmail.com') do |user|
   user.password = '123123123'

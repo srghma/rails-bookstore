@@ -3,9 +3,9 @@ FactoryGirl.define do
     title            { FFaker::Book.title }
     description      { FFaker::Book.description }
     price            { FFaker.numerify('#.##') }
-    height           { FFaker.numerify('#.##') }
-    width            { FFaker.numerify('#.##') }
-    depth            { FFaker.numerify('#.##') }
+    height           { FFaker.numerify('#.#') }
+    width            { FFaker.numerify('#.#') }
+    depth            { FFaker.numerify('#.#') }
     publication_year { FFaker::Time.date.year }
     materials        { FFaker::Lorem.words }
     category

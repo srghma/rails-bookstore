@@ -3,8 +3,6 @@ module CurrentOrder
 
   included do
     before_action :set_current_order
-    attr_reader   :current_order
-    helper_method :current_order
 
     def set_current_order
       @current_order ||= ::Order.find cookies.signed[:order_id]

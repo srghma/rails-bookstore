@@ -16,7 +16,7 @@ class Book < ApplicationRecord
   scope :orderded_by_title_desc, -> { order(title: :desc) }
 
   before_save do
-    title.capitalize!
+    # title.capitalize!
     materials&.capitalize!
     description&.capitalize!
   end

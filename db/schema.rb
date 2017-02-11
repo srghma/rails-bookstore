@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20170207150356) do
 
   create_table "countries", force: :cascade do |t|
     t.string   "name",       null: false
+    t.string   "code",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_countries_on_name", unique: true, using: :btree

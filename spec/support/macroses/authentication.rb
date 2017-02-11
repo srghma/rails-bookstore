@@ -1,4 +1,4 @@
-module FeatureMacros
+module AuthenticationMacros
   def mock_facebook(name)
     around(:each) do |example|
       user = respond_to?(name) ? public_send(name) : create(name)
@@ -18,5 +18,5 @@ module FeatureMacros
 end
 
 RSpec.configure do |config|
-  config.extend FeatureMacros, type: :feature
+  config.extend AuthenticationMacros, type: :feature
 end

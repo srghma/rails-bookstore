@@ -6,9 +6,20 @@ FactoryGirl.define do
     height           { FFaker.numerify('#.#') }
     width            { FFaker.numerify('#.#') }
     depth            { FFaker.numerify('#.#') }
-    publication_year { FFaker::Time.date.year }
+    publication_year { (1900 + rand(100)).to_s }
     materials        { FFaker::Lorem.words }
     category
+
+    trait :with_authors do
+      transient do
+        number_of_authors :rand
+      end
+
+      after(:create) do |book, evaluator|
+        number_of_authors = evaluator.number_of_authors == :rand ? rand(0..3) : evaluator.number_of_authors
+        create_list :order_item, number_of_authors, book: book
+      end
+    end
 
     trait :with_orders do
       transient do

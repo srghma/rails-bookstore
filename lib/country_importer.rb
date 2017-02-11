@@ -1,8 +1,11 @@
 module CountryImporter
   class << self
     def import
-      file = Rails.root.join('db', 'country_seeds.txt')
-      countries = File.readlines(file)
+      path = Rails.root.join('db', 'country_seeds.txt')
+      countries = File.readlines(path).map(&:strip).map { |c| c.split('|') }
+      countries.each do |code, name|
+        Country.find_or_create_by(code: code, name: name)
+      end
     end
   end
 end

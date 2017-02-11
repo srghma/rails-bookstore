@@ -1,5 +1,11 @@
 FactoryGirl.define do
   factory :category do
-    title { FFaker::Book.genre }
+    titles = [
+      'Mobile development',
+      'Photo',
+      'Web design',
+      'Web development'
+    ]
+    title { titles.sample }
   end
 end

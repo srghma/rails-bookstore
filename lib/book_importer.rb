@@ -28,10 +28,8 @@ module BookImporter
     end
 
     def create_book(title)
-      return FactoryGirl.create(:book, :with_authors, title: title) if title
-      FactoryGirl.create :book, :with_authors
-    rescue ActiveRecord::RecordInvalid
-      create_book(title)
+      title = FFaker::Book.title unless title
+      FactoryGirl.create(:book, :with_authors, title: title)
     end
   end
 end

@@ -5,8 +5,8 @@ class Book < ApplicationRecord
   has_many :covers, dependent: :destroy
   has_many :order_items, dependent: :destroy
 
-  validates :title, :price, presence: true
-  validates :price, numericality: { greater_than_or_equal_to: 0.00 }
+  validates :title, presence: true
+  validates :price, numericality: { greater_than_or_equal_to: 0.00 }, presence: true
   validates :description, length: { maximum: 500 }
 
   scope :orderded_by_created_at, -> { order(:created_at, :title) }

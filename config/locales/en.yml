@@ -20,8 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  devise:
+    recover_password_hint: 'Forgot password?'
   auth:
     access_denied: 'Access denied'
+
   errors:
     messages:
       phone: 'Please enter phone number in format +355 66 123 4567'

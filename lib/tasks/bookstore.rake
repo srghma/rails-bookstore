@@ -5,7 +5,7 @@ namespace :bookstore do
   end
 
   desc 'Import default set of books with covers'
-  task import_books: :environment do
+  task import_books: :environment do |_t, args|
     BookImporter.import
   end
 end

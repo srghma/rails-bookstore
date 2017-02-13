@@ -7,15 +7,8 @@ FactoryGirl.define do
     width            { FFaker.numerify('#.#') }
     depth            { FFaker.numerify('#.#') }
     publication_year { (1900 + rand(100)).to_s }
-    materials        { FFaker::Lorem.words }
-
-    # because category have uniqueness constraint on titles
-    after(:create) do |book, evaluator|
-      attrs = attributes_for(:category)
-      break if Category.find_by(title: attrs['title'])
-      book.category = Category.create(**attrs)
-      book.save!
-    end
+    materials        { FFaker::Lorem.words.join ', ' }
+    category
 
     trait :with_authors do
       transient do

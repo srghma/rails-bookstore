@@ -9,13 +9,9 @@ end
 describe 'bookstore:import_books' do
   include_context 'rake'
 
-  before do
-    Book.delete_all
-  end
-
   it 'create books and add covers' do
     subject.invoke
     expect(Book.count).to eq number_of_books
-    expect(Category.count).to be <= 4
+    expect(Category.count).to be <= TITLES.size
   end
 end

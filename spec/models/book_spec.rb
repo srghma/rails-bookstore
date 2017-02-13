@@ -22,11 +22,11 @@ RSpec.describe Book, type: :model do
       let(:book) { create :book }
 
       it 'should provide fallback image url' do
-        expect(book.cover_url).to eq '/images/fallback/cover_default.png'
+        expect(book.cover_url).to include '/fallback/cover_default'
       end
 
       it 'should provide thumb fallback image url' do
-        expect(book.cover_url(version: :thumb)).to eq '/images/fallback/thumb_cover_default.png'
+        expect(book.cover_url(version: :thumb)).to include '/fallback/thumb_cover_default'
       end
     end
 
@@ -34,11 +34,11 @@ RSpec.describe Book, type: :model do
       let(:book) { create :book, :with_cover, number_of_covers: 4 }
 
       it 'should provide image url' do
-        expect(book.cover_url).to end_with '/1/image_example.png'
+        expect(book.cover_url).to include 'image_example'
       end
 
       it 'should provide thumb image url' do
-        expect(book.cover_url(version: :thumb)).to end_with '/1/thumb_image_example.png'
+        expect(book.cover_url(version: :thumb)).to include 'thumb_image_example'
       end
     end
   end

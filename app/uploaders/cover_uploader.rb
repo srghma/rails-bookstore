@@ -11,10 +11,10 @@ class CoverUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg png)
   end
 
-  process resize_to_fill: [300, 450]
+  process resize_to_limit: [300, -1]
 
   version :thumb do
-    process resize_to_fill: [150, 300]
+    process resize_to_limit: [150, -1]
   end
 
   def default_url

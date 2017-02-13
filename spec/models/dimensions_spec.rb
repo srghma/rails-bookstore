@@ -2,11 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Dimensions do
   context '#to_s' do
+    subject { dimensions.to_s }
+
     context 'when the dimensions are empty' do
       let(:dimensions) { Dimensions.new }
 
       it 'should return an empty string' do
-        dimensions.to_s.should == ''
+        expect(subject).to eq ''
       end
     end
 
@@ -14,7 +16,7 @@ RSpec.describe Dimensions do
       let(:dimensions) { Dimensions.new(height: 5.375, width: 3, depth: 0.9) }
 
       it 'should return the height, width, and depth in feet and inches' do
-        dimensions.to_s.should == 'H:5.4′′ × W:3.0′′ × D:0.9′′'
+        expect(subject).to eq 'H:5.4′′ × W:3.0′′ × D:0.9′′'
       end
     end
 
@@ -22,7 +24,7 @@ RSpec.describe Dimensions do
       let(:dimensions) { Dimensions.new(height: 5.375, width: 3) }
 
       it 'should return the available height, width, and depth in feet and inches' do
-        dimensions.to_s.should == 'H:5.4′′ × W:3.0′′'
+        expect(subject).to eq 'H:5.4′′ × W:3.0′′'
       end
     end
   end

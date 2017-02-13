@@ -3,27 +3,27 @@ module BookImporter
 
   class << self
     def import
-      visit_directory(SEEDS_PATH)
+      import_directory(SEEDS_PATH)
     end
 
-    def visit_directory(path)
+    def import_directory(path)
       Dir.chdir(path) do
         Dir.glob('*').each do |entry|
           entry = path.join(entry)
-          File.directory?(entry) ? visit_directory(entry) : visit_file(entry)
+          File.directory?(entry) ? import_directory(entry) : create_book_with_cover(entry)
         end
       end
     end
 
-    def visit_file(path)
-      dirname = path.dirname
+    def create_book_with_cover(cover_path)
+      dirname = cover_path.dirname
       have_title = dirname != SEEDS_PATH
       title = dirname.basename.to_s if have_title
 
       book = Book.find_by(title: title) if title
       book = create_book(title) if book.nil? || !book.persisted?
 
-      cover = File.open(path)
+      cover = File.open(cover_path)
       book.covers.create(file: cover)
     end
 

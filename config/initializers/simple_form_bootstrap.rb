@@ -1,10 +1,10 @@
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   config.error_notification_class = 'alert alert-danger'
-  config.button_class = 'btn btn-default'
+  config.button_class = 'btn btn-default mb-20'
   config.boolean_label_class = nil
 
-  config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :vertical_form, tag: 'div', class: 'form-group mb-30', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -12,11 +12,11 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'control-label'
+    b.use :label, class: 'control-label font-weight-light'
 
     b.use :input, class: 'form-control'
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block in-gold-500' }
   end
 
   config.wrappers :vertical_file_input, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
@@ -32,12 +32,13 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group checkbox text-center mb-30', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
 
-    b.wrapper tag: 'div', class: 'checkbox' do |ba|
-      ba.use :label_input
+    b.wrapper tag: 'label', class: 'font-weight-light pl-0' do |ba|
+      ba.use :bookstore_checkbox
+      ba.use :label_text, wrap_with: { tag: :span, class: 'font-weight-light pl-0' }
     end
 
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }

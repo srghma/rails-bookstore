@@ -1,0 +1,4 @@
+- if devise_mapping.registerable?
+  %p.general-sign-text.text-center
+    Have an Account?
+    = link_to 'Log in', new_session_path(resource_name), class: 'in-gold-500'

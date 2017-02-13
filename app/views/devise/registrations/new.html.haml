@@ -2,19 +2,12 @@
   %h3.general-login-title Sign up
   = render 'devise/shared/facebook_authorize_link'
   %p.general-login-text or
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'general-form' }) do |f|
-  .form-group.mb-30
-    = f.label :email, 'Enter Email', class: 'control-label font-weight-light'
-    = f.email_field :email, placeholder: 'Enter Email', class: 'form-control', autofocus: true
-  .form-group.mb-30
-    = f.label :password, 'Password', class: 'control-label font-weight-light'
-    = f.password_field :password, placeholder: 'Password', autocomplete: 'off', class: 'form-control'
-  .form-group.mb-30
-    = f.label :password_confirmation, 'Confirm Password', class: 'control-label font-weight-light'
-    = f.password_field :password_confirmation, placeholder: 'Confirm Password', autocomplete: 'off', class: 'form-control'
-  .actions.text-center
-    = f.submit 'Sign up', class: 'btn btn-default mb-20'
-- if devise_mapping.registerable?
-  %p.general-sign-text.text-center
-    Have an Account?
-    = link_to 'Log in', new_session_path(resource_name), class: 'in-gold-500'
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  .form-inputs
+    = f.input :email, autofocus: true
+    = f.input :password
+    = f.input :password_confirmation
+    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+  .form-actions.actions.text-center
+    = f.button :submit, 'Sing up'
+= render 'devise/shared/new_session_link'

@@ -1,0 +1,4 @@
+- if devise_mapping.registerable?
+  %p.general-sign-text.text-center
+    Don’t have an Account?
+    = link_to 'Sign up', new_registration_path(resource_name), class: 'in-gold-500'

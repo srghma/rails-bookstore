@@ -29,21 +29,22 @@
         %button.btn.btn-default.pull-right.general-position Add to Cart
     .general-info-wrap.divider-lg
       %p Description
-      %p.lead.small.line-height-2
+      %p.in-grey-600.small.line-height-2{ 'data-readmore': true,
+        'data-readmore-class': 'in-gold-500 ml-10',
+        'data-readmore-moretext': 'Read More' }
         = @book.description
-        %a.in-gold-500.ml-10{href: "#"} Read More
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left Year of publication
-        %p.lead.small.pull-right= @book.publication_year
+        %p.in-grey-600.small.pull-right= @book.publication_year
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left Dimensions
-        %p.lead.small.pull-right= @book.dimensions
+        %p.in-grey-600.small.pull-right= @book.dimensions
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left Materials
-        %p.lead.small.pull-right= @book.materials
+        %p.in-grey-600.small.pull-right= @book.materials
 
 .mb-80
   = review_widget(@book)

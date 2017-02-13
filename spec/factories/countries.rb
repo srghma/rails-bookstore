@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :country do
-    name "MyString"
+    name { FFaker::Address.country }
+    code { FFaker::Address.country_code }
   end
 end

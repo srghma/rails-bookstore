@@ -1,0 +1,5 @@
+- books.each_slice(4) do |slice|
+  .row
+    - slice.each do |book|
+      .col-xs-6.col-sm-3
+        = render partial: 'books/thumb', locals: { book: book }

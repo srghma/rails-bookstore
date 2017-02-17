@@ -6,68 +6,8 @@
   %button.btn.btn-default Get Started
 .mb-35
   %h3 Best Sellers
-  .row
-    .col-sm-6.col-md-3
-      .general-thumb-wrap
-        .thumbnail.general-thumbnail
-          %img.img-shadow.general-thumbnail-img{  src: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg', alt: 'design-book' }
-          .thumb-hover
-            .general-thumb-link-wrap
-              %a.thumb-hover-link{  href: '#' }
-                %i.fa.fa-eye.thumb-icon{  'aria-hidden': 'true' }
-              %a.thumb-hover-link{  href: '#' }
-                %i.fa.fa-shopping-cart.thumb-icon
-      .mb-35
-        .clearfix
-          %p.pull-right.font-16.in-gold-500 €28.50
-          %p.general-title.mr-55 Android Programming for Beginners
-        %span.divider-sm
-        %p.in-grey-600.small John Horton
-    .col-sm-6.col-md-3
-      .general-thumb-wrap
-        .thumbnail.general-thumbnail.disabled
-          %img.img-shadow.general-thumbnail-img{  src: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg', alt: 'design-book' }
-          .thumb-hover
-            .general-thumb-link-wrap
-              %a.thumb-hover-link{  href: '#' }
-                %i.fa.fa-eye.thumb-icon{  'aria-hidden': 'true' }
-              %a.thumb-hover-link{  href: '#' }
-                %i.fa.fa-shopping-cart.thumb-icon
-      .mb-35
-        .clearfix
-          %p.pull-right.font-16.in-gold-500 €28.50
-          %p.general-title.mr-55 Android Programming for Beginners
-        %span.divider-sm
-        %p.in-grey-600.small John Horton
-    .col-sm-6.col-md-3
-      .general-thumb-wrap
-        .thumbnail.general-thumbnail
-          %img.img-shadow.general-thumbnail-img{  src: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg', alt: 'design-book' }
-          .thumb-hover
-            .general-thumb-link-wrap
-              %a.thumb-hover-link{  href: '#' }
-                %i.fa.fa-eye.thumb-icon{  'aria-hidden': 'true' }
-              %a.thumb-hover-link{  href: '#' }
-                %i.fa.fa-shopping-cart.thumb-icon
-      .mb-35
-        .clearfix
-          %p.pull-right.font-16.in-gold-500 €28.50
-          %p.general-title.mr-55 Android Programming for Beginners
-        %span.divider-sm
-        %p.in-grey-600.small John Horton
-    .col-sm-6.col-md-3
-      .general-thumb-wrap
-        .thumbnail.general-thumbnail
-          %img.img-shadow.general-thumbnail-img{  src: 'http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg', alt: 'design-book' }
-          .thumb-hover
-            .general-thumb-link-wrap
-              %a.thumb-hover-link{  href: '#' }
-                %i.fa.fa-eye.thumb-icon{  'aria-hidden': 'true' }
-              %a.thumb-hover-link{  href: '#' }
-                %i.fa.fa-shopping-cart.thumb-icon
-      .mb-35
-        .clearfix
-          %p.pull-right.font-16.in-gold-500 €28.50
-          %p.general-title.mr-55 Android Programming for Beginners
-        %span.divider-sm
-        %p.in-grey-600.small John Horton
+  - presenter.books.each_slice(4) do |slice|
+    .row
+      - slice.each do |book|
+        .col-sm-6.col-md-3
+          = render partial: 'books/thumb', locals: { book: book }

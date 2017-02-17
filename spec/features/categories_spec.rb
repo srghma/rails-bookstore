@@ -1,5 +1,5 @@
 feature 'Categories page:' do
-  before { create_list :book, 10 }
+  populate_database
 
   context 'when all categories' do
     before { visit categories_path }

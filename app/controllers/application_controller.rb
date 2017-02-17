@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
+  include Rectify::ControllerHelpers
   include CurrentOrder
-  include AllCategories
   include YotpoHelper
+
+  before_action { present HeaderPresenter.new, for: :header }
 
   protect_from_forgery with: :exception
 

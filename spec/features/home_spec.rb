@@ -1,4 +1,6 @@
 feature 'Home page:' do
+  populate_database
+
   context 'when guest' do
     scenario 'first visit' do
       visit root_path

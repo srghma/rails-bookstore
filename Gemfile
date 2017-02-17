@@ -24,12 +24,15 @@ gem 'cancancan'
 gem 'aasm'
 gem 'kaminari'
 
+gem 'memoist'
 gem 'yotpo'
 gem 'rectify'
 gem 'simple_form'
 gem 'friendly_id'
+# gem 'draper', '~> 3.0'
 
 # File uploader
+
 gem 'carrierwave'
 gem 'mini_magick'
 
@@ -51,6 +54,7 @@ group :development, :test do
   # RSpec
   gem 'rspec-rails'
   gem 'capybara-webkit'
+  gem 'capybara-screenshot'
   gem 'email_spec'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'

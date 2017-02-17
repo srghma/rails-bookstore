@@ -19,7 +19,7 @@
         %li.dropdown
           %a.dropdown-toggle{ href: '#', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } } Shop
           %ul.dropdown-menu
-            - categories.each do |category|
+            - presenter(:header).categories.each do |category|
               %li= link_to category.title, category
         - if user_signed_in?
           %li.dropdown

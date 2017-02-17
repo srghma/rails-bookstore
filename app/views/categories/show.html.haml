@@ -5,20 +5,14 @@
       Newest first
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
-      %li
-        %a{href: '#'} Newest first
-      %li
-        %a{href: '#'} Popular first
-      %li
-        %a{href: '#'} Price: Low to hight
-      %li
-        %a{href: '#'} Price: Low to hight
+      - presenter.order_methods.each do |method|
+        %li= link_to method.title, { order: method.key }
   %ul.list-inline.pt-10.mb-25.mr-240
-    - iterate_through_categories do |title, path, books_count|
+    - presenter.categories do |category|
       %li.mr-35
-        = link_to path, class: 'filter-link' do
-          = title
-          %span.badge.general-badge= books_count
+        = link_to category.path, class: 'filter-link' do
+          = category.title
+          %span.badge.general-badge= category.books_count
 .visible-xs.mb-40
   %p.in-grey-600.small.mb-10 Filter by category
   .dropdown.mb-20
@@ -26,23 +20,17 @@
       Newest first
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
-      - iterate_through_categories do |title, path|
-        %li= link_to title, path
+      - presenter.categories do |category|
+        %li= link_to category.title, category.path
   %p.in-grey-600.small.mb-10 Sort by
   .dropdown.mb-20
     %a.dropdown-toggle.dropdown-btn.width-100{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
       Newest first
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
-      %li
-        %a{href: '#'} Newest first
-      %li
-        %a{href: '#'} Popular first
-      %li
-        %a{href: '#'} Price: Low to hight
-      %li
-        %a{href: '#'} Price: Low to hight
+      - presenter.order_methods.each do |method|
+        %li= link_to method.title, { order: method.key }
 #books
-  = render partial: 'books/grid', object: @books, as: 'books'
+  = render partial: 'books_grid', locals: { books: presenter.books }
 .text-center.mb-120#paginator
-  = link_to_next_page @books, 'View More', remote: true, class: 'btn btn-primary'
+  = presenter.next_page_link

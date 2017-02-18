@@ -1,15 +1,9 @@
-TITLES = [
-  'Mobile development',
-  'Photo',
-  'Web design',
-  'Web development'
-].freeze
-
 FactoryGirl.define do
-  factory :category do
-    title { TITLES.sample }
+  sequence :category_title do |n|
+    "interesting title#{n}"
+  end
 
-    # because categories should be unique by titles
-    initialize_with { Category.find_or_create_by(title: title) }
+  factory :category do
+    title { generate(:category_title) }
   end
 end

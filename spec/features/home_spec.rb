@@ -1,5 +1,5 @@
 feature 'Home page:' do
-  populate_database
+  populate_bookstore
 
   context 'when guest' do
     scenario 'first visit' do

@@ -2,21 +2,20 @@ class CategoriesPresenter < Rectify::Presenter
   # XXX: one can't use params in initialize,
   # couse controller is not attached on that moment,
   # so I use memoization hack
-  def order_servise
-    @order_servise ||= BookOrderServise.new(params[:order])
+  def books_servise
+    @books_servise ||= CategoryBooksServise.new(params)
   end
 
-  delegate :order_methods, to: :order_servise
+  def order_by
+    books_servise.order_by.each { |method| yield method, t("order.#{method}") }
+  end
+
+  def current_order
+    t("order.#{books_servise.current_order}")
+  end
 
   def books
-    @books ||= begin
-      books = BookSearch.new(
-        order_by:    order_servise.current_order,
-        category_id: params[:id],
-        page:        params[:page]
-      ).query
-      BookDecorator.for_collection(books)
-    end
+    @books ||= BookDecorator.for_collection(books_servise.books)
   end
 
   def categories

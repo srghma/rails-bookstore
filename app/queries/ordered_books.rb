@@ -1,5 +1,6 @@
-class BookSearch < Rectify::Query
+class OrderedBooks < Rectify::Query
   def initialize(order_by:, category_id: nil, page: nil, paginates_per: 8)
+    raise ArgumentError unless order_by
     @order_by = order_by
     @category_id = category_id
     @page = page

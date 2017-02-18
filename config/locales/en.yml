@@ -24,6 +24,13 @@ en:
     recover_password_hint: 'Forgot password?'
   auth:
     access_denied: 'Access denied'
+  order:
+    by_creation_date: 'Newest first'
+    by_popularity: 'Popular first'
+    by_price: 'Price: Low to hight'
+    by_price_desc: 'Price: Hight to low'
+    by_title: 'Title: A-Z'
+    by_title_desc: 'Title: Z-A'
 
   errors:
     messages:

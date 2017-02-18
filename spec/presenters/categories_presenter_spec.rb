@@ -10,12 +10,10 @@ RSpec.describe CategoriesPresenter do
     end
 
     context 'params specified' do
-      let(:params) { { sort: 'by_title' } }
+      let(:params) { { order: 'by_title' } }
 
       it 'should return order methods with current on top' do
-        keys = subject.order_methods.map(&:key)
-        expect(keys.first).to  eq :by_title
-        expect(keys.second).to eq :by_creation_date
+        expect(subject.current_order).to  eq 'Title: A-Z'
       end
     end
 
@@ -23,9 +21,7 @@ RSpec.describe CategoriesPresenter do
       let(:params) { { sort: 'asdfa' } }
 
       it 'should return order methods' do
-        keys = subject.order_methods.map(&:key)
-        expect(keys.first).to  eq :by_creation_date
-        expect(keys.second).to eq :by_popularity
+        expect(subject.current_order).to  eq 'Newest first'
       end
     end
   end

@@ -1,11 +1,11 @@
 module YotpoHelper
-  def review_widget(book)
+  def review_widget(**options)
     data = {
-      'description': book.description,
-      'image-url':   book.cover_url(version: :thumb),
-      'name':        book.title,
-      'product-id':  book.id,
-      'url':         book_url(book)
+      'description': options[:description],
+      'image-url':   options[:image_url],
+      'name':        options[:title],
+      'product-id':  options[:id],
+      'url':         options[:url]
     }
     content_tag :div, nil, class: 'yotpo yotpo-main-widget', data: data
   end

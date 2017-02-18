@@ -6,18 +6,18 @@
   .col-sm-6
     .product-gallery
       .mb-20
-        = image_tag @book.cover_url, class: 'img-responsive img-shadow'
-      - if @book.covers_urls.size > 1
+        = image_tag presenter.primary_cover, class: 'img-responsive img-shadow'
+      - if presenter.minor_covers?
         .images.clearfix
-          - @book.covers_urls.each do |url|
+          - presenter.minor_covers do |cover|
             = link_to '#', class: 'img-link' do
-              = image_tag url, class: 'width-full'
+              = image_tag cover, class: 'width-full'
   .col-sm-6
-    %h1.mt-res-0= @book.title
-    %p.in-grey-600.small= @book.authors_names
+    %h1.mt-res-0= presenter.title
+    %p.in-grey-600.small= presenter.authors_names
     .row
       .col-xs-12.col-md-4
-        %p.h1.in-gold-500.mt-10= number_to_currency(@book.price)
+        %p.h1.in-gold-500.mt-10= presenter.price
       .col-xs-5.col-md-3
         .input-group.general-position
           %a.input-link{href: "#"}
@@ -32,19 +32,19 @@
       %p.in-grey-600.small.line-height-2{ 'data-readmore': true,
         'data-readmore-class': 'in-gold-500 ml-10',
         'data-readmore-moretext': 'Read More' }
-        = @book.description
+        = presenter.description
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left Year of publication
-        %p.in-grey-600.small.pull-right= @book.publication_year
+        %p.in-grey-600.small.pull-right= presenter.publication_year
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left Dimensions
-        %p.in-grey-600.small.pull-right= @book.dimensions
+        %p.in-grey-600.small.pull-right= presenter.dimensions
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left Materials
-        %p.in-grey-600.small.pull-right= @book.materials
+        %p.in-grey-600.small.pull-right= presenter.materials
 
 .mb-80
-  = review_widget(@book)
+  = presenter.review_widget

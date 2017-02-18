@@ -2,11 +2,11 @@
 .hidden-xs.clearfix
   .dropdown.pull-right
     %a.dropdown-toggle.dropdown-btn.width-240{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
-      Newest first
+      = presenter.current_order
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
-      - presenter.order_methods.each do |method|
-        %li= link_to method.title, { order: method.key }
+      - presenter.order_by do |method, title|
+        %li= link_to title, { order: method }
   %ul.list-inline.pt-10.mb-25.mr-240
     - presenter.categories do |category|
       %li.mr-35
@@ -17,7 +17,7 @@
   %p.in-grey-600.small.mb-10 Filter by category
   .dropdown.mb-20
     %a.dropdown-toggle.dropdown-btn.width-100{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
-      Newest first
+      = presenter.current_order
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
       - presenter.categories do |category|
@@ -25,11 +25,11 @@
   %p.in-grey-600.small.mb-10 Sort by
   .dropdown.mb-20
     %a.dropdown-toggle.dropdown-btn.width-100{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
-      Newest first
+      = presenter.current_order
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
-      - presenter.order_methods.each do |method|
-        %li= link_to method.title, { order: method.key }
+      - presenter.order_by do |method, title|
+        %li= link_to title, { order: method }
 #books
   = render partial: 'books_grid', locals: { books: presenter.books }
 .text-center.mb-120#paginator

@@ -1,5 +1,5 @@
 feature 'Categories page:' do
-  populate_database
+  populate_bookstore
 
   context 'when all categories' do
     before { visit categories_path }

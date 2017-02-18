@@ -5,10 +5,10 @@
       = presenter.current_order
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
-      - presenter.order_by do |method, title|
-        %li= link_to title, { order: method }
+      - presenter.order_by.each do |order|
+        %li= link_to order.title, { order: order.method }
   %ul.list-inline.pt-10.mb-25.mr-240
-    - presenter.categories do |category|
+    - presenter.categories.each do |category|
       %li.mr-35
         = link_to category.path, class: 'filter-link' do
           = category.title
@@ -20,7 +20,7 @@
       = presenter.current_order
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
-      - presenter.categories do |category|
+      - presenter.categories.each do |category|
         %li= link_to category.title, category.path
   %p.in-grey-600.small.mb-10 Sort by
   .dropdown.mb-20
@@ -28,8 +28,8 @@
       = presenter.current_order
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
-      - presenter.order_by do |method, title|
-        %li= link_to title, { order: method }
+      - presenter.order_by.each do |order|
+        %li= link_to order.title, { order: order.method }
 #books
   = render partial: 'books_grid', locals: { books: presenter.books }
 .text-center.mb-120#paginator

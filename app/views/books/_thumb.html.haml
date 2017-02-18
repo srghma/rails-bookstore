@@ -1,6 +1,6 @@
 .general-thumb-wrap
   .thumbnail.general-thumbnail
-    = image_tag book.cover_url(version: :thumb), class: 'img-shadow general-thumbnail-img'
+    = image_tag book.cover_url_or_default(version: :thumb), class: 'img-shadow general-thumbnail-img'
     .thumb-hover
       .general-thumb-link-wrap
         = link_to book, class: 'thumb-hover-link' do

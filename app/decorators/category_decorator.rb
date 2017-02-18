@@ -1,4 +1,8 @@
 class CategoryDecorator < BaseDecorator
+  def self.for_collection(*objects)
+    objects.flatten.map { |object| new(object) }
+  end
+
   def initialize(object = nil)
     super
   end

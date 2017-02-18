@@ -1,25 +1,28 @@
 class BookPresenter < Rectify::Presenter
-  attribute :book, Book
+  def initialize(book:)
+    @book = BookDecorator.new(book)
+  end
+
+  attr_reader :book
 
   delegate :authors_names, :title, :description,
            :publication_year, :dimensions, :materials,
-           to: :decorated_book
+           to: :book
 
   def primary_cover
-    return covers_urls.first if covers_urls
-    CoverUploader.new.default_url
+    book.cover_url_or_default
   end
 
   def minor_covers?
     covers_urls.size > 1
   end
 
-  def minor_covers
+  def minor_cover_urls
     covers_urls[1..-1]
   end
 
   def price
-    number_to_currency(decorated_book.price)
+    number_to_currency(book.price)
   end
 
   def review_widget
@@ -34,11 +37,7 @@ class BookPresenter < Rectify::Presenter
 
   private
 
-  def decorated_book
-    @decorated_book ||= BookDecorator.new(book)
-  end
-
   def covers_urls
-    @covers_urls = decorated_book.covers_urls
+    @covers_urls = book.covers_urls
   end
 end

@@ -1,28 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe CategoriesPresenter do
-  populate_bookstore
-  subject { CategoriesPresenter.new }
+  let(:categories) { create_list(:category, 5, title: FFaker::Book.genre) }
+  let(:books) do
+    categories.each { |category| create :book, category: category }
+  end
 
-  context '#order_methods' do
-    before do
-      allow(subject).to receive(:params).and_return(params)
-    end
+  subject do
+    CategoriesPresenter.new(
+      books: books,
+      order_methods: nil,
+      current_order: nil
+    )
+  end
 
-    context 'params specified' do
-      let(:params) { { order: 'by_title' } }
-
-      it 'should return order methods with current on top' do
-        expect(subject.current_order).to  eq 'Title: A-Z'
-      end
-    end
-
-    context 'params invalid' do
-      let(:params) { { sort: 'asdfa' } }
-
-      it 'should return order methods' do
-        expect(subject.current_order).to  eq 'Newest first'
-      end
+  context '#categories' do
+    it 'should return order methods with current on top' do
+      expect(subject.categories.size).to eq 6
+      expect(subject.categories.first.title).to eq 'All'
     end
   end
 end

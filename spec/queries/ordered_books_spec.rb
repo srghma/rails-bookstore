@@ -27,9 +27,9 @@ RSpec.describe OrderedBooks do
         books = OrderedBooks
                 .new(order_by: :by_popularity, category_id: category.id)
                 .query
-        # TODO: sometimes test don't pass, then I uncomment line below,
+        # TODO: sometimes this test don't pass, then I uncomment line below,
         # test pass, comment - still pass, why
-        # Book.where(category_id: category.id)
+        Book.where(category_id: category.id)
         expect(books.pluck(:id)).to eq [1, 2]
       end
     end

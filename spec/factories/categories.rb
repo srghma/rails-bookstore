@@ -1,4 +1,3 @@
-# TODO: find better place for TITLES, non global? (using it in tasks_spac)
 TITLES = [
   'Mobile development',
   'Photo',

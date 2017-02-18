@@ -9,9 +9,9 @@
         = image_tag presenter.primary_cover, class: 'img-responsive img-shadow'
       - if presenter.minor_covers?
         .images.clearfix
-          - presenter.minor_covers do |cover|
+          - presenter.minor_cover_urls.each do |url|
             = link_to '#', class: 'img-link' do
-              = image_tag cover, class: 'width-full'
+              = image_tag url, class: 'width-full'
   .col-sm-6
     %h1.mt-res-0= presenter.title
     %p.in-grey-600.small= presenter.authors_names

@@ -34,8 +34,8 @@ feature 'Authentication:' do
         fill_in 'Enter Email',      with: user.email
         fill_in 'Password',         with: user.password, match: :prefer_exact
         fill_in 'Confirm Password', with: user.password, match: :prefer_exact
+        find('input[type="submit"]').click
       end
-      click_button 'Sign up'
       expect(current_path).to eq root_path
     end
   end

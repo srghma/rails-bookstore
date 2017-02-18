@@ -1,28 +1,27 @@
 class CategoriesPresenter < Rectify::Presenter
-  # XXX: one can't use params in initialize,
-  # couse controller is not attached on that moment,
-  # so I use memoization hack
-  def books_servise
-    @books_servise ||= CategoryBooksServise.new(params)
+  OrderBy = Struct.new(:method, :title)
+
+  def initialize(books:, order_methods:, current_order:)
+    super
+    @books = BooksDecorator.new(books, BookDecorator)
+    @order_methods = order_methods
+    @current_order = current_order
   end
 
+  attr_reader :books
+
   def order_by
-    books_servise.order_by.each { |method| yield method, t("order.#{method}") }
+    @order_by ||= @order_methods.map do |method|
+      OrderBy.new(method, t("order.#{method}"))
+    end
   end
 
   def current_order
-    t("order.#{books_servise.current_order}")
-  end
-
-  def books
-    @books ||= BookDecorator.for_collection(books_servise.books)
+    t("order.#{@current_order}")
   end
 
   def categories
-    yield CategoryDecorator.new
-    Category.find_each do |category|
-      yield CategoryDecorator.new(category)
-    end
+    @categories ||= CategoryDecorator.for_collection(nil, Category.all)
   end
 
   def next_page_link

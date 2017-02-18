@@ -12,7 +12,7 @@ class CategoryBooksServise
     @params = params
   end
 
-  def order_by
+  def order_methods
     ORDER_METHODS
   end
 

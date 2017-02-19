@@ -33,8 +33,8 @@ guard 'livereload' do
   rails_view_exts = %w(erb haml slim)
 
   # file types LiveReload may optimize refresh for
-  compiled_exts = extensions.values.uniq
-  watch(%r{public/.+\.(#{compiled_exts * '|'})})
+  # compiled_exts = extensions.values.uniq
+  # watch(%r{public/.+\.(#{compiled_exts * '|'})})
 
   extensions.each do |ext, type|
     watch(%r{

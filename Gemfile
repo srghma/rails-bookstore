@@ -53,6 +53,7 @@ group :development, :test do
 
   # RSpec
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem 'capybara-webkit'
   gem 'capybara-screenshot'
   gem 'email_spec'

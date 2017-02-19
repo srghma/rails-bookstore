@@ -14,7 +14,7 @@ CarrierWave::Uploader::Base.descendants.each do |klass|
 end
 
 RSpec.configure do |config|
-  config.after(:all) do
+  config.before(:suite) do
     FileUtils.rm_rf(Rails.root.join('public', 'test_uploads'))
   end
 end

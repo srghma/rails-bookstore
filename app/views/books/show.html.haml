@@ -18,21 +18,15 @@
     .row
       .col-xs-12.col-md-4
         %p.h1.in-gold-500.mt-10= presenter.price
-      .col-xs-5.col-md-3
-        .input-group.general-position
-          %a.input-link{href: "#"}
-            %i.fa.fa-minus.line-height-40
-          %input.form-control.quantity-input{type: "text"}
-          %a.input-link{href: "#"}
-            %i.fa.fa-plus.line-height-40
+      = form_tag '#' do
+        = hidden_field_tag :book_id, presenter.book.id
+        .col-xs-5.col-md-3
+          = quantity_widget(presenter.book)
       .col-xs-7.col-md-5
         %button.btn.btn-default.pull-right.general-position Add to Cart
     .general-info-wrap.divider-lg
       %p Description
-      %p.in-grey-600.small.line-height-2{ 'data-readmore': true,
-        'data-readmore-class': 'in-gold-500 ml-10',
-        'data-readmore-moretext': 'Read More' }
-        = presenter.description
+      = readmore(:p, presenter.description, class: 'in-grey-600 small line-height-2')
     .general-info-wrap.divider-lg
       .clearfix
         %p.pull-left Year of publication

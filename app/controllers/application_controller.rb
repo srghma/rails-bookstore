@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   include Rectify::ControllerHelpers
   include CurrentOrder
-  include YotpoHelper
 
   before_action { present HeaderPresenter.new, for: :header }
 

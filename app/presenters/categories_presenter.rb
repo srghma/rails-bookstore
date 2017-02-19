@@ -3,7 +3,7 @@ class CategoriesPresenter < Rectify::Presenter
 
   def initialize(books:, order_methods:, current_order_method:)
     super
-    @books = BooksDecorator.new(books, BookDecorator)
+    @books = CategoryPage::BooksDecorator.new(books, CategoryPage::BookDecorator)
     @order_methods = order_methods
     @current_order_method = current_order_method
   end
@@ -21,7 +21,7 @@ class CategoriesPresenter < Rectify::Presenter
   end
 
   def categories
-    @categories ||= CategoryDecorator.for_collection(nil, Category.all)
+    @categories ||= CategoryPage::CategoryDecorator.for_collection(nil, Category.all)
   end
 
   def next_page_link

@@ -10,13 +10,15 @@ Rails.application.routes.draw do
     get '/:id', to: 'categories#show', as: :category
   end
 
-  resources :orders, only: :index
+  get :cart, to: 'cart#edit', as: :cart
+  # resource :cart, only: [:show]
+  resources :orders, only: [:index, :edit]
 
-  scope :cart do
-    get '/', to: 'cart#show', as: :cart
-    post   '/:model_name/:id', to: 'cart#add_product', as: :cart_add_product
-    delete '/:model_name/:id', to: 'cart#remove_product', as: :cart_remove_product
-  end
-
+  resources :order_item, only: [:create, :update, :destroy]
   resources :checkout, only: [:show, :update]
+
+  # resource :cart_item, controller: :order_item, only: [:create, :update, :destroy]
+  # post   '/:class/:id', to: 'cart#add_product',    as: :cart_add_product
+  # delete '/:class/:id', to: 'cart#remove_product', as: :cart_remove_product
+
 end

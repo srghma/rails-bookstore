@@ -1,35 +1,23 @@
 class BookPresenter < Rectify::Presenter
   def initialize(book:)
-    @book = BookDecorator.new(book)
+    @book = BookPage::BookDecorator.new(book)
   end
 
   attr_reader :book
 
-  delegate :authors_names, :title, :description,
-           :publication_year, :dimensions, :materials,
-           to: :book
-
-  def primary_cover
-    book.cover_url_or_default
+  def description
+    readmore(:p, presenter.book.description, class: 'in-grey-600 small line-height-2')
   end
 
-  def minor_covers?
-    covers_urls.size > 1
-  end
-
-  def minor_cover_urls
-    covers_urls[1..-1]
-  end
-
-  def price
-    number_to_currency(book.price)
+  def quantity_widget
+    view_context.quantity_widget(book)
   end
 
   def review_widget
     view_context.review_widget(
-      description: description,
-      image_url:   primary_cover,
-      title:       title,
+      description: book.description,
+      image_url:   book.primary_cover,
+      title:       book.title,
       id:          book.id,
       url:         book_url(book)
     )

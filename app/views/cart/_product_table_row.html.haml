@@ -1,0 +1,16 @@
+%tr
+  %td
+    .general-img-wrap-table
+      = image_tag book.cover, class: 'cart-img-shadow pull-left'
+  %td
+    %p.title book.title
+  %td
+    %span.font-16.in-gold-500 book.price
+  %td
+    = quantity_widget(book)
+  %td
+    %span.font-16.in-gold-500 book.subtotal
+  %td
+    -# = book.remove_button
+    %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
+      %span{'aria-hidden': "true"} &times;

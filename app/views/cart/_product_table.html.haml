@@ -1,0 +1,14 @@
+%table.table.table-hover
+  %tr.no-hover
+    %th.col-pic.pl-0
+      %span.in-grey-600 Product
+    %th.col-title
+    %th.col-price
+      %span.in-grey-600 Price
+    %th.col-quantity
+      %span.in-grey-600 Quantity
+    %th.col-total
+      %span.in-grey-600 SubTotal
+    %th.col-close
+  - books.each do |book|
+    = render partial: 'product_table_row', locals: { product: book }

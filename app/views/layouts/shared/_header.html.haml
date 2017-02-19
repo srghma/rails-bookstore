@@ -7,7 +7,7 @@
         %span.icon-bar
         %span.icon-bar
       = link_to 'Bookstore', root_path, class: 'navbar-brand'
-    = link_to '#', class: 'shop-link pull-right' do
+    = link_to cart_path, class: 'shop-link pull-right' do
       %span.shop-icon<
         - unless current_order.order_items.empty?
           %span.shop-quantity= current_order.order_items.size

@@ -17,7 +17,7 @@ FactoryGirl.define do
 
       after(:create) do |book, evaluator|
         number_of_authors = evaluator.number_of_authors == :rand ? rand(0..3) : evaluator.number_of_authors
-        create_list :order_item, number_of_authors, book: book
+        create_list :authorship, number_of_authors, book: book
       end
     end
 

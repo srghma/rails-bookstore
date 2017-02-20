@@ -1,23 +1,23 @@
 class CategoriesPresenter < Rectify::Presenter
-  OrderBy = Struct.new(:method, :title)
+  SortBy = Struct.new(:method, :title)
 
-  def initialize(books:, order_methods:, current_order_method:)
+  def initialize(books:, sort_methods:, current_sort_method:)
     super
     @books = CategoryPage::BooksDecorator.new(books, CategoryPage::BookDecorator)
-    @order_methods = order_methods
-    @current_order_method = current_order_method
+    @sort_methods = sort_methods
+    @current_sort_method = current_sort_method
   end
 
   attr_reader :books
 
-  def order_methods
-    @_order_methods ||= @order_methods.map do |method|
-      OrderBy.new(method, t("order.#{method}"))
+  def sort_methods
+    @_sort_methods ||= @sort_methods.map do |method|
+      SortBy.new(method, t("sort.#{method}"))
     end
   end
 
-  def current_order_method
-    t("order.#{@current_order_method}")
+  def current_sort_method
+    t("sort.#{@current_sort_method}")
   end
 
   def categories

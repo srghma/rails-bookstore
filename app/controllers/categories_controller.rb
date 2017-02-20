@@ -6,22 +6,19 @@ class CategoriesController < ApplicationController
         return
       end
 
-      on(:invalid_order) do
-        flash[:error] = 'Invalid order'
+      on(:invalid_sort) do
+        flash[:error] = 'Invalid sort'
       end
 
-      on(:ok) do |books, order_methods, current_order_method|
+      on(:ok) do |books, sort_methods, current_sort_method|
         present CategoriesPresenter.new(
-          books:                books,
-          order_methods:        order_methods,
-          current_order_method: current_order_method
+          books:               books,
+          sort_methods:        sort_methods,
+          current_sort_method: current_sort_method
         )
       end
     end
 
-    respond_to do |format|
-      format.html { render 'show' }
-      format.js   { render 'show' }
-    end
+    respond_to :html, :js
   end
 end

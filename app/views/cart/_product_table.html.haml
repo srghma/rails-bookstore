@@ -10,5 +10,5 @@
     %th.col-total
       %span.in-grey-600 SubTotal
     %th.col-close
-  - books.each do |book|
-    = render partial: 'product_table_row', locals: { product: book }
+  - products.each do |product|
+    = render partial: 'product_table_row', locals: { product: products }

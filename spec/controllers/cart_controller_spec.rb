@@ -1,23 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe CartController, type: :controller do
+  populate_bookstore(categories_count: 4, books_per_category: 10)
+
   describe 'GET #edit' do
-    populate_bookstore(categories_count: 4, books_per_category: 10)
+  end
 
-    # before do
-    #   create :order
-    # end
-    let(:current_order_method) { subject.presenter.instance_variable_get(:@current_order_method) }
+  describe 'GET #add_product' do
+    context 'valid params' do
+      it 'renders js' do
+        post :add_product, params: { type: 'bOOk', id: 1 }, xhr: true
+        expect(@responce).to render_template :add_product
+      end
+    end
 
-    context 'categories' do
-      context 'valid request' do
-        before { get :edit }
-
-        it 'use default order' do
-          expect(@responce).to render_template :show
-          expect(flash).to be_empty
-          expect(current_order_method).to eq :by_creation_date
-        end
+    context 'invalid params' do
+      it 'dont render js' do
+        post :add_product, params: { type: 'cattle', id: 1 }, xhr: true
+        expect(@responce).to redirect_to :root
       end
     end
   end

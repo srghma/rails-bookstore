@@ -2,11 +2,11 @@
 .hidden-xs.clearfix
   .dropdown.pull-right
     %a.dropdown-toggle.dropdown-btn.width-240{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
-      = presenter.current_order_method
+      = presenter.current_sort_method
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
-      - presenter.order_methods.each do |order|
-        %li= link_to order.title, { order: order.method }
+      - presenter.sort_methods.each do |sort|
+        %li= link_to sort.title, { sort: sort.method }
   %ul.list-inline.pt-10.mb-25.mr-240
     - presenter.categories.each do |category|
       %li.mr-35
@@ -17,7 +17,7 @@
   %p.in-grey-600.small.mb-10 Filter by category
   .dropdown.mb-20
     %a.dropdown-toggle.dropdown-btn.width-100{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
-      = presenter.current_order_method
+      = presenter.current_sort_method
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
       - presenter.categories.each do |category|
@@ -25,11 +25,11 @@
   %p.in-grey-600.small.mb-10 Sort by
   .dropdown.mb-20
     %a.dropdown-toggle.dropdown-btn.width-100{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
-      = presenter.current_order_method
+      = presenter.current_sort_method
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
-      - presenter.order_methods.each do |order|
-        %li= link_to order.title, { order: order.method }
+      - presenter.sort_methods.each do |sort|
+        %li= link_to sort.title, { sort: sort.method }
 #books
   = render partial: 'books_grid', locals: { books: presenter.books }
 .text-center.mb-120#paginator

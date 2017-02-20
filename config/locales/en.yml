@@ -24,7 +24,7 @@ en:
     recover_password_hint: 'Forgot password?'
   auth:
     access_denied: 'Access denied'
-  order:
+  sort:
     by_creation_date: 'Newest first'
     by_popularity: 'Popular first'
     by_price: 'Price: Low to hight'

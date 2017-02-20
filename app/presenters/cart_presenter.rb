@@ -2,8 +2,20 @@ class CartPresenter < Rectify::Presenter
   def initialize(order:)
     raise ArgumentError unless order
     @order = order
-    @books = CartPage::BookDecorator.for_collection(order.productable_items)
+    @products = CartPage::ProductDecorator.for_collection(order.books)
   end
 
-  attr_reader :books
+  attr_reader :products
+
+  def subtotal
+
+  end
+
+  def coupon
+
+  end
+
+  def order_total
+
+  end
 end

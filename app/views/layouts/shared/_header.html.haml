@@ -7,10 +7,8 @@
         %span.icon-bar
         %span.icon-bar
       = link_to 'Bookstore', root_path, class: 'navbar-brand'
-    = link_to cart_path, class: 'shop-link pull-right' do
-      %span.shop-icon<
-        - unless current_order.order_items.empty?
-          %span.shop-quantity= current_order.order_items.size
+    = link_to cart_path, class: 'shop-link pull-right', id: 'cart' do
+      = render partial: 'layouts/shared/cart'
     .navbar-collapse.collapse.pl-30#navbar{ aria: { expanded: 'false' } }
       %button.close.visible-xs{ type: 'button', aria: { label: 'Close' }, data: { toggle: 'collapse', target: '#navbar' } }
         %span{ aria: { hidden: 'true' } } &times;

@@ -1,5 +1,5 @@
 class GetCategoryBooks < Rectify::Command
-  ORDER_METHODS = [
+  SORT_METHODS = [
     :by_creation_date,
     :by_popularity,
     :by_price,
@@ -12,17 +12,17 @@ class GetCategoryBooks < Rectify::Command
     broadcast(:invalid_category) && return if broadcast_invalid_category?
     @category_id = category_id
 
-    broadcast(:invalid_order) if broadcast_invalid_order?
-    @current_order_method = current_order_method || ORDER_METHODS.first
+    broadcast(:invalid_sort) if broadcast_invalid_sort?
+    @current_sort_method = current_sort_method || SORT_METHODS.first
 
     @page = page
 
-    broadcast(:ok, order_books, ORDER_METHODS, @current_order_method)
+    broadcast(:ok, sorted_books, SORT_METHODS, @current_sort_method)
   end
 
-  def order_books
-    OrderedBooks.new(
-      order_by:    @current_order_method,
+  def sorted_books
+    SortedBooks.new(
+      sort_by:     @current_sort_method,
       category_id: @category_id,
       page:        @page
     ).query
@@ -32,13 +32,13 @@ class GetCategoryBooks < Rectify::Command
     !category_id.nil? && !category_id_valid?(category_id)
   end
 
-  def broadcast_invalid_order?
-    !order.nil? && !order_valid?(order)
+  def broadcast_invalid_sort?
+    !sort.nil? && !sort_valid?(sort)
   end
 
-  def current_order_method
-    return nil unless order_valid?(order)
-    order
+  def current_sort_method
+    return nil unless sort_valid?(sort)
+    sort
   end
 
   def category_id
@@ -51,12 +51,12 @@ class GetCategoryBooks < Rectify::Command
 
   private
 
-  def order
-    @caller.params[:order]&.to_sym
+  def sort
+    @caller.params[:sort]&.to_sym
   end
 
-  def order_valid?(order)
-    ORDER_METHODS.include?(order)
+  def sort_valid?(sort)
+    SORT_METHODS.include?(sort)
   end
 
   def category_id_valid?(id)

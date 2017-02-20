@@ -1,9 +1,10 @@
 class Book < ApplicationRecord
+  include Product
+
   belongs_to :category
   has_many :authorships, dependent: :destroy
   has_many :authors, through: :authorships
   has_many :covers, dependent: :destroy
-  has_many :order_items, as: :productable, dependent: :destroy
 
   validates :title, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0.00 }, presence: true

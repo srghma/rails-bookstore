@@ -4,36 +4,36 @@ RSpec.describe CategoriesController, type: :controller do
   describe 'GET #show' do
     populate_bookstore(categories_count: 4, books_per_category: 10)
 
-    let(:current_order_method) { subject.presenter.instance_variable_get(:@current_order_method) }
+    let(:current_sort_method) { subject.presenter.instance_variable_get(:@current_sort_method) }
 
     context 'categories' do
       context 'valid request' do
         before { get :show }
 
-        it 'use default order' do
+        it 'use default sort' do
           expect(@responce).to render_template :show
           expect(flash).to be_empty
-          expect(current_order_method).to eq :by_creation_date
+          expect(current_sort_method).to eq :by_creation_date
         end
       end
 
-      context 'invalid order' do
-        before { get :show, params: { order: 'shakalaka' } }
+      context 'invalid sort' do
+        before { get :show, params: { sort: 'shakalaka' } }
 
-        it 'use default order and show notice flash' do
+        it 'use default sort and show notice flash' do
           expect(@responce).to render_template :show
-          expect(flash[:error]).to eq 'Invalid order'
-          expect(current_order_method).to eq :by_creation_date
+          expect(flash[:error]).to eq 'Invalid sort'
+          expect(current_sort_method).to eq :by_creation_date
         end
       end
 
-      context 'specific order' do
-        before { get :show, params: { order: :by_title } }
+      context 'specific sort' do
+        before { get :show, params: { sort: :by_title } }
 
-        it 'use order' do
+        it 'use sort' do
           expect(@responce).to render_template :show
           expect(flash).to be_empty
-          expect(current_order_method).to eq :by_title
+          expect(current_sort_method).to eq :by_title
         end
       end
     end
@@ -45,7 +45,7 @@ RSpec.describe CategoriesController, type: :controller do
         it 'show books in category' do
           expect(@responce).to render_template :show
           expect(flash).to be_empty
-          expect(current_order_method).to eq :by_creation_date
+          expect(current_sort_method).to eq :by_creation_date
         end
       end
 
@@ -57,23 +57,23 @@ RSpec.describe CategoriesController, type: :controller do
           expect(flash[:error]).to eq 'Invalid category'
         end
       end
-      context 'invalid order' do
-        before { get :show, params: { id: 1, order: 'asdfasf' } }
+      context 'invalid sort' do
+        before { get :show, params: { id: 1, sort: 'asdfasf' } }
 
-        it 'use default order and show notice flash' do
+        it 'use default sort and show notice flash' do
           expect(@responce).to render_template :show
-          expect(flash[:error]).to eq 'Invalid order'
-          expect(current_order_method).to eq :by_creation_date
+          expect(flash[:error]).to eq 'Invalid sort'
+          expect(current_sort_method).to eq :by_creation_date
         end
       end
 
-      context 'specific order' do
-        before { get :show, params: { id: 1, order: :by_popularity } }
+      context 'specific sort' do
+        before { get :show, params: { id: 1, sort: :by_popularity } }
 
-        it 'use order' do
+        it 'use sort' do
           expect(@responce).to render_template :show
           expect(flash).to be_empty
-          expect(current_order_method).to eq :by_popularity
+          expect(current_sort_method).to eq :by_popularity
         end
       end
     end

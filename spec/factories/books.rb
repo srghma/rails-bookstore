@@ -27,7 +27,7 @@ FactoryGirl.define do
       end
 
       after(:create) do |book, evaluator|
-        create_list :order_item, evaluator.number_of_orders, book: book
+        create_list :order_item, evaluator.number_of_orders, productable: book
       end
     end
 

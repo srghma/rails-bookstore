@@ -29,7 +29,7 @@ RSpec.describe OrderedBooks do
                 .query
         # TODO: sometimes this test don't pass, then I uncomment line below,
         # test pass, comment - still pass, why
-        Book.where(category_id: category.id)
+        # Book.where(category_id: category.id)
         expect(books.pluck(:id)).to eq [1, 2]
       end
     end

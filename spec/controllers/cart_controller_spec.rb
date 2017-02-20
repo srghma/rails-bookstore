@@ -11,7 +11,7 @@ RSpec.describe CartController, type: :controller do
 
     context 'categories' do
       context 'valid request' do
-        before { get :show }
+        before { get :edit }
 
         it 'use default order' do
           expect(@responce).to render_template :show

@@ -34,8 +34,8 @@ class OrderedBooks < Rectify::Query
   end
 
   def order_by_popularity
-    @books.joins('LEFT JOIN order_items ON order_items.book_id = books.id')
+    @books.joins('LEFT JOIN order_items ON order_items.productable_id = books.id')
           .group('books.id')
-          .order('count(order_items.book_id) desc')
+          .order('count(order_items.productable_id) desc')
   end
 end

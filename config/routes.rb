@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   scope :cart do
     get  '/', to: 'cart#edit', as: :cart
-    post '/:type/:id', to: 'cart#add_product', as: :cart_add_product
+    post '/book/:id', to: 'cart#add_book', as: :cart_add_book
   end
 
   # resource :cart, only: [:show]

@@ -5,11 +5,11 @@
   %td
     %p.title product.title
   %td
-    %span.font-16.in-gold-500 product.price
+    %span.font-16.in-gold-500= product.price
   %td
-    = quantity_widget(product)
+    = product.quantity_widget
   %td
-    %span.font-16.in-gold-500 product.subtotal
+    %span.font-16.in-gold-500= product.subtotal
   %td
     -# = product.remove_button
     %button.close.general-cart-close{type: "button", 'aria-label': "Close"}

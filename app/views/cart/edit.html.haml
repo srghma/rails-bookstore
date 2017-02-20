@@ -1,8 +1,8 @@
 %h1.general-title-margin Cart
 .hidden-xs
   = render partial: 'product_table', locals: { products: presenter.products }
-.visible-xs
-  = render partial: 'xs_products', locals: { products: presenter.products }
+-# .visible-xs
+-#   = render partial: 'products_xs', locals: { products: presenter.products }
 .general-order-wrap
   .row
     .col-sm-4
@@ -20,15 +20,15 @@
             %td
               %p.font-16 Subtotal:
             %td
-              %p.font-16= presenter.subtotal
+              %p.font-16= presenter.products.subtotal
           %tr
             %td
               %p.font-16 Coupon:
             %td
-              %p.font-16= presenter.coupon
+              %p.font-16= presenter.products.coupon
           %tr
             %td
               %strong.font-18 Order Total:
             %td
-              %strong.font-18= presenter.order_total
+              %strong.font-18= presenter.products.order_total
         = link_to checkout_path, 'Checkout', class: 'btn btn-default mb-20 visible-xs-inline-block'

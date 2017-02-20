@@ -6,17 +6,17 @@ RSpec.describe CartController, type: :controller do
   describe 'GET #edit' do
   end
 
-  describe 'GET #add_product' do
+  describe 'GET #add_book' do
     context 'valid params' do
       it 'renders js' do
-        post :add_product, params: { type: 'bOOk', id: 1 }, xhr: true
-        expect(@responce).to render_template :add_product
+        post :add_book, params: { id: 1 }, xhr: true
+        expect(@responce).to render_template :add_book
       end
     end
 
     context 'invalid params' do
       it 'dont render js' do
-        post :add_product, params: { type: 'cattle', id: 1 }, xhr: true
+        post :add_book, params: { id: 1 }, xhr: true
         expect(@responce).to redirect_to :root
       end
     end

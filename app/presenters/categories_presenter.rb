@@ -3,7 +3,7 @@ class CategoriesPresenter < Rectify::Presenter
 
   def initialize(books:, sort_methods:, current_sort_method:)
     super
-    @books = CategoryPage::BooksDecorator.new(books, CategoryPage::BookDecorator)
+    @books = CategoryPage::BooksDecorator.new(books)
     @sort_methods = sort_methods
     @current_sort_method = current_sort_method
   end

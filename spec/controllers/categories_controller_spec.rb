@@ -11,7 +11,7 @@ RSpec.describe CategoriesController, type: :controller do
         before { get :show }
 
         it 'use default sort' do
-          expect(@responce).to render_template :show
+          expect(response).to render_template :show
           expect(flash).to be_empty
           expect(current_sort_method).to eq :by_creation_date
         end
@@ -21,7 +21,7 @@ RSpec.describe CategoriesController, type: :controller do
         before { get :show, params: { sort: 'shakalaka' } }
 
         it 'use default sort and show notice flash' do
-          expect(@responce).to render_template :show
+          expect(response).to render_template :show
           expect(flash[:error]).to eq 'Invalid sort'
           expect(current_sort_method).to eq :by_creation_date
         end
@@ -31,7 +31,7 @@ RSpec.describe CategoriesController, type: :controller do
         before { get :show, params: { sort: :by_title } }
 
         it 'use sort' do
-          expect(@responce).to render_template :show
+          expect(response).to render_template :show
           expect(flash).to be_empty
           expect(current_sort_method).to eq :by_title
         end
@@ -43,7 +43,7 @@ RSpec.describe CategoriesController, type: :controller do
         before { get :show, params: { id: 1 } }
 
         it 'show books in category' do
-          expect(@responce).to render_template :show
+          expect(response).to render_template :show
           expect(flash).to be_empty
           expect(current_sort_method).to eq :by_creation_date
         end
@@ -53,7 +53,7 @@ RSpec.describe CategoriesController, type: :controller do
         before { get :show, params: { id: 100 } }
 
         it 'redirect to categories' do
-          expect(@responce).to redirect_to(categories_path)
+          expect(response).to redirect_to(categories_path)
           expect(flash[:error]).to eq 'Invalid category'
         end
       end
@@ -61,7 +61,7 @@ RSpec.describe CategoriesController, type: :controller do
         before { get :show, params: { id: 1, sort: 'asdfasf' } }
 
         it 'use default sort and show notice flash' do
-          expect(@responce).to render_template :show
+          expect(response).to render_template :show
           expect(flash[:error]).to eq 'Invalid sort'
           expect(current_sort_method).to eq :by_creation_date
         end
@@ -71,7 +71,7 @@ RSpec.describe CategoriesController, type: :controller do
         before { get :show, params: { id: 1, sort: :by_popularity } }
 
         it 'use sort' do
-          expect(@responce).to render_template :show
+          expect(response).to render_template :show
           expect(flash).to be_empty
           expect(current_sort_method).to eq :by_popularity
         end

@@ -1,13 +1,13 @@
 %tr
   %td
     .general-img-wrap-table
-      = image_tag product.cover, class: 'cart-img-shadow pull-left'
+      = image_tag product.cover, class: 'cart-img-shadow pull-left width-full'
   %td
-    %p.title product.title
+    %p.title= product.title
   %td
     %span.font-16.in-gold-500= product.price
   %td
-    = product.quantity_widget
+    = presenter.quantity_widget(product)
   %td
     %span.font-16.in-gold-500= product.subtotal
   %td

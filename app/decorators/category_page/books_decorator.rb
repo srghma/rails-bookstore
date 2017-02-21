@@ -1,7 +1,7 @@
 module CategoryPage
   class BooksDecorator < SimpleDelegator
     def initialize(target)
-      decorated = target.map { |object| BookDecorator.new(object) }
+      decorated = target.map { |object| CategoryPage::BookDecorator.new(object) }
       super(decorated)
       @undecorated = target
     end

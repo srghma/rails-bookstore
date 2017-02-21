@@ -6,7 +6,7 @@ class BookPresenter < Rectify::Presenter
   attr_reader :book
 
   def description
-    readmore(:p, presenter.book.description, class: 'in-grey-600 small line-height-2')
+    readmore(:p, book.description, class: 'in-grey-600 small line-height-2')
   end
 
   def quantity_widget

@@ -9,15 +9,21 @@ RSpec.describe CartController, type: :controller do
   describe 'GET #add_book' do
     context 'valid params' do
       it 'renders js' do
-        post :add_book, params: { id: 1 }, xhr: true
-        expect(@responce).to render_template :add_book
+        expect do
+          post :add_book, params: { id: 1 }, xhr: true
+        end.to change { OrderItem.count }.by(1)
+
+        expect(response).to render_template :add_book
       end
     end
 
     context 'invalid params' do
-      it 'dont render js' do
-        post :add_book, params: { id: 1 }, xhr: true
-        expect(@responce).to redirect_to :root
+      it 'redirect via js' do
+        expect do
+          post :add_book, params: { id: 300 }, xhr: true
+        end.not_to change { OrderItem.count }
+
+        expect(response.body).to include 'Turbolinks.visit("http://test.host'
       end
     end
   end

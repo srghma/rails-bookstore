@@ -14,6 +14,5 @@ RSpec.describe Book, type: :model do
     it { should have_many(:authors).through(:authorships) }
     # it { should have_many(:reviews).dependent(:destroy) }
     it { should have_many(:order_items).dependent(:destroy) }
-    # it { should have_many(:wishes).dependent(:destroy) }
   end
 end

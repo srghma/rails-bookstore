@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207150356) do
+ActiveRecord::Schema.define(version: 20170220181741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 20170207150356) do
     t.index ["name"], name: "index_countries_on_name", unique: true, using: :btree
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.integer  "order_id"
+    t.string   "code",       null: false
+    t.float    "discount",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_coupons_on_order_id", using: :btree
+  end
+
   create_table "covers", force: :cascade do |t|
     t.integer  "book_id",    null: false
     t.string   "file",       null: false
@@ -125,6 +134,7 @@ ActiveRecord::Schema.define(version: 20170207150356) do
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
   add_foreign_key "books", "categories"
+  add_foreign_key "coupons", "orders"
   add_foreign_key "covers", "books"
   add_foreign_key "orders", "users"
 end

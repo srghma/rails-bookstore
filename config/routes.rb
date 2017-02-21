@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   end
 
   scope :cart do
-    get  '/', to: 'cart#edit', as: :cart
-    post '/book/:id', to: 'cart#add_book', as: :cart_add_book
+    get  '/', to: 'cart#show', as: :cart
+    post '/coupon', to: 'cart#add_coupon', as: :cart_add_coupon
+    post   '/book/:id', to: 'cart#add_product',    as: :cart_add_product
+    match  '/book/:id', to: 'cart#update_product', as: :cart_update_product, via: [:patch, :put]
+    delete '/book/:id', to: 'cart#remove_product', as: :cart_remove_product
   end
 
   # resource :cart, only: [:show]

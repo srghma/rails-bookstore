@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   def show
-    GetCategoryBooks.call do
+    CategoryPage::GetBooks.call do
       on(:invalid_category) do
         redirect_to(categories_path, flash: { error: 'Invalid category' })
         return

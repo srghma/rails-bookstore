@@ -4,6 +4,15 @@ class CartPresenter < Rectify::Presenter
     @products = CartPage::ProductsDecorator.new(order)
   end
 
-  attr_reader :products
+  def products
+    @products ||= CartPage::ProductsDecorator.new(current_order)
+  end
 
+  def cart_empty?
+    current_order.order_items.empty?
+  end
+
+  def coupon_code
+    current_order.coupon&.code || nil
+  end
 end

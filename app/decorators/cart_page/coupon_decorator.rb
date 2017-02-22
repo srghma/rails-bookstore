@@ -1,14 +1,28 @@
 module CartPage
   class CouponDecorator
-    def initialize(coupon, cart_form)
-      @code = cart_form&.coupon_code || coupon&.code
-      @errors = cart_form&.errors
+    def initialize(code, errors)
+      @code = code
+      @errors = errors
     end
 
     attr_reader :code
 
     def error_class
-      'has-error' if @errors
+      'has-error' if error_message
+    end
+
+    def helper?
+      error_message
+    end
+
+    def helper
+      error_message
+    end
+
+    private
+
+    def error_message
+      @error_message ||= @errors&.full_messages_for(:coupon_code)&.first
     end
   end
 end

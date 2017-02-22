@@ -3,10 +3,14 @@ module CartPage
     include ViewHelpers
     include BookCoverHelpers
 
-    def initialize(order_item)
-      @order_item = order_item
-      super(order_item.book)
+    def initialize(product, quantity:, discount: nil, errors: nil)
+      @quantity = quantity
+      @discount = discount
+      @errors = errors
+      super(product)
     end
+
+    attr_reader :quantity
 
     def cover
       cover_url_or_default(version: :thumb)
@@ -17,15 +21,11 @@ module CartPage
     end
 
     def subtotal
-      helpers.number_to_currency(item_price)
+      helpers.number_to_currency(_subtotal)
     end
 
-    def quantity
-      @order_item.quantity
-    end
-
-    def item_price
-      @item_price ||= @order_item.quantity * __getobj__.price
+    def _subtotal
+      @_subtotal ||= @quantity * __getobj__.price
     end
   end
 end

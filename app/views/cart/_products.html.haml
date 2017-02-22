@@ -1,0 +1,32 @@
+%table.table.table-hover
+  %tr.no-hover
+    %th.col-pic.pl-0
+      %span.in-grey-600 Product
+    %th.col-title
+    %th.col-price
+      %span.in-grey-600 Price
+    %th.col-quantity
+      %span.in-grey-600 Quantity
+    %th.col-total
+      %span.in-grey-600 SubTotal
+    %th.col-close
+  - products.each do |product|
+    = fields_for 'products[]', product do |product_fields|
+      = product_fields.hidden_field :id
+      %tr
+        %td
+          .general-img-wrap-table
+            = image_tag product.cover, class: 'cart-img-shadow pull-left width-full'
+        %td
+          %p.title= product.title
+        %td
+          %span.font-16.in-gold-500= product.price
+        %td
+          = quantity_widget(product, product_fields)
+        %td
+          %span.font-16.in-gold-500= product.subtotal
+        %td
+          -# = product.remove_button
+          %button.close.general-cart-close{type: "button", 'aria-label': "Close"}
+            %span{'aria-hidden': "true"} &times;
+

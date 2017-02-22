@@ -1,38 +1,38 @@
 %h1.general-title-margin Cart
-- if presenter.cart_empty?
-  %h2.text-center.mt-10.mb-40 Cart is empty
-- else
-  .hidden-xs
-    = render partial: 'product_table', locals: { products: presenter.products }
-  -# .visible-xs
-  -#   = render partial: 'products_xs', locals: { products: presenter.products }
-.general-order-wrap
-  .row
-    .col-sm-4
-      = form_tag cart_path, method: :post do
-        .input-group.general-input-group
-          = label_tag 'coupon_code', 'Enter Your Coupon Code', class: 'input-label'
-          = text_field_tag 'coupon_code', presenter.coupon_code, placeholder: 'Enter Your Coupon Code', class: 'form-control mb-30'
-          %div
-            %button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
-            = button_tag 'Update cart', class: 'btn btn-primary mb-15 res-block'
-    .col-sm-8
-      .res-mr-200.text-center.general-text-right
-        %p.in-gold-500.font-18 Order Summary
-        %table.general-summary-table.general-summary-table-right.general-text-right
-          %tr
-            %td
-              %p.font-16 Subtotal:
-            %td
-              %p.font-16= presenter.products.subtotal
-          %tr
-            %td
-              %p.font-16 Coupon:
-            %td
-              %p.font-16= presenter.products.coupon
-          %tr
-            %td
-              %strong.font-18 Order Total:
-            %td
-              %strong.font-18= presenter.products.order_total
-        = link_to checkout_path, 'Checkout', class: 'btn btn-default mb-20 visible-xs-inline-block'
+= form_tag update_cart_path do
+  - if presenter.cart_empty?
+    %h2.text-center.mt-10.mb-40 Cart is empty
+  - else
+    -# .hidden-xs
+    = render partial: 'products', locals: { products: presenter.products }
+    -# .visible-xs
+    -#   = render partial: 'products_xs', locals: { products: presenter.products }
+  .general-order-wrap
+    .row
+      .col-sm-4
+        = content_tag :div, class: "form-group general-input-group #{presenter.coupon.error_class}" do
+          = label_tag 'coupon_code', 'Enter Your Coupon Code', class: 'control-label'
+          = text_field_tag 'coupon_code', presenter.coupon.code, placeholder: 'Enter Your Coupon Code', class: 'form-control'
+        %div
+          -# %button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
+          = button_tag 'Update Cart', class: 'btn btn-primary mt-30 mb-15 res-block'
+      .col-sm-8
+        .res-mr-200.text-center.general-text-right
+          %p.in-gold-500.font-18 Order Summary
+          %table.general-summary-table.general-summary-table-right.general-text-right
+            %tr
+              %td
+                %p.font-16 Subtotal:
+              %td
+                %p.font-16= presenter.products.subtotal
+            %tr
+              %td
+                %p.font-16 Coupon:
+              %td
+                %p.font-16= presenter.products.coupon
+            %tr
+              %td
+                %strong.font-18 Order Total:
+              %td
+                %strong.font-18= presenter.products.order_total
+          = link_to checkout_path, 'Checkout', class: 'btn btn-default mb-20 visible-xs-inline-block'

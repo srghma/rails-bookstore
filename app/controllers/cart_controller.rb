@@ -1,18 +1,19 @@
 class CartController < ApplicationController
   respond_to :js, only: [:add_product]
 
-  def add_coupon
-    CartPage::AddCoupon.call do
-      on(:invalid_coupon) { redirect_to :show, error: 'Invalid coupon code.' }
-      on(:ok)             { redirect_to :show, notice: 'Coupon was successfully added' }
-    end
+  def edit
+    present CartPresenter.new(current_order)
   end
 
-  def update_product
-    CartPage::UpdateProduct.call do
-      on(:invalid_product) { redirect_to :show, error: 'Invalid coupon code.' }
-      on(:ok)              { redirect_to :show }
+  def update
+    @cart = CartForm.from_params(params)
+    CartPage::UpdateCart.call(@cart) do
+      on(:invalid_coupon)  { flash[:error] = 'Invalid coupon code' }
+      on(:invalid_product) { flash[:error] = 'Invalid product quantity' }
+      on(:ok)              { flash[:notice] = 'Cart was updated successfully' }
     end
+    present CartPresenter.new(current_order, @cart)
+    render :edit
   end
 
   def remove_product
@@ -20,10 +21,6 @@ class CartController < ApplicationController
       on(:invalid_product) { redirect_to :show, error: 'Invalid product' }
       on(:ok)              { redirect_to :show }
     end
-  end
-
-  def show
-    present CartPresenter.new
   end
 
   def add_product

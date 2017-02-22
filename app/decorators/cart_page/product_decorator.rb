@@ -20,6 +20,10 @@ module CartPage
       helpers.number_to_currency(item_price)
     end
 
+    def quantity
+      @order_item.quantity
+    end
+
     def item_price
       @item_price ||= @order_item.quantity * __getobj__.price
     end

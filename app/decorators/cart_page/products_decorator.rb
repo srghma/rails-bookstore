@@ -2,9 +2,9 @@ module CartPage
   class ProductsDecorator < SimpleDelegator
     include ViewHelpers
 
-    def initialize(order)
-      @order = order
-      decorated_items = order.order_items.map do |item|
+    def initialize(current_order, cart_form = nil)
+      @discount = current_order.coupon.&discount
+      decorated_items = current_order.order_items.map do |item|
         CartPage::ProductDecorator.new(item)
       end
       super(decorated_items)
@@ -15,14 +15,19 @@ module CartPage
     end
 
     def coupon
-      nil
+      helpers.number_to_currency(saved)
     end
 
     def order_total
-      1
+
     end
 
     private
+
+    def saved
+      saved = 0
+      saved = order_price * @discount if @discount
+    end
 
     def order_price
       @order_price ||= __getobj__.inject(0) do |sum, item|

@@ -1,50 +1,46 @@
 module CartPage
   class AddProduct < Rectify::Command
-    def initialize(form)
-      @form = form
+    def initialize(product)
+      @product = product
     end
 
     def call
-      if @form.valid?
-        update_attributes
-        broadcast(:ok)
-      else
-        broadcast(:invalid_quantity, quantity_error) if quantity_error
-        broadcast(:invalid_product, base_error) if base_error
-      end
-    rescue ActiveRecord::RecordNotFound
-      broadcast(:invalid_product)
-    end
+      broadcast_errors && return unless @product.valid?
+      broadcast(:nothing_to_update) && return if item.quantity == quantity
 
-    def update_attributes
-      item = current_order.order_items.find_or_create_by(book: book)
       item.update(quantity: quantity)
+      broadcast(:ok)
     end
 
     def quantity
-      @form.quantity
+      @product.quantity
     end
 
     def id
-      @form.id
+      @product.id
     end
 
-    def book
-      @book ||= Book.find(id)
+    def item
+      @item ||= current_order.order_items.find_or_create_by(book_id: id)
     end
 
     private
 
+    def broadcast_errors
+      broadcast(:invalid_quantity, quantity_errors) if quantity_errors
+      broadcast(:invalid_product, base_errors) if base_errors
+    end
+
     def errors
-      @form.errors
+      @product.errors
     end
 
-    def quantity_error
+    def quantity_errors
       return nil unless errors.include?(:quantity)
-      errors.full_messages_for(:quantity).first
+      errors.full_messages_for(:quantity)
     end
 
-    def base_error
+    def base_errors
       return nil unless errors.include?(:base)
       errors.full_messages_for(:base)
     end

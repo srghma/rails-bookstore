@@ -27,7 +27,7 @@ module CartPage
       current_coupon = current_order.coupon
 
       if !current_coupon.nil?
-        code.empty? ? deattach_coupon : update_coupon
+        code&.empty? ? deattach_coupon : update_coupon
       elsif !code.empty?
         update_coupon
       end

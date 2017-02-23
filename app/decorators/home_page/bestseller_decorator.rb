@@ -1,5 +1,5 @@
 module HomePage
-  class BookDecorator < SimpleDelegator
+  class BestsellerDecorator < SimpleDelegator
     include BookCoverHelpers
     include BookAuthorsNames
 

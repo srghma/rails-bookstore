@@ -6,8 +6,8 @@
   %button.btn.btn-default Get Started
 .mb-35
   %h3 Best Sellers
-  - presenter.books.each_slice(4) do |slice|
+  - presenter.bestsellers.each_slice(4) do |slice|
     .row
-      - slice.each do |book|
+      - slice.each do |bestseller|
         .col-sm-6.col-md-3
-          = render partial: 'books/thumb', locals: { book: book }
+          = render partial: 'books/thumb', locals: { book: bestseller }

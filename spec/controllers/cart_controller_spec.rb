@@ -46,7 +46,7 @@ RSpec.describe CartController, type: :controller do
           3 => { 'id' => 3, 'quantity' => '1' }
         }
         expect do
-          post :update, params: { products: products_params }
+          post :update, params: { products: products_params, coupon_code: second_coupon.code }
         end.to change {
           subject.current_order
                  .reload
@@ -76,21 +76,21 @@ RSpec.describe CartController, type: :controller do
     end
   end
 
-  describe 'GET #add_product' do
+  describe 'GET #increment_quantity' do
     context 'valid params' do
       it 'renders js' do
         expect do
-          post :add_product, params: { id: 1 }, xhr: true
+          post :increment_quantity, params: { id: 1 }, xhr: true
         end.to change { OrderItem.count }.by(1)
 
-        expect(response).to render_template :add_product
+        expect(response).to render_template :increment_quantity
       end
     end
 
     context 'invalid params' do
       it 'redirect via js' do
         expect do
-          post :add_product, params: { id: 300 }, xhr: true
+          post :increment_quantity, params: { id: 300 }, xhr: true
         end.not_to change { OrderItem.count }
 
         expect(response.body).to include 'Turbolinks.visit("http://test.host'

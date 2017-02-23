@@ -25,12 +25,12 @@
           .input-group.general-position{class: product.error_class, data: {quantity: true}}
             %a.input-link{href: "#"}
               %i.fa.fa-minus.line-height-40
-            = product_fields.text_field :quantity, presenter.quantity, class: 'form-control quantity-input'
+            = product_fields.text_field :quantity, class: 'form-control quantity-input'
             %a.input-link{href: "#"}
               %i.fa.fa-plus.line-height-40
         %td
           %span.font-16.in-gold-500= product.subtotal
         %td
-          = button_tag cart_remove_product_path(product), class: 'close general-cart-close' do
+          = link_to cart_remove_product_path(product), method: :delete, class: 'close general-cart-close' do
             %span{'aria-hidden': "true"} &times;
 

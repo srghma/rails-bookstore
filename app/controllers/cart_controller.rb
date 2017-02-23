@@ -18,8 +18,8 @@ class CartController < ApplicationController
 
   def remove_product
     CartPage::RemoveProduct.call(id: params[:id]) do
-      on(:invalid_product) { redirect_to :show, error: 'Invalid product' }
-      on(:ok)              { redirect_to :show }
+      on(:invalid_product) { redirect_to cart_path, error: 'Invalid product' }
+      on(:ok)              { redirect_to cart_path }
     end
   end
 

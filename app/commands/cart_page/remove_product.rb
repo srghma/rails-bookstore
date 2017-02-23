@@ -7,6 +7,7 @@ module CartPage
     def call
       broadcast(:invalid_product) && return unless order_item
       order_item.destroy
+      broadcast(:ok)
     end
 
     private

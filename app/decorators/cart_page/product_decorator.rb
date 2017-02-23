@@ -16,6 +16,10 @@ module CartPage
       cover_url_or_default(version: :thumb)
     end
 
+    def error_class
+      'has-error' if @errors && !@errors.empty?
+    end
+
     def price
       helpers.number_to_currency(__getobj__.price)
     end

@@ -41,7 +41,7 @@ RSpec.describe CartForm do
     let(:params) do
       ActionController::Parameters.new(
         'products' =>  {
-          'valid_id' => { 'id' => 'invalid_id', 'quantity' => '0' }
+          'valid_id' => { 'id' => 'invalid_id', 'quantity' => '' }
         }
       )
     end
@@ -51,8 +51,8 @@ RSpec.describe CartForm do
       expect(subject.valid?).to be false
       expect(subject.errors).to be_present
       first_product_messages = subject.products.first.errors.messages
-      expect(first_product_messages[:id].first).to include 'invalid'
-      expect(first_product_messages[:quantity].first).to include 'greater'
+      expect(first_product_messages[:base].first).to include "product doesn't exist"
+      expect(first_product_messages[:quantity].first).to include 'blank'
     end
   end
 end

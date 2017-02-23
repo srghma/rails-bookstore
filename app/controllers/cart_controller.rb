@@ -1,5 +1,5 @@
 class CartController < ApplicationController
-  respond_to :js, only: [:add_product]
+  respond_to :js, only: [:increase_quantity]
 
   def edit
     present CartPresenter.new
@@ -23,8 +23,8 @@ class CartController < ApplicationController
     end
   end
 
-  def add_product
-    CartPage::AddProduct.call(id: params[:id], quantity: 1) do
+  def increment_quantity
+    CartPage::IncrementQuantity.call(id: params[:id], by: 1) do
       on(:invalid_product) do
         redirect_to :root, flash: { error: 'Invalid product' }, js: true
         return

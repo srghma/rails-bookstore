@@ -16,3 +16,4 @@
 //= require bootstrap-sprockets
 
 //= require read_more
+//= require quantity_widget

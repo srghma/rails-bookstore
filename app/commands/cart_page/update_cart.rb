@@ -9,22 +9,37 @@ module CartPage
 
     def call
       transaction do
-        attach_coupon
+        process_coupon
         update_products
       end
 
       broadcast(:ok)
     rescue InvalidCoupon
       broadcast(:invalid_coupon)
+      return
     rescue InvalidProduct
       broadcast(:invalid_product)
+      return
     end
 
-    def attach_coupon
+    def process_coupon
       code = @cart_form.coupon_code
-      return unless code || current_order.coupon.code == code
+      current_coupon = current_order.coupon
+
+      if !current_coupon.nil?
+        code.empty? ? deattach_coupon : update_coupon
+      elsif !code.empty?
+        update_coupon
+      end
+    end
+
+    def deattach_coupon
+      current_order.coupon = nil
+    end
+
+    def update_coupon
       raise InvalidCoupon unless @cart_form.valid?
-      coupon = Coupon.find_by!(code: code)
+      coupon = Coupon.find_by!(code: @cart_form.coupon_code)
       current_order.coupon = coupon
     rescue ActiveRecord::RecordNotFound
       raise InvalidCoupon

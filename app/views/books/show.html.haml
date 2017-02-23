@@ -18,12 +18,17 @@
     .row
       .col-xs-12.col-md-4
         %p.h1.in-gold-500.mt-10= presenter.book.price
-      = form_tag '#' do
-        = hidden_field_tag :book_id, presenter.book.id
+      = form_tag add_to_cart_book_path(presenter.book), method: :post do
         .col-xs-5.col-md-3
-          = presenter.quantity_widget
-      .col-xs-7.col-md-5
-        %button.btn.btn-default.pull-right.general-position Add to Cart
+          .input-group.general-position{data: {quantity: true}}
+            %a.input-link{href: "#"}
+              %i.fa.fa-minus.line-height-40
+            = text_field_tag :quantity, presenter.quantity, class: 'form-control quantity-input'
+            %a.input-link{href: "#"}
+              %i.fa.fa-plus.line-height-40
+          -# = quantity_widget(presenter.book, book_fields)
+        .col-xs-7.col-md-5
+          = button_tag 'Add to Cart', class: 'btn btn-default pull-right general-position'
     .general-info-wrap.divider-lg
       %p Description
       = presenter.description

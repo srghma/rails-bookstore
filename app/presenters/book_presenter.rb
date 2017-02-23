@@ -1,16 +1,13 @@
 class BookPresenter < Rectify::Presenter
-  def initialize(book:)
+  def initialize(book:, quantity: nil)
     @book = BookPage::BookDecorator.new(book)
+    @quantity = quantity
   end
 
-  attr_reader :book
+  attr_reader :book, :quantity
 
   def description
     readmore(:p, book.description, class: 'in-grey-600 small line-height-2')
-  end
-
-  def quantity_widget
-    view_context.quantity_widget(book)
   end
 
   def review_widget

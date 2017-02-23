@@ -76,25 +76,25 @@ RSpec.describe CartController, type: :controller do
     end
   end
 
-  # describe 'GET #add_product' do
-  #   context 'valid params' do
-  #     it 'renders js' do
-  #       expect do
-  #         post :add_product, params: { id: 1 }, xhr: true
-  #       end.to change { OrderItem.count }.by(1)
+  describe 'GET #add_product' do
+    context 'valid params' do
+      it 'renders js' do
+        expect do
+          post :add_product, params: { id: 1 }, xhr: true
+        end.to change { OrderItem.count }.by(1)
 
-  #       expect(response).to render_template :add_product
-  #     end
-  #   end
+        expect(response).to render_template :add_product
+      end
+    end
 
-  #   context 'invalid params' do
-  #     it 'redirect via js' do
-  #       expect do
-  #         post :add_product, params: { id: 300 }, xhr: true
-  #       end.not_to change { OrderItem.count }
+    context 'invalid params' do
+      it 'redirect via js' do
+        expect do
+          post :add_product, params: { id: 300 }, xhr: true
+        end.not_to change { OrderItem.count }
 
-  #       expect(response.body).to include 'Turbolinks.visit("http://test.host'
-  #     end
-  #   end
-  # end
+        expect(response.body).to include 'Turbolinks.visit("http://test.host'
+      end
+    end
+  end
 end

@@ -15,7 +15,7 @@
       %ul.nav.navbar-nav
         %li= link_to 'Home', root_path
         %li.dropdown
-          %a.dropdown-toggle{ href: '#', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } } Shop
+          =link_to 'Shop', categories_path, class: 'dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }
           %ul.dropdown-menu
             - presenter(:header).categories.each do |category|
               %li= link_to category.title, category

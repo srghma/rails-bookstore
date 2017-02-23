@@ -10,14 +10,15 @@
   .general-order-wrap
     .row
       .col-sm-4
-        = content_tag :div, class: "form-group general-input-group #{presenter.coupon.error_class}" do
-          = label_tag 'coupon_code', 'Enter Your Coupon Code', class: 'control-label'
-          = text_field_tag 'coupon_code', presenter.coupon.code, placeholder: 'Enter Your Coupon Code', class: 'form-control'
-          - if presenter.coupon.helper?
-            %span.help-block= presenter.coupon.helper
-        %div
-          -# %button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
-          = button_tag 'Update Cart', class: 'btn btn-primary mt-30 mb-15 res-block'
+        = fields_for 'coupon', presenter.coupon do |coupon_fields|
+          .form-group.general-input-group{class: presenter.coupon.error_class}
+            = label_tag 'coupon_code', 'Enter Your Coupon Code', class: 'control-label'
+            = coupon_fields.text_field :code, placeholder: 'Enter Your Coupon Code', class: 'form-control'
+            - if presenter.coupon.helper?
+              %span.help-block= presenter.coupon.helper
+          %div
+            -# %button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
+            = button_tag 'Update Cart', class: 'btn btn-primary mt-30 mb-15 res-block'
       .col-sm-8
         .res-mr-200.text-center.general-text-right
           %p.in-gold-500.font-18 Order Summary

@@ -6,7 +6,7 @@ class CartPresenter < Rectify::Presenter
   def products
     @products ||= begin
       current_order.order_items.map do |item|
-        cart_product = find_product_in_cart(item.id)
+        cart_product = find_product_in_cart(item.book_id)
         quantity = cart_product&.quantity || item.quantity
 
         CartPage::ProductDecorator.new(item.book,
@@ -19,8 +19,8 @@ class CartPresenter < Rectify::Presenter
 
   def coupon
     @coupon ||= begin
-      code = @cart_form&.coupon_code || current_order.coupon&.code
-      errors = @cart_form&.errors
+      code = @cart_form&.coupon&.code || current_order.coupon&.code
+      errors = @cart_form&.coupon&.errors
 
       CartPage::CouponDecorator.new(code, errors)
     end

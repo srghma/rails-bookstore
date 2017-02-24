@@ -22,7 +22,7 @@ module CartPage
     private
 
     def error_message
-      @error_message ||= @errors&.full_messages_for(:coupon_code)&.first
+      @error_message ||= @errors&.full_messages_for(:code)&.first
     end
   end
 end

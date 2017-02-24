@@ -4,12 +4,13 @@ module CartPage
 
   class UpdateCart < Rectify::Command
     def initialize(cart_form)
-      @cart_form = cart_form
+      @coupon = cart_form.coupon
+      @products = cart_form.products
     end
 
     def call
       transaction do
-        process_coupon
+        process_coupon if process_coupon?
         update_products
       end
 
@@ -22,13 +23,14 @@ module CartPage
       return
     end
 
-    def process_coupon
-      code = @cart_form.coupon_code
-      current_coupon = current_order.coupon
+    def process_coupon?
+      new_code != current_code
+    end
 
-      if !current_coupon.nil?
-        code&.empty? ? deattach_coupon : update_coupon
-      elsif !code.empty?
+    def process_coupon
+      if !current_code.blank? && new_code.blank?
+        deattach_coupon
+      else
         update_coupon
       end
     end
@@ -38,19 +40,29 @@ module CartPage
     end
 
     def update_coupon
-      raise InvalidCoupon unless @cart_form.valid?
-      coupon = Coupon.find_by!(code: @cart_form.coupon_code)
+      raise InvalidCoupon unless @coupon.valid?
+      coupon = Coupon.find_by!(code: @coupon.code)
       current_order.coupon = coupon
     rescue ActiveRecord::RecordNotFound
       raise InvalidCoupon
     end
 
     def update_products
-      @cart_form.products.each do |product|
+      @products.each do |product|
         raise InvalidProduct unless product.valid?
         item = current_order.order_items.find_by(book_id: product.id)
         item.update(quantity: product.quantity)
       end
+    end
+
+    private
+
+    def new_code
+      @new_code ||= @coupon&.code&.to_s
+    end
+
+    def current_code
+      @current_code ||= current_order.coupon&.code&.to_s
     end
   end
 end

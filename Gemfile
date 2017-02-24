@@ -55,6 +55,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'capybara-webkit'
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
   gem 'capybara-screenshot'
   gem 'email_spec'
   gem 'shoulda-matchers'

@@ -8,13 +8,13 @@ RSpec.describe CartController, type: :controller do
   describe 'GET #update' do
     context 'no current coupon, empty cart' do
       it 'add coupon if it valid' do
-        post :update, params: { coupon_code: coupon.code }
+        post :update, params: { coupon: { code: coupon.code } }
         expect(subject.current_order.coupon.id).to eq coupon.id
         expect(response).to render_template :edit
       end
 
       it 'dont add coupon if it invalid' do
-        post :update, params: { coupon_code: 'invalid' }
+        post :update, params: { coupon: { code: 'invalid' } }
         expect(subject.current_order.coupon).to eq nil
         expect(response).to render_template :edit
       end
@@ -29,18 +29,18 @@ RSpec.describe CartController, type: :controller do
       end
 
       it 'adds valid coupon' do
-        post :update, params: { coupon_code: second_coupon.code }
+        post :update, params: { coupon: { code: second_coupon.code } }
         expect(subject.current_order.coupon.id).to eq second_coupon.id
         expect(response).to render_template :edit
       end
 
       it 'dont add coupon if it invalid' do
-        post :update, params: { coupon_code: 'invalid' }
+        post :update, params: { coupon: { code: 'invalid' } }
         expect(subject.current_order.coupon).to eq coupon
         expect(response).to render_template :edit
       end
 
-      it 'changes book quantity if it valid' do
+      it 'changes book quantity if all params valid' do
         products_params = {
           1 => { 'id' => 1, 'quantity' => '2' },
           3 => { 'id' => 3, 'quantity' => '1' }

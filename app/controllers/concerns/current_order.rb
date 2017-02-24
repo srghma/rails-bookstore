@@ -3,6 +3,7 @@ module CurrentOrder
 
   included do
     helper_method :current_order
+    helper_method :current_order_item
   end
 
   def current_order

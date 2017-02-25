@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  respond_to :html, :js, only: :show
+
   def show
     CategoryPage::GetBooks.call do
       on(:invalid_category) do
@@ -18,7 +20,5 @@ class CategoriesController < ApplicationController
         )
       end
     end
-
-    respond_to :html, :js
   end
 end

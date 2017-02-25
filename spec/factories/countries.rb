@@ -1,6 +1,9 @@
 FactoryGirl.define do
+  sequence :country_name { |n| "country_name#{n}" }
+  sequence :country_code { |n| "country_code#{n}" }
+
   factory :country do
-    name { FFaker::Address.country }
-    code { FFaker::Address.country_code }
+    name { generate(:country_name) }
+    code { generate(:country_code) }
   end
 end

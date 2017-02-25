@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   scope :cart do
     get    '/', to: 'cart#edit', as: :cart
     post   '/', to: 'cart#update', as: :update_cart
-    post   '/book/:id', to: 'cart#increment_quantity', as: :cart_increment_quantity
-    delete '/book/:id', to: 'cart#remove_product',     as: :cart_remove_product
+    post   '/book/:id', to: 'cart#add_product', as: :cart_add_product
+    delete '/book/:id', to: 'cart#remove_product', as: :cart_remove_product
   end
 
   # resource :cart, only: [:show]

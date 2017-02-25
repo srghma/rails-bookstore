@@ -20,6 +20,7 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
+
     dropzone do
       only Book
     end

@@ -1,19 +1,19 @@
 FactoryGirl.define do
   factory :address, aliases: [:addressable] do
-    # TODO: country_code "MyString"
+    country
     first_name { FFaker::Name.first_name }
     last_name  { FFaker::Name.last_name }
-    city       { FFaker::Address.city }
-    street     { FFaker::Address.street_address }
-    zip        { FFaker::Address.zip.to_i }
-    phone      { FFaker::Base.numerify('+##########') }
+    city       { FFaker::AddressUS.city }
+    street     { FFaker::AddressUS.street_address }
+    zip        { FFaker::AddressUS.zip_code.to_i }
+    phone      { FFaker.numerify('+### ## ### ####') }
 
-    factory :shipping_address do
-      addressable
+    factory :billing_address, class: BillingAddress do
+      association :addressable, factory: :address
     end
 
-    factory :billing_address do
-      addressable
+    factory :shipping_address, class: ShippingAddress do
+      association :addressable, factory: :address
     end
   end
 end

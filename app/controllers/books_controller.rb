@@ -9,7 +9,7 @@ class BooksController < ApplicationController
 
   def add_to_cart
     form = ProductForm.from_params(params)
-    CartPage::AddProduct.call(form) do
+    CartPage::CreateOrUpdateProduct.call(form) do
       on(:invalid_product, :invalid_quantity) do |errors|
         flash[:error] = errors.first
       end

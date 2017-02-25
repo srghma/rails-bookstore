@@ -94,6 +94,9 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.4)
+    credit_card_validations (3.4.0)
+      activemodel (>= 3, <= 6)
+      activesupport (>= 3, <= 6)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
@@ -396,6 +399,8 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    wicked (1.3.1)
+      railties (>= 3.0.7)
     wisper (1.6.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -421,6 +426,7 @@ DEPENDENCIES
   carrierwave
   chromedriver-helper
   coffee-rails (~> 4.2)
+  credit_card_validations
   database_cleaner
   devise
   dotenv-rails
@@ -457,6 +463,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  wicked
   yotpo
 
 BUNDLED WITH

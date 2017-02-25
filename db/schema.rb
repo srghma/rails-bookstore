@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220181741) do
+ActiveRecord::Schema.define(version: 20170224174654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,18 @@ ActiveRecord::Schema.define(version: 20170220181741) do
     t.index ["book_id"], name: "index_covers_on_book_id", using: :btree
   end
 
+  create_table "credit_cards", force: :cascade do |t|
+    t.string   "number",     null: false
+    t.string   "name",       null: false
+    t.integer  "year",       null: false
+    t.integer  "month",      null: false
+    t.integer  "cvv",        null: false
+    t.integer  "order_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_credit_cards_on_order_id", using: :btree
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.integer  "quantity",   default: 1, null: false
     t.integer  "book_id",                null: false
@@ -107,6 +119,7 @@ ActiveRecord::Schema.define(version: 20170220181741) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "aasm_state"
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
@@ -136,5 +149,6 @@ ActiveRecord::Schema.define(version: 20170220181741) do
   add_foreign_key "books", "categories"
   add_foreign_key "coupons", "orders"
   add_foreign_key "covers", "books"
+  add_foreign_key "credit_cards", "orders"
   add_foreign_key "orders", "users"
 end

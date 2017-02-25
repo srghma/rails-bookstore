@@ -29,7 +29,8 @@ gem 'yotpo'
 gem 'rectify'
 gem 'simple_form'
 gem 'friendly_id'
-# gem 'draper', '~> 3.0'
+gem 'wicked'
+gem 'credit_card_validations'
 
 # File uploader
 

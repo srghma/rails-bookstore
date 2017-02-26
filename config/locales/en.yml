@@ -36,3 +36,6 @@ en:
     messages:
       phone: 'Please enter phone number in format +355 66 123 4567'
 
+  checkout:
+    show:
+      invalid: 'Tmth was wrong'

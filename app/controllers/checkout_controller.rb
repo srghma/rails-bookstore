@@ -6,7 +6,7 @@ class CheckoutController < ApplicationController
 
   def show
     CheckoutPage::ValidateStep.call(step) do
-      on(:invalid) { redirect_to cart_path }
+      on(:invalid) { redirect_to cart_path, error: t('.invalid') }
       on(:ok) do
         present step_presenter.new
         render_wizard
@@ -18,8 +18,8 @@ class CheckoutController < ApplicationController
     CheckoutPage::ProceedCheckout.call(step, params) do
       on(:invalid)    { redirect_to cart_path }
       on(:validation) { render_wizard }
-      on(:ok) do
-        render_wizard @order
+      on(:ok)         do
+        render_wizard current_order
       end
     end
   end

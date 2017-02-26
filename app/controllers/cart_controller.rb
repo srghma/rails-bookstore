@@ -10,7 +10,7 @@ class CartController < ApplicationController
     CartPage::UpdateCart.call(@cart) do
       on(:invalid_coupon)  { flash[:error] = 'Invalid coupon code' }
       on(:invalid_product) { flash[:error] = 'Invalid product quantity' }
-      on(:ok)              { flash[:notice] = 'Cart was updated successfully' }
+      on(:ok)              { flash[:success] = 'Cart was updated successfully' }
     end
     present CartPage::CartPresenter.new(@cart)
     render :edit
@@ -24,7 +24,7 @@ class CartController < ApplicationController
   end
 
   def add_product
-    CartPage::IncrementQuantity.call(id: params[:id], by: 1) do
+    CartPage::AddProduct.call(id: params[:id], quantity: 1) do
       on(:invalid_product) do
         redirect_to :root, flash: { error: 'Invalid product' }, js: true
         return

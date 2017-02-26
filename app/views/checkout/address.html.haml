@@ -1,5 +1,5 @@
 = render layout: 'checkout/layout' do
-  = form_for current_order, url: wizard_path, class: 'res-mb-100' do |f|
+  = form_for current_order, url: wizard_path, method: :put, class: 'res-mb-100' do |f|
     .hidden-xs.hidden-sm
       .row
         .col-md-5
@@ -12,16 +12,17 @@
         .visible-xs.visible-sm
           %h3.general-subtitle= t('billing_address')
           %p.general-info-text= t('simple_form.titles.required_fields')
-        = render partial: 'address_fields',
-          locals: { f: f, type: :billing }
+        = f.simple_fields_for :billing do |sf|
+          = render partial: 'address_fields', locals: { sf: sf }
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle= t('shipping_address')
-        = render partial: 'address_fields',
-          locals: { f: f, type: :shipping }
+        = f.simple_fields_for :shipping do |sf|
+          #shipping_address_fields
+            = render partial: 'address_fields', locals: { sf: sf }
+          = sf.input :use_billing, as: :boolean, wrapper_html: { 'data-slide-toggle-for': '#shipping_address_fields' }
+
     .general-text-align.mb-60
       = render partial: 'order_summary'
       = f.submit t('simple_form.titles.save_and_continue'),
         class: 'btn btn-default center-block mb-20'
-
-

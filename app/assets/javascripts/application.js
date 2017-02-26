@@ -17,3 +17,4 @@
 
 //= require read_more
 //= require quantity_widget
+//= require slide_toggle

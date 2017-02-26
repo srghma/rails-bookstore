@@ -1,5 +1,5 @@
-module CartPage
-  class CreateOrUpdateProduct < Rectify::Command
+module BookPage
+  class AddToCart < Rectify::Command
     def initialize(product)
       @product = product
     end

@@ -35,7 +35,7 @@ RSpec.describe Order, type: :model do
     end
 
     describe '#sent_to_client' do
-      subject { create(:order, aasm_state: :processing) }
+      subject { create(:order, state: :processing) }
 
       it 'expect to allow transition from :processing to :in_delivery' do
         subject.sent_to_client
@@ -44,7 +44,7 @@ RSpec.describe Order, type: :model do
     end
 
     describe '#end_delivery' do
-      subject { create(:order, aasm_state: :in_delivery) }
+      subject { create(:order, state: :in_delivery) }
 
       it 'expect to allow transition from :in_delivery to :delivered' do
         subject.end_delivery

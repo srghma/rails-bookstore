@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
       end
 
       on(:ok) do |books, sort_methods, current_sort_method|
-        present CategoriesPresenter.new(
+        present CategoryPage::CategoriesPresenter.new(
           books:               books,
           sort_methods:        sort_methods,
           current_sort_method: current_sort_method

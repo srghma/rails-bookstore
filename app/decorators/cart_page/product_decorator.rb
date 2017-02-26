@@ -3,14 +3,18 @@ module CartPage
     include ViewHelpers
     include BookCoverHelpers
 
-    def initialize(product, quantity:, discount: nil, errors: nil)
-      @quantity = quantity
-      @discount = discount
+    def initialize(order_item, quantity:, errors: nil)
+      @order_item = order_item
+      @quantity = quantity || order_item.quantity
       @errors = errors
-      super(product)
+      super(order_item.book)
     end
 
     attr_reader :quantity
+
+    def order_item_id
+      @order_item.id
+    end
 
     def cover
       cover_url_or_default(version: :thumb)

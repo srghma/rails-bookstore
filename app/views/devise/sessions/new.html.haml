@@ -5,12 +5,10 @@
 = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .form-inputs
     = f.input :email, autofocus: true
-    -# TODO: make hint_link component, if one do this - it will be wrapped in p
-    -# = f.input :password, hint: "#{link_to t('devise.recover_password_hint'), new_password_path(resource_name)}".html_safe
     = f.input :password do
       = f.input_field :password, class: 'form-control'
       = render 'devise/shared/new_password_link'
-    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+    = f.input :remember_me, as: :boolean, wrapper_html: { class: 'text-center mb-30' } if devise_mapping.rememberable?
   .form-actions.actions.text-center
     = f.button :submit, "Log in", class: 'mb-20'
 = render 'devise/shared/new_registration_link'

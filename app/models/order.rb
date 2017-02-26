@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user, optional: true
+
   has_many :order_items, dependent: :destroy
   has_many :books, through: :order_items
 
@@ -9,9 +10,9 @@ class Order < ApplicationRecord
 
   include AASM
 
-  enum aasm_state: %i(in_progress processing in_delivery delivered canceled)
+  enum state: %i(in_progress processing in_delivery delivered canceled)
 
-  aasm whiny_transitions: false do
+  aasm column: :state, enum: true, whiny_transitions: false do
     state :in_progress, initial: true
     state :processing
     state :in_delivery
@@ -37,6 +38,21 @@ class Order < ApplicationRecord
 
   def ready_for_processing?
     [billing_address, shipping_address].all?(&:present?) && order_items.any?
+  end
+
+  def create_or_increment_product(id, quantity = 1)
+    order_item = order_items.find_by(book_id: id)
+
+    if order_item
+      order_item.update(quantity: order_item.quantity + quantity.to_i)
+    else
+      order_items.create(book_id: id, quantity: quantity)
+    end
+  end
+
+  def create_or_update_product(id, quantity = 1)
+    order_item = order_items.find_or_initialize_by(book_id: id)
+    order_item.update(quantity: quantity)
   end
 
   def to_s

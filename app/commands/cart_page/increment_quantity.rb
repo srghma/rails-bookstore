@@ -6,13 +6,7 @@ module CartPage
     end
 
     def call
-      item = current_order.order_items.find_by(book: book)
-      if item
-        item.quantity += @by
-        item.save!
-      else
-        current_order.order_items.create(book: @book, quantity: @by)
-      end
+      current_order.create_or_increment_product(@id, @by)
       broadcast(:ok)
     rescue ActiveRecord::RecordNotFound
       broadcast(:invalid_product)

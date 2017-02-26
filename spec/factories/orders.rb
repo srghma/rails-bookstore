@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :order do
     user
-    credit_card
 
     trait :with_items do
       transient do

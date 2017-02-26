@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    present HomePresenter.new
+    present HomePage::HomePresenter.new
   end
 end

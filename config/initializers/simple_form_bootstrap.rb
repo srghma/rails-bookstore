@@ -32,7 +32,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group checkbox text-center mb-30', error_class: 'has-error' do |b|
+  config.wrappers :vertical_boolean, tag: 'div', class: 'form-group checkbox', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
 

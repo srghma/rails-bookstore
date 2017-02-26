@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   def show
     item = current_order.order_items.find_by(book: @book)
     current_quantity = item&.quantity || 1
-    present BookPresenter.new(book: @book, quantity: current_quantity)
+    present BookPage::BookPresenter.new(book: @book, quantity: current_quantity)
   end
 
   def add_to_cart

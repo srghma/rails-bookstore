@@ -94,14 +94,13 @@ ActiveRecord::Schema.define(version: 20170224174654) do
   end
 
   create_table "credit_cards", force: :cascade do |t|
-    t.string   "number",     null: false
-    t.string   "name",       null: false
-    t.integer  "year",       null: false
-    t.integer  "month",      null: false
-    t.integer  "cvv",        null: false
-    t.integer  "order_id",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "number",          null: false
+    t.string   "name",            null: false
+    t.date     "expiration_date", null: false
+    t.integer  "cvv",             null: false
+    t.integer  "order_id",        null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["order_id"], name: "index_credit_cards_on_order_id", using: :btree
   end
 
@@ -119,7 +118,7 @@ ActiveRecord::Schema.define(version: 20170224174654) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "aasm_state"
+    t.integer  "state",      null: false
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 

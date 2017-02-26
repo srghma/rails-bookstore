@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :edit]
 
   resources :order_item, only: [:create, :update, :destroy]
-  resource :checkout, only: [:show, :update]
+  resources :checkout, only: [:show, :update]
 
   # resource :cart_item, controller: :order_item, only: [:create, :update, :destroy]
   # post   '/:class/:id', to: 'cart#add_product',    as: :cart_add_product

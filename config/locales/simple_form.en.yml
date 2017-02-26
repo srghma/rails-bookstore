@@ -11,20 +11,48 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     placeholders:
-      defaults:
+      user:
         email: 'Enter Email'
         password: 'Password'
         password_confirmation: 'Confirm Password'
+      order:
+        shipping: :"simple_form.placeholders.address"
+        billing: :"simple_form.placeholders.address"
+      address:
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        street: 'Address'
+        city: 'City'
+        zip: 'Zip'
+        country: 'Select a country'
+        phone: 'Example +355 66 123 4567'
+
     labels:
-      defaults:
+      user:
         email: 'Enter Email'
         password: 'Password'
         password_confirmation: 'Confirm Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
+      order:
+        shipping: :"simple_form.labels.address"
+        billing: :"simple_form.labels.address"
+      address:
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        street: 'Address'
+        city: 'City'
+        zip: 'Zip'
+        country: 'Country'
+        phone: 'Phone'
+    titles:
+      change: Change
+      save: Save
+      save_and_continue: Save and Continue
+      forgot_password?: Forgot password?
+      new_password: Set new password
+      log_in: 'Log in'
+      sign_up: 'Sign up'
+      required_fields: all fields are required
+
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'

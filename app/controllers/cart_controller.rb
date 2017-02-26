@@ -2,7 +2,7 @@ class CartController < ApplicationController
   respond_to :js, only: [:add_product]
 
   def edit
-    present CartPresenter.new
+    present CartPage::CartPresenter.new
   end
 
   def update
@@ -12,7 +12,7 @@ class CartController < ApplicationController
       on(:invalid_product) { flash[:error] = 'Invalid product quantity' }
       on(:ok)              { flash[:notice] = 'Cart was updated successfully' }
     end
-    present CartPresenter.new(@cart)
+    present CartPage::CartPresenter.new(@cart)
     render :edit
   end
 

@@ -1,0 +1,27 @@
+= render layout: 'checkout/layout' do
+  = form_for current_order, url: wizard_path, class: 'res-mb-100' do |f|
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle= t('billing_address')
+          %p.general-info-text= t('simple_form.titles.required_fields')
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle= t('shipping_address')
+    .row
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle= t('billing_address')
+          %p.general-info-text= t('simple_form.titles.required_fields')
+        = render partial: 'address_fields',
+          locals: { f: f, type: :billing }
+      .col-md-5.col-md-offset-1.mb-60
+        .visible-xs.visible-sm
+          %h3.general-subtitle= t('shipping_address')
+        = render partial: 'address_fields',
+          locals: { f: f, type: :shipping }
+    .general-text-align.mb-60
+      = render partial: 'order_summary'
+      = f.submit t('simple_form.titles.save_and_continue'),
+        class: 'btn btn-default center-block mb-20'
+
+

@@ -30,6 +30,7 @@ module CategoryPage
     end
 
     def broadcast_invalid_category?
+      # TODO: to valid
       !category_id.nil? && !category_id_valid?(category_id)
     end
 

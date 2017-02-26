@@ -1,0 +1,12 @@
+= f.simple_fields_for type do |a|
+
+  - [:first_name, :last_name, :street, :city, :zip].each do |field|
+    = a.input field
+
+  = a.input :country_id, collection: presenter.countries, selected: 1
+
+  = a.input :phone
+
+  - if type == :shipping
+    = a.input :use_billing, as: :boolean
+

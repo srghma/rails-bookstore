@@ -1,0 +1,12 @@
+%h1.general-title-margin Checkout
+
+%ul.steps.list-inline
+  - presenter(:progress).steps.each do |step|
+    %li{ class: step.classes }
+      %span.step-number= step.number
+      %span.step-text.hidden-xs= step.name
+    - if step.divider?
+      %li.step-divider
+
+= yield
+

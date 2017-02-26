@@ -6,9 +6,8 @@ module CartPage
 
     def call
       broadcast_errors && return unless @product.valid?
-      broadcast(:nothing_to_update) && return if item.quantity == quantity
 
-      item.update(quantity: quantity)
+      current_order.create_or_update_product(id, quantity)
       broadcast(:ok)
     end
 
@@ -18,10 +17,6 @@ module CartPage
 
     def id
       @product.id
-    end
-
-    def item
-      @item ||= current_order.order_items.find_or_create_by(book_id: id)
     end
 
     private

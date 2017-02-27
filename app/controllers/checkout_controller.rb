@@ -1,8 +1,10 @@
 class CheckoutController < ApplicationController
   include Wicked::Wizard
 
-  steps :address, :delivery, :payment, :confirm, :complete
+  before_action :fast_authenticate_user!
   before_action :set_progress_presenter
+
+  steps :address, :delivery, :payment, :confirm, :complete
 
   def show
     CheckoutPage::ValidateStep.call(step) do

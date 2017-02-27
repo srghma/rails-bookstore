@@ -77,4 +77,53 @@ RSpec.describe Order, type: :model do
       expect(subject.ready_for_processing?).to be_truthy
     end
   end
+
+  describe '#create_or_increment_product' do
+    let(:product) { create(:book) }
+    subject { create :order }
+
+    it 'create order item if item doest exits' do
+      item = subject.create_or_increment_product(product.id, 10)
+      expect(item).to be_persisted
+      expect(item.quantity).to eq 10
+    end
+
+    it 'increment item quantity if item exits' do
+      subject.order_items.create(book: product, quantity: 1)
+      item = subject.create_or_increment_product(product.id, 10)
+      expect(item).to be_persisted
+      expect(item.quantity).to eq 11
+    end
+
+    it 'return false if invalid product' do
+      item = subject.create_or_increment_product(1000, 10)
+      expect(item).to eq false
+    end
+  end
+
+
+  describe '#create_or_update_product' do
+    let(:product) { create(:book) }
+    subject { create :order }
+
+    it 'create order item if item doest exits' do
+      item = subject.create_or_update_product(product.id, 10)
+      expect(item).to be_persisted
+      expect(item.quantity).to eq 10
+    end
+
+    it 'increment item quantity if item exits' do
+      subject.order_items.create(book: product, quantity: 1)
+      item = subject.create_or_update_product(product.id, 10)
+      expect(item).to be_persisted
+      expect(item.quantity).to eq 10
+    end
+
+    it 'return false if invalid product' do
+      # TODO: why last is nil, but not after reload
+      # item = subject.create_or_update_product(Book.last.id + 1, 10)
+      item = subject.create_or_update_product(1000, 10)
+      expect(item).to eq false
+    end
+  end
 end

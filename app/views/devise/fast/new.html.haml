@@ -1,0 +1,32 @@
+.row
+  .col-sm-6
+    .text-center
+      %h1.general-login-title= t('devise.fast.old_customer.title')
+      = render 'devise/shared/facebook_authorize_link'
+      %p.general-login-text or
+    = simple_form_for(@old_customer,
+                      as: resource_name,
+                      url: user_fast_session_path,
+                      html: { id: 'new_session' }) do |f|
+      .form-inputs
+        %h5.grey-600= t('devise.fast.old_customer.message')
+        = f.input :email
+        = f.input :password do
+          = f.input_field :password, class: 'form-control'
+          = render 'devise/shared/new_password_link'
+      .form-actions.actions.text-center
+        = f.button :submit, t('devise.fast.old_customer.submit')
+  .col-sm-6
+    .text-center
+      %h3.general-login-title= t('devise.fast.old_customer.title')
+      = render 'devise/shared/facebook_authorize_link'
+      %p.general-login-text or
+    = simple_form_for(@new_customer,
+                      as: resource_name,
+                      url: user_fast_registration_path) do |f|
+      %h5.grey-600= t('devise.fast.new_customer.message')
+      %p.general-login-text= t('devise.fast.new_customer.message_small')
+      .form-inputs
+        = f.input :email
+      .form-actions.actions.text-center
+        = f.button :submit, t('devise.fast.new_customer.submit')

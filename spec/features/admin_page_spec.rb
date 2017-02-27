@@ -1,6 +1,6 @@
 feature 'Admin page:' do
   context 'when ordinary user' do
-    mock_sign_in :user
+    before { sign_in create(:user) }
 
     scenario 'cannot visit' do
       visit rails_admin_path
@@ -9,7 +9,7 @@ feature 'Admin page:' do
   end
 
   context 'when admin' do
-    mock_sign_in :admin
+    before { sign_in create(:admin) }
 
     scenario 'can visit' do
       visit rails_admin_path

@@ -76,7 +76,7 @@ RSpec.describe CartController, type: :controller do
     end
   end
 
-  describe 'GET #increment_quantity' do
+  describe 'GET #add_product' do
     context 'valid params' do
       it 'renders js' do
         expect do

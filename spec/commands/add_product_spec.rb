@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe CartPage::IncrementQuantity do
+RSpec.describe CartPage::AddProduct do
   context 'book exists in current_order' do
     let(:order) { create :order, :with_items, number_of_items: 3 }
-    subject { CartPage::IncrementQuantity.new(id: 1, by: 100) }
+    subject { CartPage::AddProduct.new(id: 1, quantity: 100) }
 
     before do
       caller = double('some controller')

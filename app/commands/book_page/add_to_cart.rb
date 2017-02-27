@@ -7,7 +7,7 @@ module BookPage
     def call
       broadcast_errors && return unless @product.valid?
 
-      current_order.create_or_update_product(id, quantity)
+      item = current_order.create_or_update_product(id, quantity)
       broadcast(:ok)
     end
 

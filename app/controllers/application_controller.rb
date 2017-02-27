@@ -13,4 +13,10 @@ class ApplicationController < ActionController::Base
   def not_found
     raise ActionController::RoutingError, 'Not Found'
   end
+
+  def fast_authenticate_user!
+    return if user_signed_in?
+    session['user_return_to'] = request.fullpath
+    redirect_to user_fast_path
+  end
 end

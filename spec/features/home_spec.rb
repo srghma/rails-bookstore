@@ -11,7 +11,7 @@ feature 'Home page:' do
   end
 
   context 'when signed' do
-    mock_sign_in :user
+    before { sign_in create(:user) }
 
     scenario 'signed user visit' do
       visit root_path

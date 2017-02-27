@@ -50,6 +50,19 @@ en:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+    fast:
+      user:
+        signed_up: :"devise.registrations.signed_up"
+        signed_in: :"devise.sessions.signed_in"
+      old_customer:
+        title: 'Returning Customer'
+        message: 'Log In With Password'
+        submit: 'Log In with Password'
+      new_customer:
+        title: 'New Customer'
+        message: 'Quick Register'
+        message_small: "You'll be able to create password later"
+        submit: 'Continue to Checkout'
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"
@@ -60,3 +73,4 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+

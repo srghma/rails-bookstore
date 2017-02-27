@@ -17,12 +17,14 @@ feature 'Categories page:' do
 
   context 'coupon exists' do
     let(:order) { create(:order, :with_items, coupon: coupon) }
-    mock_current_order(with: :order)
-    before { visit cart_path }
+    before do
+      stub_current_order(order)
+      visit cart_path
+    end
 
     scenario 'can deattach coupon' do
       fill_in 'coupon_code', with: ''
-      page.execute_script %($('form').submit()) # because of overwlapping footer (presumably)
+      page.execute_script %($('form').first().submit()) # because of overwlapping footer (presumably)
       expect(page).to have_content 'Cart was updated successfully'
       expect(find('#coupon_code').value).to eq ''
     end

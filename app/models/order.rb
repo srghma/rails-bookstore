@@ -41,18 +41,15 @@ class Order < ApplicationRecord
   end
 
   def create_or_increment_product(id, quantity = 1)
-    order_item = order_items.find_by(book_id: id)
-
-    if order_item
-      order_item.update(quantity: order_item.quantity + quantity.to_i)
-    else
-      order_items.create(book_id: id, quantity: quantity)
-    end
+    item = order_items.find_or_initialize_by(book_id: id)
+    item.quantity = item.persisted? ? item.quantity + quantity.to_i : quantity
+    item.save ? item : false
   end
 
   def create_or_update_product(id, quantity = 1)
-    order_item = order_items.find_or_initialize_by(book_id: id)
-    order_item.update(quantity: quantity)
+    item = order_items.find_or_initialize_by(book_id: id)
+    item.quantity = quantity
+    item.save ? item : false
   end
 
   def to_s

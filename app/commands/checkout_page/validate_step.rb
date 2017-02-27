@@ -6,7 +6,7 @@ module CheckoutPage
     end
 
     def call
-      if order_has_data_for(@step)
+      if can_access?(@step)
         broadcast(:ok)
       else
         broadcast(:invalid, minimal_accessible_step)
@@ -15,24 +15,21 @@ module CheckoutPage
 
     private
 
-    def minimal_accessible_step
-      steps_with_completeness.find_index(false)
+    def can_access?(step)
+      steps_index = steps_with_completeness.find_index { |key, _| key == step }
+      steps_index <= minimal_accessible_step_index
     end
 
-    def order_has_data_for(step)
-      case step
-      when :address  then true
-      when :delivery then has_address? ?          true : false
-      when :payment  then has_address_delivery? ? true : false
-      when :confirm  then has_all_data? ?         true : false
-      when :complete then true
-      else
-        false
-      end
+    def minimal_accessible_step
+      steps_with_completeness.keys[minimal_accessible_step_index]
+    end
+
+    def minimal_accessible_step_index
+      @minimal_accessible_step_index ||= steps_with_completeness.find_index { |_, value| !value }
     end
 
     def steps_with_completeness
-      {
+      @steps_with_completeness ||= {
         address:  has_addresses?,
         delivery: has_delivery?,
         payment:  has_credit_card?,

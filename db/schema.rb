@@ -104,6 +104,15 @@ ActiveRecord::Schema.define(version: 20170224174654) do
     t.index ["order_id"], name: "index_credit_cards_on_order_id", using: :btree
   end
 
+  create_table "deliveries", force: :cascade do |t|
+    t.string   "title",                              default: ""
+    t.integer  "min_days",                                        null: false
+    t.integer  "max_days",                                        null: false
+    t.decimal  "price",      precision: 8, scale: 2,              null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.integer  "quantity",   default: 1, null: false
     t.integer  "book_id",                null: false
@@ -116,9 +125,11 @@ ActiveRecord::Schema.define(version: 20170224174654) do
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "state",      null: false
+    t.integer  "delivery_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "state",       null: false
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
@@ -149,5 +160,6 @@ ActiveRecord::Schema.define(version: 20170224174654) do
   add_foreign_key "coupons", "orders"
   add_foreign_key "covers", "books"
   add_foreign_key "credit_cards", "orders"
+  add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
 end

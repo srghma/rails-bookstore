@@ -18,5 +18,17 @@ FactoryGirl.define do
         create(:shipping_address, addressable: order)
       end
     end
+
+    trait :with_delivery do
+      after(:create) do |order|
+        order.delivery = create(:delivery)
+      end
+    end
+
+    trait :with_credit_card do
+      after(:create) do |order|
+        order.credit_card = create(:credit_card)
+      end
+    end
   end
 end

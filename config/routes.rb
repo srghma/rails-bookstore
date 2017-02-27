@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   root to: 'home#index'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do
-    get  '/users/fast',              to: 'users/fast#new',              as: :user_fast
-    post '/users/fast/session',      to: 'users/fast#new_session',      as: :user_fast_session
-    post '/users/fast/registration', to: 'users/fast#new_registration', as: :user_fast_registration
+    get  '/users/fast', to: 'users/fast#new',              as: :user_fast
+    put  '/users/fast', to: 'users/fast#new_session',      as: :user_fast_session
+    post '/users/fast', to: 'users/fast#new_registration', as: :user_fast_registration
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

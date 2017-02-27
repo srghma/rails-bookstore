@@ -6,8 +6,12 @@ class CheckoutController < ApplicationController
 
   steps :address, :delivery, :payment, :confirm, :complete
 
+  rescue_from Wicked::Wizard::InvalidStepError do |_|
+    redirect_to cart_path, alert: t('checkout.failure.invalid_step')
+  end
+
   def show
-    CheckoutPage::ValidateStep.call(step) do
+    CheckoutPage::ValidateStep.call(current_order, step) do
       on(:invalid) { redirect_to cart_path, error: t('.invalid') }
       on(:ok) do
         present step_presenter.new
@@ -17,12 +21,10 @@ class CheckoutController < ApplicationController
   end
 
   def update
-    CheckoutPage::ProceedCheckout.call(step, params) do
+    CheckoutPage::ProceedCheckout.call(current_order, step, params) do
       on(:invalid)    { redirect_to cart_path }
       on(:validation) { render_wizard }
-      on(:ok)         do
-        render_wizard current_order
-      end
+      on(:ok)         { render_wizard current_order }
     end
   end
 

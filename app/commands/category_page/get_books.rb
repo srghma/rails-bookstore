@@ -10,7 +10,7 @@ module CategoryPage
     ].freeze
 
     def call
-      broadcast(:invalid_category) && return if broadcast_invalid_category?
+      return broadcast(:invalid_category) if broadcast_invalid_category?
       @category_id = category_id
 
       broadcast(:invalid_sort) if broadcast_invalid_sort?
@@ -30,7 +30,7 @@ module CategoryPage
     end
 
     def broadcast_invalid_category?
-      # TODO: to valid
+      # TODO: pass to valid
       !category_id.nil? && !category_id_valid?(category_id)
     end
 

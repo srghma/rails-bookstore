@@ -1,17 +1,25 @@
 module CheckoutPage
   class ValidateStep < Rectify::Command
-    def initialize(step)
+    def initialize(order, step)
+      @order = order
       @step = step
     end
 
     def call
-      return broadcast(:invalid) unless @step
-      order_has_data_for(@step) ? broadcast(:ok) : broadcast(:invalid)
+      if order_has_data_for(@step)
+        broadcast(:ok)
+      else
+        broadcast(:invalid, minimal_accessible_step)
+      end
     end
 
     private
 
-    def order_has_data_for step
+    def minimal_accessible_step
+      steps_with_completeness.find_index(false)
+    end
+
+    def order_has_data_for(step)
       case step
       when :address  then true
       when :delivery then has_address? ?          true : false
@@ -23,16 +31,30 @@ module CheckoutPage
       end
     end
 
-    def has_address?
-      current_order.billing_address && current_order.shipping_address
+    def steps_with_completeness
+      {
+        address:  has_addresses?,
+        delivery: has_delivery?,
+        payment:  has_credit_card?,
+        confirm:  has_confirmation?,
+        complete: false
+      }
     end
 
-    def has_address_delivery?
-      has_address? && current_order.delivery
+    def has_addresses?
+      @order.billing_address && @order.shipping_address
     end
 
-    def has_all_data?
-      has_address_delivery? && current_order.credit_card
+    def has_delivery?
+      @order.delivery
+    end
+
+    def has_credit_card?
+      @order.credit_card
+    end
+
+    def has_confirmation?
+      false
     end
   end
 end

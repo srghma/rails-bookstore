@@ -7,13 +7,30 @@ feature 'Fast authentication:' do
   context 'new customer' do
     let(:user) { attributes_for(:user) }
 
-    it 'register user' do
+    before do
       within '#new_user' do
-        fill_in 'user[email]', with: user[:email]
+        fill_in 'user[email]', with: email
       end
       click_button I18n.t('devise.fast.new_customer.submit')
-      expect(page.current_path).to eq checkout_path(:address)
-      expect(page).to have_content(I18n.t('devise.registrations.signed_up'))
+    end
+
+    context 'valid params' do
+      let(:email) { user[:email] }
+
+      it 'register user' do
+        expect(page.current_path).to eq checkout_path(:address)
+        expect(page).to have_content(I18n.t('devise.registrations.signed_up'))
+      end
+    end
+
+    context 'invalid params' do
+      let(:email)    { 'adsf' }
+
+      it 'rerenders page' do
+        expect(page.current_path).to eq user_fast_session_path
+        form = find('#new_user')
+        expect(form.find('.email .help-block').text).to eq 'is invalid'
+      end
     end
   end
 
@@ -44,6 +61,9 @@ feature 'Fast authentication:' do
 
       it 'rerenders page' do
         expect(page.current_path).to eq user_fast_session_path
+        form = find('#new_session')
+        expect(form.find('.email .help-block').text).to eq 'is invalid'
+        expect(form.find('.password span.help-block').text).to eq "can't be blank"
       end
     end
   end

@@ -7,6 +7,7 @@
     = simple_form_for(@old_customer,
                       as: resource_name,
                       url: user_fast_session_path,
+                      method: :put,
                       html: { id: 'new_session' }) do |f|
       .form-inputs
         %h5.grey-600= t('devise.fast.old_customer.message')
@@ -23,6 +24,7 @@
       %p.general-login-text or
     = simple_form_for(@new_customer,
                       as: resource_name,
+                      method: :post,
                       url: user_fast_registration_path) do |f|
       %h5.grey-600= t('devise.fast.new_customer.message')
       %p.general-login-text= t('devise.fast.new_customer.message_small')

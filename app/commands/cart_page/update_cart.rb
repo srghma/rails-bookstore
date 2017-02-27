@@ -16,11 +16,9 @@ module CartPage
 
       broadcast(:ok)
     rescue InvalidCoupon
-      broadcast(:invalid_coupon)
-      return
+      return broadcast(:invalid_coupon)
     rescue InvalidProduct
-      broadcast(:invalid_product)
-      return
+      return broadcast(:invalid_product)
     end
 
     def process_coupon?

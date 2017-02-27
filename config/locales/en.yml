@@ -37,5 +37,7 @@ en:
       phone: 'Please enter phone number in format +355 66 123 4567'
 
   checkout:
+    failure:
+      invalid_step: 'Invalid step'
     show:
       invalid: 'Tmth was wrong'

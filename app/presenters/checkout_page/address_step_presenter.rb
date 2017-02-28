@@ -8,7 +8,7 @@ module CheckoutPage
     end
 
     def countries
-      Country.order(:name).pluck(:name)
+      Country.order(:name).pluck(:name, :id)
     end
 
   end

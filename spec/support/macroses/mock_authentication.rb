@@ -9,13 +9,6 @@ module AuthenticationMacros
       OmniAuth.config.test_mode = false
     end
   end
-
-#   def mock_sign_in(name)
-#     before do
-#       user = respond_to?(name) ? public_send(name) : create(name)
-#       sign_in user
-#     end
-#   end
 end
 
 RSpec.configure do |config|

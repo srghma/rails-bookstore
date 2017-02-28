@@ -1,11 +1,13 @@
 module CheckoutPage
   class AddCheckoutAddresses < Rectify::Command
-    def initialize(params)
+    def initialize(order, params)
+      @order = order
       @params = params
     end
 
     def call
       set_billing
+      require 'pry'; ::Kernel.binding.pry;
       @billing.valid? ? save_billing : write_errors(:billing, @billing)
 
       set_shipping
@@ -15,34 +17,36 @@ module CheckoutPage
     private
 
     def set_billing
-      @billing = AddressForm.from_params(@params[:billing])
+      @billing = AddressForm.from_params(params_for_address(:billing))
     end
 
     def save_billing
-      current_order.order_billing.delete if current_order.order_billing
+      @order.billing_address.delete if @order.billing_address
+      require 'pry'; ::Kernel.binding.pry;
       Address.create @billing.address
     end
 
     def set_shipping
-      @shipping = use_billing? ? @billing : shipping_from_params
-      @shipping.address[:addressable_type] = 'order_shipping'
+      @shipping = if use_billing? then @billing
+                  else AddressForm.from_params(params_for_address(:shipping))
+                  end
     end
 
     def use_billing?
-      @params[:order][:use_billing][:allow] == '1'
-    end
-
-    def shipping_from_params
-      AddressForm.from_params(@params[:shipping])
+      @params[:order][:shipping][:use_billing] == '1'
     end
 
     def save_shipping
-      current_order.order_shipping.delete if current_order.order_shipping
+      @order.shipping_address.delete if @order.shipping_address
       Address.create @shipping.address
     end
 
+    def params_for_address(type)
+      @params.require(:order).require(type)
+    end
+
     def write_errors(type, address)
-      current_order.errors[type].concat address.errors.full_messages
+      @order.errors[type].concat address.errors.full_messages
     end
   end
 end

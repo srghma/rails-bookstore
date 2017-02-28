@@ -41,3 +41,4 @@ en:
       invalid_step: 'Invalid step'
     show:
       invalid: 'Tmth was wrong'
+      must_fill_previous: 'Must fill previous steps'

@@ -12,4 +12,11 @@ class AddressForm < Rectify::Form
   validates :first_name, :last_name, :street, :city, :zip, :phone, :country_id, presence: true
   validates :zip, numericality: true
   validates :phone, phone: true
+
+  validate :check_country
+
+  def check_country
+    return if Country.exists?(country_id)
+    errors.add(:country_id, 'don\' exitst')
+  end
 end

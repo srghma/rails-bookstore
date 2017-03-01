@@ -10,6 +10,5 @@ module CheckoutPage
     def countries
       Country.order(:name).pluck(:name, :id)
     end
-
   end
 end

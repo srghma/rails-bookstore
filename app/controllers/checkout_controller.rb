@@ -24,7 +24,7 @@ class CheckoutController < ApplicationController
   end
 
   def update
-    CheckoutPage::ProceedCheckout.call(current_order, step, params) do
+    CheckoutPage::ProceedCheckout.call(current_order, params, step) do
       on(:invalid)    { redirect_to cart_path }
       on(:validation) do
         present step_presenter.new

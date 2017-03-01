@@ -16,8 +16,8 @@ en:
         password: 'Password'
         password_confirmation: 'Confirm Password'
       order:
-        shipping: :"simple_form.placeholders.address"
-        billing: :"simple_form.placeholders.address"
+        shipping_address: :"simple_form.placeholders.address"
+        billing_address: :"simple_form.placeholders.address"
       address:
         first_name: 'First Name'
         last_name: 'Last Name'
@@ -33,8 +33,8 @@ en:
         password: 'Password'
         password_confirmation: 'Confirm Password'
       order:
-        shipping: :"simple_form.labels.address"
-        billing: :"simple_form.labels.address"
+        shipping_address: :"simple_form.labels.address"
+        billing_address: :"simple_form.labels.address"
       address:
         first_name: 'First Name'
         last_name: 'Last Name'
@@ -43,6 +43,7 @@ en:
         zip: 'Zip'
         country: 'Country'
         phone: 'Phone'
+        use_billing: 'Use Billing Address'
     titles:
       change: Change
       save: Save

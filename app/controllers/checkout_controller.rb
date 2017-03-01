@@ -11,7 +11,7 @@ class CheckoutController < ApplicationController
   end
 
   def show
-    CheckoutPage::ValidateStep.call(current_order, step) do
+    CheckoutPage::ValidateStep.call(step) do
       on(:invalid, minimal_accessible_step) do
         redirect_to checkout_path(minimal_accessible_step),
                     flash: { error: t('.must_fill_previous') }
@@ -24,16 +24,12 @@ class CheckoutController < ApplicationController
   end
 
   def update
-    CheckoutPage::ProceedCheckout.call(current_order, params, step) do
-      on(:invalid)    { redirect_to cart_path }
-      on(:validation) do
-        present step_presenter.new
+    CheckoutPage::ProceedCheckout.call(params, step) do
+      on(:invalid) do |*attrs|
+        present step_presenter.new(*attrs)
         render_wizard
       end
-      on(:ok)         do
-        present step_presenter.new
-        render_wizard current_order
-      end
+      on(:ok) { redirect_to checkout_path(next_step) }
     end
   end
 

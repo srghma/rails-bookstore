@@ -4,7 +4,5 @@ class Address < ApplicationRecord
   belongs_to :addressable, polymorphic: true
   belongs_to :country
 
-  validates :first_name, :last_name, :street, :city, :zip, :phone, :country, presence: true
-  validates :zip, numericality: true
-  validates :phone, phone: true
+  validates :country, presence: true
 end

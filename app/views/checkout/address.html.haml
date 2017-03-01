@@ -12,15 +12,24 @@
         .visible-xs.visible-sm
           %h3.general-subtitle= t('billing_address')
           %p.general-info-text= t('simple_form.titles.required_fields')
-        = f.simple_fields_for :billing do |sf|
+        = f.simple_fields_for :billing_address, presenter.billing do |sf|
           = render partial: 'address_fields', locals: { sf: sf }
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle= t('shipping_address')
-        = f.simple_fields_for :shipping do |sf|
-          #shipping_address_fields
+        = f.simple_fields_for :shipping_address, presenter.shipping do |sf|
+          #shipping_address_fields{style: presenter.shipping_fields_style}
             = render partial: 'address_fields', locals: { sf: sf }
-          = sf.input :use_billing, as: :boolean, wrapper_html: { 'data-slide-toggle-for': '#shipping_address_fields' }
+        = fields_for 'order[shipping_address]' do |ub|
+          .form-group.checkbox{'data-slide-toggle-for': '#shipping_address_fields'}
+            %label.font-weight-light.pl-0
+              = ub.check_box 'use_billing',
+                checked: presenter.use_billing,
+                class: 'checkbox-input',
+                hidden: true
+              %span.checkbox-icon
+                %i.fa.fa-check
+              %span.checkbox-text= t('simple_form.labels.address.use_billing')
 
     .general-text-align.mb-60
       = render partial: 'order_summary'

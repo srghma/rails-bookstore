@@ -1,11 +1,15 @@
-Capybara.default_driver = :webkit
-Capybara.javascript_driver = :webkit
+# Capybara.default_driver = :webkit
+# Capybara.javascript_driver = :webkit
 
-# Capybara.register_driver :selenium do |app|
-#   Capybara::Selenium::Driver.new(app, browser: :chrome)
-# end
-# Capybara.default_driver = :selenium
-# Capybara.javascript_driver = :selenium
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    path: '/usr/bin/google-chrome-stable'
+  )
+end
+Capybara.default_driver = :chrome
+Capybara.javascript_driver = :chrome
 
 Capybara::Webkit.configure do |config|
   config.allow_url('www.gravatar.com')

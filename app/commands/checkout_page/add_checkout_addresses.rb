@@ -1,36 +1,54 @@
 module CheckoutPage
   class AddCheckoutAddresses < Rectify::Command
-    def initialize(order, params)
-      @order = order
+    def initialize(params)
       @params = params
     end
 
     def call
-      transaction do
-        create_billing
-        create_shipping
+      @use_billing = use_billing?
+
+      set_billing
+      set_shipping
+
+      unless [@billing, @shipping].all?(&:valid?)
+        broadcast(:invalid, @billing, @shipping, @use_billing)
+        return
       end
+
+      create_billing
+      create_shipping
+
+      broadcast(:ok)
     end
 
     private
 
+    def set_billing
+      @billing = AddressForm.new params_for_address(:billing)
+    end
+
+    def set_shipping
+      @shipping = if @use_billing then @billing
+                  else AddressForm.new params_for_address(:shipping)
+                  end
+    end
+
     def create_billing
-      @order.billing_address&.delete
-      @order.create_billing_address(params_for_address(:billing))
+      current_order.billing_address&.delete
+      current_order.create_billing_address(@billing.attributes)
     end
 
     def create_shipping
-      @order.shipping_address&.delete
-      params_for = use_billing? ? :billing : :shipping
-      @order.create_shipping_address(params_for_address(params_for))
+      current_order.shipping_address&.delete
+      current_order.create_shipping_address(@shipping.attributes)
     end
 
     def use_billing?
-      @params[:order][:shipping][:use_billing] == '1'
+      @params[:order][:shipping_address][:use_billing] == '1'
     end
 
     def params_for_address(type)
-      @params.require(:order).require(type).permit(
+      @params.require(:order).require("#{type}_address").permit(
         :first_name,
         :last_name,
         :street,

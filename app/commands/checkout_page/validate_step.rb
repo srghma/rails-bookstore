@@ -1,7 +1,6 @@
 module CheckoutPage
   class ValidateStep < Rectify::Command
-    def initialize(order, step)
-      @order = order
+    def initialize(step)
       @step = step
     end
 
@@ -25,7 +24,8 @@ module CheckoutPage
     end
 
     def minimal_accessible_step_index
-      @minimal_accessible_step_index ||= steps_with_completeness.find_index { |_, value| !value }
+      @minimal_accessible_step_index ||=
+        steps_with_completeness.find_index { |_, value| !value }
     end
 
     def steps_with_completeness
@@ -39,15 +39,15 @@ module CheckoutPage
     end
 
     def has_addresses?
-      @order.billing_address && @order.shipping_address
+      current_order.billing_address && current_order.shipping_address
     end
 
     def has_delivery?
-      @order.delivery
+      current_order.delivery
     end
 
     def has_credit_card?
-      @order.credit_card
+      current_order.credit_card
     end
 
     def has_confirmation?

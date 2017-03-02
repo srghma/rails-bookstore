@@ -13,10 +13,8 @@ FactoryGirl.define do
     end
 
     trait :with_addresses do
-      after(:create) do |order|
-        create(:billing_address, addressable: order)
-        create(:shipping_address, addressable: order)
-      end
+      billing_address
+      shipping_address
     end
 
     trait :with_delivery do

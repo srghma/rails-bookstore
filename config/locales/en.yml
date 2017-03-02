@@ -39,6 +39,7 @@ en:
   checkout:
     failure:
       invalid_step: 'Invalid step'
+      cart_empty: 'Cart is empty'
+      must_fill_previous: 'Must fill previous steps'
     show:
       invalid: 'Tmth was wrong'
-      must_fill_previous: 'Must fill previous steps'

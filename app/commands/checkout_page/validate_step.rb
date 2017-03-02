@@ -5,11 +5,10 @@ module CheckoutPage
     end
 
     def call
-      if can_access?(@step)
-        broadcast(:ok)
-      else
-        broadcast(:invalid, minimal_accessible_step)
-      end
+      return broadcast(:cart_empty) if current_order.order_items.empty?
+      return broadcast(:invalid, minimal_accessible_step) unless can_access?(@step)
+
+      broadcast(:ok)
     end
 
     private

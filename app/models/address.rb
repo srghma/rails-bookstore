@@ -1,8 +1,7 @@
 class Address < ApplicationRecord
-  include ActiveModel::Validations
-
-  belongs_to :addressable, polymorphic: true
   belongs_to :country
+  belongs_to :order
+  belongs_to :user, optional: true
 
   validates :country, presence: true
 end

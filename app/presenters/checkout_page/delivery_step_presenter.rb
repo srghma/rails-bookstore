@@ -1,10 +1,7 @@
 module CheckoutPage
   class DeliveryStepPresenter < Rectify::Presenter
-    def initialize
-    end
-
     def deliveries
-      CheckoutPage::DeliveryDecorator.for_collection(Delivery.all)
+      CheckoutPage::DeliveryDecorator.for_collection(Delivery.all, current_order.delivery)
     end
   end
 end

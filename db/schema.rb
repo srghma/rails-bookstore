@@ -16,19 +16,21 @@ ActiveRecord::Schema.define(version: 20170224174654) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "addressable_type", null: false
-    t.integer  "addressable_id",   null: false
-    t.integer  "country_id",       null: false
-    t.string   "first_name",       null: false
-    t.string   "last_name",        null: false
-    t.string   "street",           null: false
-    t.string   "city",             null: false
-    t.string   "zip",              null: false
-    t.string   "phone",            null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
+    t.string   "first_name", null: false
+    t.string   "last_name",  null: false
+    t.string   "street",     null: false
+    t.string   "city",       null: false
+    t.string   "zip",        null: false
+    t.string   "phone",      null: false
+    t.string   "type",       null: false
+    t.integer  "order_id",   null: false
+    t.integer  "country_id", null: false
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_addresses_on_country_id", using: :btree
+    t.index ["order_id"], name: "index_addresses_on_order_id", using: :btree
+    t.index ["user_id"], name: "index_addresses_on_user_id", using: :btree
   end
 
   create_table "authors", force: :cascade do |t|

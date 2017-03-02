@@ -12,9 +12,12 @@ class CheckoutController < ApplicationController
 
   def show
     CheckoutPage::ValidateStep.call(step) do
+      on(:cart_empty) do
+        redirect_to cart_path, alert: t('checkout.failure.cart_empty')
+      end
       on(:invalid, minimal_accessible_step) do
         redirect_to checkout_path(minimal_accessible_step),
-                    flash: { error: t('.must_fill_previous') }
+                    flash: { error: t('checkout.failure.must_fill_previous') }
       end
       on(:ok) do
         present step_presenter.new

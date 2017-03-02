@@ -20,7 +20,7 @@
         = f.simple_fields_for :shipping, presenter.shipping do |sf|
           #shipping_address_fields{style: presenter.shipping_fields_style}
             = render partial: 'address_fields', locals: { sf: sf }
-        = fields_for 'order[shipping_address]' do |ub|
+        = fields_for 'order[shipping]' do |ub|
           .form-group.checkbox{'data-slide-toggle-for': '#shipping_address_fields'}
             %label.font-weight-light.pl-0
               = ub.check_box 'use_billing',

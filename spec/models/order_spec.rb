@@ -11,6 +11,18 @@ RSpec.describe Order, type: :model do
     it { should have_many(:order_items).dependent(:destroy) }
   end
 
+  describe 'addresses' do
+    subject { create :order, :with_addresses }
+    it 'can create and delete addresses' do
+      expect(subject.billing_address.type).to eq 'BillingAddress'
+      subject.billing_address.delete
+      subject.reload
+      expect(subject.billing_address).to eq nil
+      expect(subject.shipping_address).to be_present
+      expect(subject.shipping_address.type).to eq 'ShippingAddress'
+    end
+  end
+
   describe 'States' do
     subject { create :order, :with_items, :with_addresses }
 

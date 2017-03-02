@@ -15,11 +15,11 @@ module CheckoutPage
         return
       end
 
-      require 'pry'; ::Kernel.binding.pry;
+      p Address.count
       create_billing
       create_shipping
 
-      require 'pry'; ::Kernel.binding.pry;
+      p Address.count
       broadcast(:ok)
     end
 

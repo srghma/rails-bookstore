@@ -7,8 +7,9 @@ class Order < ApplicationRecord
 
   has_one :coupon, dependent: :nullify
   has_one :credit_card, dependent: :destroy
-  has_one :billing_address,  as: :addressable, dependent: :destroy
-  has_one :shipping_address, as: :addressable, dependent: :destroy
+
+  has_one :billing_address,  dependent: :destroy
+  has_one :shipping_address, dependent: :destroy
 
   include AASM
 

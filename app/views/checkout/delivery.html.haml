@@ -1,7 +1,7 @@
 = render layout: 'checkout/layout' do
   %h3.general-subtitle= t('shipping_method')
   .hidden-xs.mb-res-50
-    = simple_form_for current_order, url: wizard_path, method: :put, class: 'res-mb-100' do |f|
+    = form_for current_order, url: wizard_path, method: :put, class: 'res-mb-100' do |f|
       %table.table.table-hover
         %thead
           %tr
@@ -17,7 +17,11 @@
               %td
                 .form-group.radio.mt-0.mb-0
                   %label.radio-label
-                    %input.radio-input{type: "radio", hidden: "true"}
+                    = radio_button_tag :delivery_id,
+                      delivery.id,
+                      delivery.selected?,
+                      class: 'radio-input',
+                      hidden: true
                     %span.radio-icon
                     %span.radio-text= delivery.title
               %td

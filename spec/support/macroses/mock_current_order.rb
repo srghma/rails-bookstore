@@ -1,5 +1,5 @@
 module CurrentOrderMacros
-  def stub_current_order(name)
+  def stub_current_order_with(order)
     allow_any_instance_of(ApplicationController).to receive(:current_order).and_return(order)
   end
 end

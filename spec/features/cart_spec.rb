@@ -18,7 +18,7 @@ feature 'Categories page:' do
   context 'coupon exists' do
     let(:order) { create(:order, :with_items, coupon: coupon) }
     before do
-      stub_current_order(order)
+      stub_current_order_with(order)
       visit cart_path
     end
 

@@ -17,10 +17,15 @@ feature 'Checkout page:' do
 
       context 'when all fields valid' do
         it 'should show next step' do
+          # expect {
+          #   click_button I18n.t('simple_form.titles.save_and_continue')
+          # }.to change {
+          #   Address.count
+          # }.by(2)
           click_button I18n.t('simple_form.titles.save_and_continue')
+
           expect(page.current_path).to eq checkout_path(:delivery)
-          expect(ApplicationController.current_order.billing_address).to  be_present
-          expect(ApplicationController.current_order.shipping_address).to be_present
+          require 'pry'; ::Kernel.binding.pry;
         end
       end
 

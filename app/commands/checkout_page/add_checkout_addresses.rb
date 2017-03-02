@@ -15,9 +15,11 @@ module CheckoutPage
         return
       end
 
+      require 'pry'; ::Kernel.binding.pry;
       create_billing
       create_shipping
 
+      require 'pry'; ::Kernel.binding.pry;
       broadcast(:ok)
     end
 
@@ -44,11 +46,11 @@ module CheckoutPage
     end
 
     def use_billing?
-      @params[:order][:shipping_address][:use_billing] == '1'
+      @params[:order][:shipping][:use_billing] == '1'
     end
 
     def params_for_address(type)
-      @params.require(:order).require("#{type}_address").permit(
+      @params.require(:order).require(type).permit(
         :first_name,
         :last_name,
         :street,
@@ -56,7 +58,7 @@ module CheckoutPage
         :zip,
         :country_id,
         :phone
-      )
+      ).to_h
     end
   end
 end

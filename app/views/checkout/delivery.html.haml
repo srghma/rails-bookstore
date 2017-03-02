@@ -24,8 +24,8 @@
                 %span= delivery.days
               %td
                 %span.font-16.in-gold-500= delivery.price
-    .general-text-align
-      = render partial: 'order_summary'
-    .text-center
-      = f.submit t('simple_form.titles.save_and_continue'),
-        class: 'btn btn-default center-block mb-20'
+      .general-text-align
+        = render partial: 'order_summary'
+      .text-center
+        = f.submit t('simple_form.titles.save_and_continue'),
+          class: 'btn btn-default center-block mb-20'

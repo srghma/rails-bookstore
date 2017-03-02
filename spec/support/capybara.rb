@@ -4,8 +4,7 @@
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(
     app,
-    browser: :chrome,
-    path: '/usr/bin/google-chrome-stable'
+    browser: :chrome
   )
 end
 Capybara.default_driver = :chrome

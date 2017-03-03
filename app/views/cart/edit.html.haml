@@ -3,10 +3,7 @@
   - if presenter.cart_empty?
     %h2.text-center.mt-10.mb-40 Cart is empty
   - else
-    -# .hidden-xs
-    = render partial: 'products', locals: { products: presenter.products }
-    -# .visible-xs
-    -#   = render partial: 'products_xs', locals: { products: presenter.products }
+    = render partial: 'products/table', locals: { products: presenter.products }
   .general-order-wrap
     .row
       .col-sm-4

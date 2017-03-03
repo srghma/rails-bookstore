@@ -32,10 +32,10 @@ gem 'friendly_id'
 gem 'wicked'
 gem 'credit_card_validations'
 
-# File uploader
-
 gem 'carrierwave'
 gem 'mini_magick'
+
+gem 'rails-assets-tipsy', source: 'https://rails-assets.org'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -65,6 +65,7 @@ group :development, :test do
   gem 'ffaker'
   gem 'database_cleaner'
   gem 'fuubar', require: false
+  gem 'show_me_the_cookies'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

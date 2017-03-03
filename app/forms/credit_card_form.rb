@@ -5,7 +5,6 @@ class CreditCardForm < Rectify::Form
   attribute :number,          String
   attribute :cvv,             Integer
   attribute :expiration_date, Date
-  attribute :month,           Integer
 
   validates :number,
             credit_card_number: true,
@@ -30,6 +29,6 @@ class CreditCardForm < Rectify::Form
 
   def expiration_date_valid
     return if !expiration_date.blank? && expiration_date > Time.zone.today
-    errors.add(:expiration_date, 'Date must be in the future')
+    errors.add(:expiration_date, 'must be in the future')
   end
 end

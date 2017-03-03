@@ -1,0 +1,21 @@
+= render layout: 'checkout/layout' do
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle= t('shipping_address')
+      = presenter.edit_link(:address)
+      %p.general-address= presenter.shipping_address
+    .col-sm-3
+      %h3.general-subtitle= t('billing_address')
+      = presenter.edit_link(:address)
+      %p.general-address= presenter.billing_address
+    .col-sm-3
+      %h3.general-subtitle= t('shipments')
+      = presenter.edit_link(:delivery)
+      %p.general-address= presenter.shipments
+    .col-sm-3
+      %h3.general-subtitle= t('payment_information')
+      = presenter.edit_link(:payment)
+      %p.general-address= presenter.payment
+  = render partial: 'products/table', locals: { products: presenter.products }
+  .text-center
+    = link_to t('simple_form.titles.place_order'), wizard_path, method: :put, class: 'btn btn-default mb-20'

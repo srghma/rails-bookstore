@@ -1,15 +1,17 @@
--# TODO: fix, yotpo tampering styles, e.g. h1 on book page
-:javascript
-  (function e() {
-      var e = document.createElement("script");
-      e.type = "text/javascript";
-      e.async = true;
-      e["data-turbolinks-track"] = 'reload'
-      e.src = "//staticw2.yotpo.com/#{ENV['YOTPO_KEY']}/widget.js";
-      var t = document.getElementsByTagName("script")[0];
-      t.parentNode.insertBefore(e, t)
-  })();
-  document.addEventListener("turbolinks:load", function() {
-    if (window.yotpo) { yotpo.initWidgets() }
-  })
+-# TODO: fix, yotpo tampering fonts
+-# TODO: for speed of testing, remove
+- unless Rails.env.test?
+  :javascript
+    (function e() {
+        var e = document.createElement("script");
+        e.type = "text/javascript";
+        e.async = true;
+        e["data-turbolinks-track"] = 'reload'
+        e.src = "//staticw2.yotpo.com/#{ENV['YOTPO_KEY']}/widget.js";
+        var t = document.getElementsByTagName("script")[0];
+        t.parentNode.insertBefore(e, t)
+    })();
+    document.addEventListener("turbolinks:load", function() {
+      if (window.yotpo) { yotpo.initWidgets() }
+    })
 

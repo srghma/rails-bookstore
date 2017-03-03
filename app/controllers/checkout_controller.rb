@@ -11,11 +11,11 @@ class CheckoutController < ApplicationController
   end
 
   def show
-    CheckoutPage::ValidateStep.call(step) do
+    CheckoutPage::ValidateStep.call(current_order, step) do
       on(:cart_empty) do
         redirect_to cart_path, alert: t('checkout.failure.cart_empty')
       end
-      on(:invalid, minimal_accessible_step) do
+      on(:cant_access) do |minimal_accessible_step|
         redirect_to checkout_path(minimal_accessible_step),
                     flash: { error: t('checkout.failure.must_fill_previous') }
       end
@@ -27,16 +27,29 @@ class CheckoutController < ApplicationController
   end
 
   def update
-    CheckoutPage::ProceedCheckout.call(params, step) do
+    CheckoutPage::ProceedCheckout.call(params, current_order, step) do
+      on(:cant_access) do |minimal_accessible_step|
+        redirect_to checkout_path(minimal_accessible_step),
+                    flash: { error: t('checkout.failure.must_fill_previous') }
+      end
       on(:invalid) do |*attrs|
         present step_presenter.new(*attrs)
         render_wizard
       end
-      on(:ok) { redirect_to checkout_path(next_step) }
+      on(:ok) do |next_step|
+        redirect_to checkout_path(next_step)
+      end
+      on(:finish) do |old_order|
+        redirect_to finish_wizard_path(old_order)
+      end
     end
   end
 
   private
+
+  def finish_wizard_path(order)
+    checkout_path(id: :complete, order_id: order.id)
+  end
 
   def set_progress_presenter
     present CheckoutPage::ProgressPresenter.new, for: :progress

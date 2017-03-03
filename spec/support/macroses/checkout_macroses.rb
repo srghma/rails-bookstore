@@ -9,11 +9,12 @@ module CheckoutMacroses
     fill_in "order[#{type}][phone]",      with: address[:phone]
   end
 
-  def fill_payment(credit_card)
-    fill_in 'Number', with: credit_card[:number]
-    find('.months-select').select('March')
-    fill_in 'Expiration year', with: credit_card[:expiration_year]
-    fill_in 'Cvv', with: credit_card[:cvv]
+  def fill_card(card)
+    fill_in 'order[card][number]',          with: card[:number]
+    fill_in 'order[card][name]',            with: card[:name]
+    fill_in 'order[card][expiration_date]', with: card[:expiration_date]
+      .strftime(CreditCardForm::DATE_FORMAT)
+    fill_in 'order[card][cvv]',             with: card[:cvv]
   end
 end
 

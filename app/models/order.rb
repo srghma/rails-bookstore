@@ -22,8 +22,8 @@ class Order < ApplicationRecord
     state :delivered
     state :canceled
 
-    event :queue do
-      transitions from: :in_progress, to: :processing, guard: :ready_for_processing?
+    event :place_order do
+      transitions from: :in_progress, to: :processing
     end
 
     event :sent_to_client do
@@ -37,10 +37,6 @@ class Order < ApplicationRecord
     event :cancel do
       transitions from: [:processing, :in_delivery], to: :canceled
     end
-  end
-
-  def ready_for_processing?
-    [billing_address, shipping_address].all?(&:present?) && order_items.any?
   end
 
   def create_or_increment_product(id, quantity = 1)

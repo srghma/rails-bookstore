@@ -1,6 +1,8 @@
 module CurrentOrderMacros
   def stub_current_order_with(order)
-    allow_any_instance_of(ApplicationController).to receive(:current_order).and_return(order)
+    # TODO: if only there was a way to set @current_order_id to ApplContr instance directly
+    visit('/')
+    create_cookie(:current_order_id, order.id)
   end
 end
 

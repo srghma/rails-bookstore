@@ -1,10 +1,14 @@
 module CheckoutPage
   class AddCheckoutAddresses < Rectify::Command
-    def initialize(params)
+    def initialize(params, order, step)
       @params = params
+      @order = order
+      @manager = CheckoutManager.new(order, step)
     end
 
     def call
+      return broadcast(:cant_access, @manager.minimal_accessible_step) unless @manager.can_access?
+
       @use_billing = use_billing?
 
       set_billing
@@ -15,12 +19,10 @@ module CheckoutPage
         return
       end
 
-      p Address.count
       create_billing
       create_shipping
 
-      p Address.count
-      broadcast(:ok)
+      broadcast(:ok, @manager.next_step)
     end
 
     private
@@ -36,13 +38,13 @@ module CheckoutPage
     end
 
     def create_billing
-      current_order.billing_address&.delete
-      current_order.create_billing_address(@billing.attributes)
+      @order.billing_address&.delete
+      @order.create_billing_address(@billing.attributes)
     end
 
     def create_shipping
-      current_order.shipping_address&.delete
-      current_order.create_shipping_address(@shipping.attributes)
+      @order.shipping_address&.delete
+      @order.create_shipping_address(@shipping.attributes)
     end
 
     def use_billing?

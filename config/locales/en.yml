@@ -43,3 +43,5 @@ en:
       must_fill_previous: 'Must fill previous steps'
     show:
       invalid: 'Tmth was wrong'
+    cvv-help: '3-digid seucrity code usually found on the back of your card'
+    edit: 'edit'

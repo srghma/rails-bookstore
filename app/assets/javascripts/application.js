@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require tipsy/src/javascripts/jquery.tipsy.js
 
 //= require read_more
 //= require quantity_widget
 //= require slide_toggle
+//= require data_tipsy

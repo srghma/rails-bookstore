@@ -1,35 +1,35 @@
-module CartPage
+module CheckoutPage
   class ProductDecorator < SimpleDelegator
     include ViewHelpers
     include BookCoverHelpers
 
-    def initialize(order_item, quantity:, errors: nil)
+    def self.for_collection(order_items)
+      order_items.map { |item| new(item) }
+    end
+
+    def initialize(order_item)
       @order_item = order_item
-      @quantity = quantity || order_item.quantity
-      @errors = errors
       super(order_item.book)
     end
 
-    attr_reader :quantity
+    def quantity
+      @order_item.quantity
+    end
 
-    def show_remove
-      true
+    def error_class
+      nil
     end
 
     def quantity_editable?
-      true
+      false
     end
 
-    def order_item_id
-      @order_item.id
+    def show_remove
+      false
     end
 
     def cover
       cover_url_or_default(version: :thumb)
-    end
-
-    def error_class
-      'has-error' if @errors && !@errors.empty?
     end
 
     def price
@@ -41,7 +41,7 @@ module CartPage
     end
 
     def _subtotal
-      @_subtotal ||= @quantity * __getobj__.price
+      @_subtotal ||= @order_item.quantity * __getobj__.price
     end
   end
 end

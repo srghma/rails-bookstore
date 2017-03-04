@@ -25,7 +25,9 @@ module CartPage
     end
 
     def checkout_path
-      view_context.checkout_path(checkout_manager.minimal_accessible_step)
+      return @checkout_path if @checkout_path
+      next_step = CheckoutManager.new(current_order).next_step
+      @checkout_path = view_context.checkout_path(next_step)
     end
 
     def subtotal
@@ -69,10 +71,6 @@ module CartPage
 
     def discount
       @discount ||= current_order.coupon&.discount
-    end
-
-    def checkout_manager
-      @manager ||= CheckoutManager.new(current_order, nil)
     end
   end
 end

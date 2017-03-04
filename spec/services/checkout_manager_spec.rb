@@ -2,27 +2,25 @@ require 'rails_helper'
 
 RSpec.describe CheckoutManager do
   context '#minimal_accessible_step_index' do
-    subject { CheckoutManager.new(nil, nil) }
+    subject { CheckoutManager.new(nil) }
 
     before do
       expect(subject).to receive(:steps_with_completeness) { {
         address:  true,
-        delivery: true,
-        payment:  false,
-        confirm:  true,
-        complete: false
+        delivery: false,
+        payment:  true,
+        confirm:  false
       } }
     end
 
     it '..' do
-      expect(subject.send(:minimal_accessible_step_index)).to eq 2
+      expect(subject.send(:minimal_accessible_step_index)).to eq 1
     end
   end
 
   context '#minimal_accessible_step' do
     subject do
-      CheckoutManager.new(order, nil)
-                     .method(:minimal_accessible_step)
+      CheckoutManager.new(order).method(:minimal_accessible_step)
     end
 
     context 'order doesnt have addresses' do
@@ -50,11 +48,10 @@ RSpec.describe CheckoutManager do
         address:  true,
         delivery: false,
         payment:  false,
-        confirm:  false,
-        complete: false
+        confirm:  false
       }.each do |step, expectation|
         send :it, "with #{step} should return #{expectation}" do
-          expect(CheckoutManager.new(order, step).can_access?).to eq expectation
+          expect(CheckoutManager.new(order).can_access?(step)).to eq expectation
         end
       end
     end
@@ -66,11 +63,10 @@ RSpec.describe CheckoutManager do
         address:  true,
         delivery: true,
         payment:  false,
-        confirm:  false,
-        complete: false
+        confirm:  false
       }.each do |step, expectation|
         send :it, "with #{step} should return #{expectation}" do
-          expect(CheckoutManager.new(order, step).can_access?).to eq expectation
+          expect(CheckoutManager.new(order).can_access?(step)).to eq expectation
         end
       end
     end
@@ -82,11 +78,10 @@ RSpec.describe CheckoutManager do
         address:  true,
         delivery: true,
         payment:  true,
-        confirm:  false,
-        complete: false
+        confirm:  false
       }.each do |step, expectation|
         send :it, "with #{step} should return #{expectation}" do
-          expect(CheckoutManager.new(order, step).can_access?).to eq expectation
+          expect(CheckoutManager.new(order).can_access?(step)).to eq expectation
         end
       end
     end
@@ -98,11 +93,10 @@ RSpec.describe CheckoutManager do
         address:  true,
         delivery: true,
         payment:  true,
-        confirm:  true,
-        complete: false
+        confirm:  true
       }.each do |step, expectation|
         send :it, "with #{step} should return #{expectation}" do
-          expect(CheckoutManager.new(order, step).can_access?).to eq expectation
+          expect(CheckoutManager.new(order).can_access?(step)).to eq expectation
         end
       end
     end

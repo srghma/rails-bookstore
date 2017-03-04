@@ -14,7 +14,7 @@ module CheckoutWizard
   end
 
   def set_manager
-    @manager = CheckoutManager.new(current_order, step)
+    @manager = CheckoutManager.new(current_order)
   end
 
   alias update_manager set_manager
@@ -38,6 +38,6 @@ module CheckoutWizard
   end
 
   def check_accesability
-    raise CantAccessError unless @manager.can_access?
+    raise CantAccessError unless @manager.can_access?(step)
   end
 end

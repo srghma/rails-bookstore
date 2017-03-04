@@ -1,23 +1,16 @@
 class CheckoutManager
-  def initialize(order, step = nil)
+  def initialize(order)
     @order = order
-    @step = step
   end
 
   # if we on confirm stage and editing previous - all submitting will redirect to :confirm
   def next_step
     return :confirm if minimal_accessible_step == :confirm
-
-    if minimal_accessible_step == :complete
-      raise 'There was an error in PlaceOrder: old order was placed,'\
-        ' but new was not created. Please recreate database.'
-    end
-
-    wizard_next_step || minimal_accessible_step
+    steps.at(minimal_accessible_step_index + 1)
   end
 
-  def can_access?
-    current_step_index = steps_with_completeness.find_index { |key, _| key == @step }
+  def can_access?(step)
+    current_step_index = steps_with_completeness.find_index { |key, _| key == step }
     current_step_index <= minimal_accessible_step_index
   end
 
@@ -26,12 +19,6 @@ class CheckoutManager
   end
 
   private
-
-  def wizard_next_step
-    return nil unless @step
-    current_index = steps.find_index(@step)
-    steps.at(current_index + 1)
-  end
 
   def minimal_accessible_step_index
     @minimal_accessible_step_index ||=
@@ -47,8 +34,7 @@ class CheckoutManager
       address:  has_addresses?,
       delivery: has_delivery?,
       payment:  has_payment?,
-      confirm:  has_confirmation?,
-      complete: false
+      confirm:  false
     }
   end
 
@@ -62,9 +48,5 @@ class CheckoutManager
 
   def has_payment?
     @order.credit_card
-  end
-
-  def has_confirmation?
-    @order.processing?
   end
 end

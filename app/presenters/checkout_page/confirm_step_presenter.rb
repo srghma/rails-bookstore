@@ -1,7 +1,7 @@
 module CheckoutPage
   class ConfirmStepPresenter < Rectify::Presenter
     BR = '<br />'.html_safe.freeze
-    STARS = Array.new(3, '**').join(' ').freeze
+    STARS = '** ** ** '.freeze
 
     [:shipping, :billing].map do |type|
       define_method("#{type}_address") { address(type) }
@@ -15,7 +15,7 @@ module CheckoutPage
 
     def payment
       card = current_order.credit_card
-      number = [STARS, card.number.last(4)].join ' '
+      number = STARS + card.number.last(4)
       date = card.expiration_date.strftime '%m/%Y'
       safe_join [number, date], BR
     end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'home#index'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  # TODO: change, resource fast, only :show, :update
   devise_scope :user do
     get  '/users/fast', to: 'users/fast#new',              as: :user_fast
     put  '/users/fast', to: 'users/fast#new_session',      as: :user_fast_session
@@ -27,7 +28,6 @@ Rails.application.routes.draw do
     delete '/book/:id', to: 'cart#remove_product', as: :cart_remove_product
   end
 
-  # resource :cart, only: [:show]
   resources :orders, only: [:index, :edit]
 
   resources :order_item, only: [:create, :update, :destroy]
@@ -35,7 +35,8 @@ Rails.application.routes.draw do
   get 'checkout/complete', to: 'checkout#complete', id: 'complete'
   resources :checkout, only: [:show, :update]
 
-  # resource :cart_item, controller: :order_item, only: [:create, :update, :destroy]
-  # post   '/:class/:id', to: 'cart#add_product',    as: :cart_add_product
-  # delete '/:class/:id', to: 'cart#remove_product', as: :cart_remove_product
+  namespace :settings do
+    resource :address, only: [:show, :update]
+    resource :profile, only: [:show, :update, :destroy], controller: 'profile'
+  end
 end

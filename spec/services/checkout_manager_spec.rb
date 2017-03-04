@@ -1,8 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe CheckoutPage::ValidateStep do
+RSpec.describe CheckoutManager do
   context '#minimal_accessible_step_index' do
-    subject { CheckoutPage::ValidateStep.new(nil, nil) }
+    subject { CheckoutManager.new(nil, nil) }
+
     before do
       expect(subject).to receive(:steps_with_completeness) { {
         address:  true,
@@ -20,12 +21,12 @@ RSpec.describe CheckoutPage::ValidateStep do
 
   context '#minimal_accessible_step' do
     subject do
-      CheckoutPage::ValidateStep.new(current_order, nil)
-                                .method(:minimal_accessible_step)
+      CheckoutManager.new(order, nil)
+                     .method(:minimal_accessible_step)
     end
 
     context 'order doesnt have addresses' do
-      let(:current_order) { create :order }
+      let(:order) { create :order }
 
       it 'return :addresses' do
         expect(subject.call).to eq :address
@@ -33,7 +34,7 @@ RSpec.describe CheckoutPage::ValidateStep do
     end
 
     context 'order doesnt have addresses' do
-      let(:current_order) { create :order, :with_addresses }
+      let(:order) { create :order, :with_addresses }
 
       it 'return :addresses' do
         expect(subject.call).to eq :delivery
@@ -42,13 +43,8 @@ RSpec.describe CheckoutPage::ValidateStep do
   end
 
   context '#can_access?' do
-    subject do
-      CheckoutPage::ValidateStep.new(current_order, nil)
-                                .method(:can_access?)
-    end
-
     context 'user doesnt fill anything' do
-      let(:current_order) { create :order }
+      let(:order) { create :order }
 
       {
         address:  true,
@@ -58,13 +54,13 @@ RSpec.describe CheckoutPage::ValidateStep do
         complete: false
       }.each do |step, expectation|
         send :it, "with #{step} should return #{expectation}" do
-          expect(subject.call(step)).to eq expectation
+          expect(CheckoutManager.new(order, step).can_access?).to eq expectation
         end
       end
     end
 
     context 'user fill addresses' do
-      let(:current_order) { create :order, :with_addresses }
+      let(:order) { create :order, :with_addresses }
 
       {
         address:  true,
@@ -74,13 +70,13 @@ RSpec.describe CheckoutPage::ValidateStep do
         complete: false
       }.each do |step, expectation|
         send :it, "with #{step} should return #{expectation}" do
-          expect(subject.call(step)).to eq expectation
+          expect(CheckoutManager.new(order, step).can_access?).to eq expectation
         end
       end
     end
 
     context 'user fill addresses and delivery' do
-      let(:current_order) { create :order, :with_addresses, :with_delivery }
+      let(:order) { create :order, :with_addresses, :with_delivery }
 
       {
         address:  true,
@@ -90,13 +86,13 @@ RSpec.describe CheckoutPage::ValidateStep do
         complete: false
       }.each do |step, expectation|
         send :it, "with #{step} should return #{expectation}" do
-          expect(subject.call(step)).to eq expectation
+          expect(CheckoutManager.new(order, step).can_access?).to eq expectation
         end
       end
     end
 
     context 'user fill addresses and delivery and credit_card' do
-      let(:current_order) { create :order, :with_addresses, :with_delivery, :with_credit_card }
+      let(:order) { create :order, :with_addresses, :with_delivery, :with_credit_card }
 
       {
         address:  true,
@@ -106,7 +102,7 @@ RSpec.describe CheckoutPage::ValidateStep do
         complete: false
       }.each do |step, expectation|
         send :it, "with #{step} should return #{expectation}" do
-          expect(subject.call(step)).to eq expectation
+          expect(CheckoutManager.new(order, step).can_access?).to eq expectation
         end
       end
     end

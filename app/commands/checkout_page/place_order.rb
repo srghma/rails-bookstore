@@ -25,7 +25,7 @@ module CheckoutPage
 
     def place_order
       @order.place_order
-      @order.generate_delivery_code
+      @order.generate_delivery_hash
       @order.save
     end
   end

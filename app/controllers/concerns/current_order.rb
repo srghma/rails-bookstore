@@ -40,20 +40,26 @@ module CurrentOrder
 
   # TODO: remove, only for development
   def create_order
-    if Rails.env.development?
-      delivery = Delivery.first
-      country = Country.first
-      billing  = FactoryGirl.create :billing_address, country: country
-      shipping = FactoryGirl.create :shipping_address, country: country
+    Rails.env.development? ? create_with_factory : Order.create
+  end
 
-      FactoryGirl.create :order,
-                         :with_addresses,
-                         :with_credit_card,
-                         delivery: delivery,
-                         billing_address:  billing,
-                         shipping_address: shipping
-    else
-      Order.create
-    end
+  def create_with_factory
+    delivery = Delivery.first
+    country = Country.first
+
+    order = FactoryGirl.create :order,
+                               :with_credit_card,
+                               delivery: delivery
+
+    order.billing_address  = FactoryGirl.create :billing_address,
+                                                country: country,
+                                                addressable: order
+
+    order.shipping_address = FactoryGirl.create :shipping_address,
+                                                country: country,
+                                                addressable: order
+
+    order.save!
+    order
   end
 end

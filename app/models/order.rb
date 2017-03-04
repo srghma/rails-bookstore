@@ -8,8 +8,8 @@ class Order < ApplicationRecord
   has_one :coupon, dependent: :nullify
   has_one :credit_card, dependent: :destroy
 
-  has_one :billing_address,  dependent: :destroy
-  has_one :shipping_address, dependent: :destroy
+  has_one :billing_address,  as: :addressable, dependent: :destroy
+  has_one :shipping_address, as: :addressable, dependent: :destroy
 
   include AASM
 
@@ -49,6 +49,10 @@ class Order < ApplicationRecord
     item = order_items.find_or_initialize_by(book_id: id)
     item.quantity = quantity
     item.save ? item : false
+  end
+
+  def generate_delivery_hash
+    '#R'.ljust(10, rand.to_s)
   end
 
   def to_s

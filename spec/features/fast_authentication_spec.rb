@@ -1,17 +1,19 @@
 feature 'Fast authentication:' do
+  let(:order) { create :order, :with_items }
   before do
+    stub_current_order_with(order)
     visit checkout_path(:address)
     expect(current_path).to eq user_fast_path
   end
 
-  context 'new customer' do
+  context 'new_registration' do
     let(:user) { attributes_for(:user) }
 
     before do
-      within '#new_user' do
+      within '#new_registration' do
         fill_in 'user[email]', with: email
       end
-      click_button I18n.t('devise.fast.new_customer.submit')
+      click_button I18n.t('devise.fast.new_registration.submit')
     end
 
     context 'valid params' do
@@ -28,13 +30,13 @@ feature 'Fast authentication:' do
 
       it 'rerenders page' do
         expect(page.current_path).to eq user_fast_session_path
-        form = find('#new_user')
+        form = find('#new_registration')
         expect(form.find('.email .help-block').text).to eq 'is invalid'
       end
     end
   end
 
-  context 'old customer' do
+  context 'new_session' do
     let(:user) { create(:user) }
 
     before do
@@ -42,7 +44,7 @@ feature 'Fast authentication:' do
         fill_in 'user[email]',    with: email
         fill_in 'user[password]', with: password
       end
-      click_button I18n.t('devise.fast.old_customer.submit')
+      click_button I18n.t('devise.fast.new_session.submit')
     end
 
     context 'valid params' do

@@ -54,11 +54,11 @@ en:
       user:
         signed_up: :"devise.registrations.signed_up"
         signed_in: :"devise.sessions.signed_in"
-      old_customer:
+      new_registration:
         title: 'Returning Customer'
         message: 'Log In With Password'
         submit: 'Log In with Password'
-      new_customer:
+      new_session:
         title: 'New Customer'
         message: 'Quick Register'
         message_small: "You'll be able to create password later"

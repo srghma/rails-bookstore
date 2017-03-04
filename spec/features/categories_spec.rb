@@ -10,7 +10,7 @@ feature 'Categories page:' do
     end
 
     scenario 'can redirect to book' do
-      first('.thumb-hover-link').click
+      first('.general-thumb-wrap').hover.first('.thumb-hover-link').click
       expect(page.current_path).to include 'books'
     end
   end

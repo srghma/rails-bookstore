@@ -37,8 +37,7 @@ feature 'Checkout page:' do
       context 'when use_billing' do
         before do
           within '.edit_order' do
-            find('.checkbox-icon').click # for selenium
-            # find('.checkbox-icon').trigger('click') # for webkit
+            click_checkbox
           end
         end
         it 'should show next step' do

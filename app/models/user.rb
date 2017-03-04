@@ -4,8 +4,9 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook]
 
   has_many :orders, dependent: :destroy
-  has_one :billing_address
-  has_one :shipping_address
+
+  has_one :billing_address,  as: :addressable, dependent: :destroy
+  has_one :shipping_address, as: :addressable, dependent: :destroy
 
   validates_uniqueness_of :email, allow_blank: true, if: :email_uniqueness_required?
 

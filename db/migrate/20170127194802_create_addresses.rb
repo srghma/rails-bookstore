@@ -8,10 +8,10 @@ class CreateAddresses < ActiveRecord::Migration[5.0]
       t.string :zip, null: false
       t.string :phone, null: false
 
-      t.string :type, null: false
-      t.belongs_to :order, null: false
       t.belongs_to :country, null: false
-      t.belongs_to :user
+
+      t.string :type, null: false
+      t.references :addressable, polymorphic: true, null: false
 
       t.timestamps
     end

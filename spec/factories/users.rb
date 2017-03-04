@@ -6,5 +6,12 @@ FactoryGirl.define do
     factory :admin do
       is_admin true
     end
+
+    trait :with_addresses do
+      after(:create) do |user|
+        create(:billing_address, addressable: user)
+        create(:shipping_address, addressable: user)
+      end
+    end
   end
 end

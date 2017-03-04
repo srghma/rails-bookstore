@@ -1,5 +1,5 @@
 class CheckoutManager
-  def initialize(order, step)
+  def initialize(order, step = nil)
     @order = order
     @step = step
   end
@@ -8,12 +8,12 @@ class CheckoutManager
   def next_step
     return :confirm if minimal_accessible_step == :confirm
 
-    # if minimal_accessible_step == :complete
-    #   raise 'There was an error in PlaceOrder: old order was placed, \
-    #     but new was not created. Please recreate database.'
-    # end
+    if minimal_accessible_step == :complete
+      raise 'There was an error in PlaceOrder: old order was placed,'\
+        ' but new was not created. Please recreate database.'
+    end
 
-    wizard_next_step
+    wizard_next_step || minimal_accessible_step
   end
 
   def can_access?
@@ -28,6 +28,7 @@ class CheckoutManager
   private
 
   def wizard_next_step
+    return nil unless @step
     current_index = steps.find_index(@step)
     steps.at(current_index + 1)
   end

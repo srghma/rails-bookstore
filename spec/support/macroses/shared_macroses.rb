@@ -1,4 +1,4 @@
-module CheckoutMacroses
+module SharedMacroses
   def fill_address(type, address, country)
     fill_in "order[#{type}][first_name]", with: address[:first_name]
     fill_in "order[#{type}][last_name]",  with: address[:last_name]
@@ -16,8 +16,17 @@ module CheckoutMacroses
       .strftime(CreditCardForm::DATE_FORMAT)
     fill_in 'order[card][cvv]',             with: card[:cvv]
   end
+
+  def click_checkbox
+    case Capybara.default_driver
+    when :selenium_chrome
+      find('.checkbox-icon').click
+    when :webkit
+      find('.checkbox-icon').trigger('click')
+    end
+  end
 end
 
 RSpec.configure do |config|
-  config.include CheckoutMacroses, type: :feature
+  config.include SharedMacroses, type: :feature
 end

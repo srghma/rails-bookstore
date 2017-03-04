@@ -9,11 +9,10 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Associations' do
-    it { should have_one(:billing_address) }
-    it { should have_one(:shipping_address) }
-    # it { should have_many(:reviews).dependent(:destroy) }
     it { should have_many(:orders).dependent(:destroy) }
   end
+
+  it_behaves_like 'addressable'
 
   describe '.from_omniauth' do
     let(:email) { FFaker::Internet.email }

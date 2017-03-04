@@ -1,7 +1,6 @@
 FactoryGirl.define do
-  factory :address, class: 'Address' do
+  factory :address, class: 'Address', aliases: [:addressable] do
     country
-    order
     first_name { FFaker::Name.first_name }
     last_name  { FFaker::Name.last_name }
     city       { FFaker::AddressUS.city }
@@ -10,9 +9,11 @@ FactoryGirl.define do
     phone      { FFaker.numerify('+### ## ### ####') }
 
     factory :billing_address, class: 'BillingAddress' do
+      association :addressable, factory: :address
     end
 
     factory :shipping_address, class: 'ShippingAddress' do
+      association :addressable, factory: :address
     end
   end
 end

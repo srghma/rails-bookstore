@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  respond_to :html, :js, only: :show
+  respond_to :html, only: :show
 
   def show
     CategoryPage::GetBooks.call do

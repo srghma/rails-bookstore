@@ -12,10 +12,10 @@ module Users
       if user
         sign_in(resource_name, user)
         set_flash_message! :notice, :signed_in
-        respond_with user, location: after_sign_in_path_for(user)
+        redirect_to after_sign_in_path_for(user)
       else
         @old_customer = resource_class.new(sign_in_params)
-        # TODO: still show has already been taken
+        # TODO: still showing 'has already been taken'
         @old_customer.skip_email_uniqueness_validation = true
         @old_customer.valid?
         flash[:error] = t('devise.failure.invalid', authentication_keys: 'email')
@@ -29,7 +29,8 @@ module Users
       if @new_customer.save
         set_flash_message! :notice, :signed_up
         sign_in(resource_name, @new_customer)
-        respond_with @new_customer, location: after_sign_in_path_for(@new_customer)
+        url = after_sign_in_path_for(@new_customer)
+        redirect_to url
       else
         render 'devise/fast/new'
       end

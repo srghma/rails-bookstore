@@ -19,7 +19,6 @@ RSpec.describe Address, type: :model do
 
   describe 'Associations' do
     it { should belong_to(:country) }
-    it { should belong_to(:user) }
-    it { should belong_to(:order) }
+    it { should belong_to(:addressable) }
   end
 end

@@ -1,7 +1,6 @@
 class Address < ApplicationRecord
   belongs_to :country
-  belongs_to :order
-  belongs_to :user, optional: true
+  belongs_to :addressable, polymorphic: true
 
   validates :country, presence: true
 end

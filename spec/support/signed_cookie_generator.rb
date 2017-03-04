@@ -1,3 +1,4 @@
+# not working
 class SignedCookieGenerator
   attr_accessor :name, :value
 

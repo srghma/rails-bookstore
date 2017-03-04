@@ -24,6 +24,10 @@ module CartPage
       end
     end
 
+    def checkout_path
+      view_context.checkout_path(checkout_manager.minimal_accessible_step)
+    end
+
     def subtotal
       number_to_currency(_subtotal)
     end
@@ -65,6 +69,10 @@ module CartPage
 
     def discount
       @discount ||= current_order.coupon&.discount
+    end
+
+    def checkout_manager
+      @manager ||= CheckoutManager.new(current_order, nil)
     end
   end
 end

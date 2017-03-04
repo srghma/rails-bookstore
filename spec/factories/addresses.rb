@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :address, class: Address do
+  factory :address, class: 'Address' do
     country
     order
     first_name { FFaker::Name.first_name }
@@ -9,10 +9,10 @@ FactoryGirl.define do
     zip        { FFaker::AddressUS.zip_code.to_i }
     phone      { FFaker.numerify('+### ## ### ####') }
 
-    factory :billing_address, class: BillingAddress do
+    factory :billing_address, class: 'BillingAddress' do
     end
 
-    factory :shipping_address, class: ShippingAddress do
+    factory :shipping_address, class: 'ShippingAddress' do
     end
   end
 end

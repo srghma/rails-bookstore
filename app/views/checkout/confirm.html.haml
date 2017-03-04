@@ -18,4 +18,4 @@
       %p.general-address= presenter.payment
   = render partial: 'products/table', locals: { products: presenter.products }
   .text-center
-    = link_to t('simple_form.titles.place_order'), wizard_path, method: :put, class: 'btn btn-default mb-20'
+    = link_to t('simple_form.titles.place_order'), checkout_path(:complete), class: 'btn btn-default mb-20'

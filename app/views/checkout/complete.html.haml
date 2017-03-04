@@ -20,3 +20,6 @@
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0 Order #R25314582
       %p.general-address.mb-30 October 29, 2016
+
+  = render partial: 'products/table', locals: { products: presenter.products }
+

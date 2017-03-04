@@ -35,6 +35,6 @@
                 %strong.font-18 Order Total:
               %td
                 %strong.font-18= presenter.order_total
-          = link_to 'Checkout', checkout_path(:address), class: 'btn btn-default mb-20 visible-xs-inline-block'
+          = link_to 'Checkout', presenter.checkout_path, class: 'btn btn-default mb-20 visible-xs-inline-block'
 - unless presenter.cart_empty?
-  = button_to 'Checkout', checkout_path(:address), method: :get, class: 'btn btn-default mb-20 hidden-xs center-block'
+  = button_to 'Checkout', presenter.checkout_path, method: :get, class: 'btn btn-default mb-20 hidden-xs center-block'

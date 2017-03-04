@@ -2,10 +2,16 @@ module CheckoutPage
   class ProgressPresenter < Rectify::Presenter
     Step = Struct.new(:classes, :number, :name, :divider?)
 
+    def initialize(steps, current_step, select_up_to_step)
+      @steps = steps
+      @current_step = current_step
+      @select_up_to_step = select_up_to_step
+    end
+
     def steps
-      wizard_steps.each_with_index.map do |s, index|
+      @steps.each_with_index.map do |s, index|
         classes = 'step'
-        classes += ' active' if index <= current_step_index
+        classes += ' active' if active?(index)
 
         number = index + 1
 
@@ -20,16 +26,16 @@ module CheckoutPage
     private
 
     def last?(index)
-      @last ||= wizard_steps.length - 1
-      index == @last
+      @last_index ||= @steps.length - 1
+      index == @last_index
     end
 
-    def current?(s)
-      step == s
+    def select_up_to_step_index
+      @select_up_to_step_index ||= @steps.index @select_up_to_step
     end
 
-    def current_step_index
-      @current_index ||= wizard_steps.index step
+    def active?(index)
+      index <= select_up_to_step_index
     end
   end
 end

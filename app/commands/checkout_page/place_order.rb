@@ -1,25 +1,23 @@
 module CheckoutPage
   class PlaceOrder < Rectify::Command
-    def initialize(params, order, step)
+    def initialize(params, order)
       @params = params
       @order = order
-      @manager = CheckoutManager.new(order, step)
     end
 
     def call
-      return broadcast(:cant_access, @manager.minimal_accessible_step) unless @manager.can_access?
       return broadcast(:invalid) unless order_valid
 
       place_order
       create_current_order
 
-      broadcast(:finish, @order)
+      broadcast(:ok, @order)
     end
 
     private
 
     def order_valid
-      return false unless @order.order_items.any?
+      return false unless @order.order_items.any? && @order.in_progress?
       %i(credit_card billing_address shipping_address).all? do |attr|
         @order.send(attr).valid?
       end
@@ -27,6 +25,7 @@ module CheckoutPage
 
     def place_order
       @order.place_order
+      @order.generate_delivery_code
       @order.save
     end
   end

@@ -5,7 +5,6 @@ module CheckoutPage
                 when :address  then AddCheckoutAddresses
                 when :delivery then AddCheckoutDelivery
                 when :payment  then AddCheckoutPayment
-                when :confirm  then PlaceOrder
                 end
       ActiveRecord::Base.transaction { command.call(params, order, step, &block) }
     end

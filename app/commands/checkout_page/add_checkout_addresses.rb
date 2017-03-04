@@ -3,12 +3,9 @@ module CheckoutPage
     def initialize(params, order, step)
       @params = params
       @order = order
-      @manager = CheckoutManager.new(order, step)
     end
 
     def call
-      return broadcast(:cant_access, @manager.minimal_accessible_step) unless @manager.can_access?
-
       @use_billing = use_billing?
 
       set_billing
@@ -22,7 +19,7 @@ module CheckoutPage
       create_billing
       create_shipping
 
-      broadcast(:ok, @manager.next_step)
+      broadcast(:ok)
     end
 
     private

@@ -29,7 +29,7 @@ feature 'Checkout page:' do
         it 'should show next step' do
           expect(Address.all.count).to eq 0
           click_button I18n.t('simple_form.titles.save_and_continue')
-          expect(page.current_path).to eq checkout_path(:delivery)
+          expect(page).to have_current_path checkout_path(:delivery)
           expect(Address.all.count).to eq 2
         end
       end
@@ -45,7 +45,7 @@ feature 'Checkout page:' do
           expect(Address.all.count).to eq 0
           click_button I18n.t('simple_form.titles.save_and_continue')
 
-          expect(page).to have_current_path checkout_path(:delivery)
+          expect(page.current_path).to eq checkout_path(:delivery)
           expect(ShippingAddress.last.first_name).to eq BillingAddress.last.first_name
           expect(Address.all.count).to eq 2
         end
@@ -175,11 +175,13 @@ feature 'Checkout page:' do
 
       it 'should place order and render complete page only one time' do
         click_on I18n.t('simple_form.titles.place_order')
-        expect(page.current_path).to eq checkout_path(:complete)
-        expect(order.reload.processing?).to eq true
+
+        # will wait for redirection
+        expect(page).to have_current_path checkout_path(:complete)
+
         page.evaluate_script('window.location.reload()')
-        require 'pry'; ::Kernel.binding.pry;
-        expect(page.current_path).to eq cart_path
+        expect(page).to have_current_path cart_path
+        expect(order.reload.processing?).to eq true
       end
     end
   end

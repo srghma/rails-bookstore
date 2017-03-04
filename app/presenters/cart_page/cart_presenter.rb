@@ -26,8 +26,8 @@ module CartPage
 
     def checkout_path
       return @checkout_path if @checkout_path
-      next_step = CheckoutManager.new(current_order).next_step
-      @checkout_path = view_context.checkout_path(next_step)
+      step = CheckoutManager.new(current_order).minimal_accessible_step
+      @checkout_path = view_context.checkout_path(step)
     end
 
     def subtotal

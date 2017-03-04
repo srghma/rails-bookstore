@@ -44,9 +44,10 @@ feature 'Checkout page:' do
           expect(Address.all.count).to eq 0
           click_button I18n.t('simple_form.titles.save_and_continue')
 
+          expect(page).to have_current_path checkout_path(:delivery)
           expect(page.current_path).to eq checkout_path(:delivery)
-          expect(ShippingAddress.last.first_name).to eq BillingAddress.last.first_name
-          expect(Address.all.count).to eq 2
+          expect(Address.all.count).to eq 1
+          expect(order.reload.use_billing).to eq true
         end
       end
 
@@ -70,7 +71,7 @@ feature 'Checkout page:' do
     end
   end
 
-  describe 'Delively' do
+  describe 'Delivery' do
     let(:order) { create :order, :with_items, :with_addresses }
     before { stub_current_order_with(order) }
 

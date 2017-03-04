@@ -40,7 +40,8 @@ module CurrentOrder
 
   # TODO: remove, only for development
   def create_order
-    Rails.env.development? ? create_with_factory : Order.create
+    # Rails.env.development? ? create_with_factory : Order.create
+    Order.create
   end
 
   def create_with_factory

@@ -39,7 +39,8 @@ class CheckoutManager
   end
 
   def has_addresses?
-    @order.billing_address && @order.shipping_address
+    shipping = @order.use_billing ? true : @order.shipping_address
+    @order.billing_address && shipping
   end
 
   def has_delivery?

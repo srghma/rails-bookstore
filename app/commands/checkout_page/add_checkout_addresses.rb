@@ -9,15 +9,16 @@ module CheckoutPage
       @use_billing = use_billing?
 
       set_billing
-      set_shipping
+      set_shipping unless @use_billing
 
-      unless [@billing, @shipping].all?(&:valid?)
+      unless [@billing, @shipping].compact.all?(&:valid?)
         broadcast(:invalid, @billing, @shipping, @use_billing)
         return
       end
 
       create_billing
-      create_shipping
+      create_shipping unless @use_billing
+      save_use_billing
 
       broadcast(:ok)
     end
@@ -29,9 +30,11 @@ module CheckoutPage
     end
 
     def set_shipping
-      @shipping = if @use_billing then @billing
-                  else AddressForm.new params_for_address(:shipping)
-                  end
+      @shipping = AddressForm.new params_for_address(:shipping)
+    end
+
+    def set_shipping
+      @shipping = AddressForm.new params_for_address(:shipping)
     end
 
     def create_billing
@@ -44,8 +47,13 @@ module CheckoutPage
       @order.create_shipping_address(@shipping.attributes)
     end
 
+    def save_use_billing
+      return if @use_billing == @order.use_billing
+      @order.update_attributes(use_billing: true)
+    end
+
     def use_billing?
-      @params[:order][:shipping][:use_billing] == '1'
+      @params[:order][:use_billing] == '1'
     end
 
     def params_for_address(type)

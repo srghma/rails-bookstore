@@ -7,8 +7,6 @@ module CheckoutPage
       super()
     end
 
-    attr_reader :use_billing
-
     def billing
       address(:billing)
     end
@@ -17,12 +15,17 @@ module CheckoutPage
       address(:shipping)
     end
 
+    def use_billing
+      return @use_billing unless @use_billing.nil?
+      current_order.use_billing
+    end
+
     def countries
       Country.order(:name).pluck(:name, :id)
     end
 
     def shipping_fields_style
-      'display: none;' if @use_billing
+      'display: none;' if use_billing
     end
 
     private

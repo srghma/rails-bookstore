@@ -3,8 +3,12 @@ module CheckoutPage
     BR = '<br />'.html_safe.freeze
     STARS = '** ** ** '.freeze
 
-    [:shipping, :billing].map do |type|
-      define_method("#{type}_address") { address(type) }
+    def billing_address
+      @billing_address ||= address(:billing)
+    end
+
+    def shipping_address
+      current_order.use_billing? ? billing_address : address(:shipping)
     end
 
     def shipments

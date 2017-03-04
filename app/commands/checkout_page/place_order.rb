@@ -18,9 +18,9 @@ module CheckoutPage
 
     def order_valid
       return false unless @order.order_items.any? && @order.in_progress?
-      %i(credit_card billing_address shipping_address).all? do |attr|
-        @order.send(attr).valid?
-      end
+      attrs = %i(credit_card billing_address)
+      attrs.push :shipping_address unless @order.use_billing
+      attrs.all? { |attr| @order.send(attr).valid? }
     end
 
     def place_order

@@ -1,0 +1,35 @@
+%h1.mt-0.mb-25 My Orders
+%p.lead.small.mb-10.visible-xs Filter by
+- if presenter.empty?
+  %h2.text-center.mt-10.mb-40 Empty
+- else
+  .dropdown.general-order-dropdown.mb-20
+    %a.dropdown-toggle.dropdown-btn.width-240{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+      = presenter.current_filter_method
+      %i.fa.fa-angle-down.dropdown-icon
+    %ul.dropdown-menu
+      - presenter.filter_methods.each do |filter|
+        %li= link_to filter[:title], { filter: filter[:key] }
+  .hidden-xs.mb-res-50
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600 Number
+          %th
+            %span.in-grey-600 Completed at
+          %th
+            %span.in-grey-600 Status
+          %th
+            %span.in-grey-600 Total
+      %tbody
+        - presenter.orders.each do |order|
+          %tr
+            %td
+              %span.general-order-number= order.number
+            %td
+              %span.in-grey-900.font-16.fw-300= order.completed_at
+            %td
+              %span{class: order.state_classes}= order.state
+            %td
+              %strong.font-16= order.total

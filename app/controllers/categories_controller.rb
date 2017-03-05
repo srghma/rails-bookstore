@@ -12,12 +12,8 @@ class CategoriesController < ApplicationController
         flash[:error] = 'Invalid sort'
       end
 
-      on(:ok) do |books, sort_methods, current_sort_method|
-        present CategoryPage::CategoriesPresenter.new(
-          books:               books,
-          sort_methods:        sort_methods,
-          current_sort_method: current_sort_method
-        )
+      on(:ok) do |*attrs|
+        present CategoryPage::CategoriesPresenter.new(*attrs)
       end
     end
   end

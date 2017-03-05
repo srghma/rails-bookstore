@@ -7,4 +7,12 @@ class OrderItem < ApplicationRecord
     only_integer: true,
     greater_than_or_equal_to: 1
   }
+
+  def subtotal
+    @_subtotal ||= quantity * book.price
+  end
+
+  def to_s
+    "#{quantity} #{book.title}"
+  end
 end

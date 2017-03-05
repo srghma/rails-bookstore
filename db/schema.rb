@@ -127,11 +127,12 @@ ActiveRecord::Schema.define(version: 20170224174654) do
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "delivery_id"
-    t.string   "delivery_hash", default: ""
-    t.boolean  "use_billing",   default: false, null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "state",                         null: false
+    t.string   "number",       default: ""
+    t.datetime "completed_at"
+    t.boolean  "use_billing",  default: false, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "state",                        null: false
     t.index ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end

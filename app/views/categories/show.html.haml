@@ -6,7 +6,7 @@
       %i.fa.fa-angle-down.dropdown-icon
     %ul.dropdown-menu
       - presenter.sort_methods.each do |sort|
-        %li= link_to sort.title, { sort: sort.method }
+        %li= link_to sort[:title], { sort: sort[:key] }
   %ul.list-inline.pt-10.mb-25.mr-240
     - presenter.categories.each do |category|
       %li.mr-35
@@ -29,7 +29,7 @@
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
       - presenter.sort_methods.each do |sort|
-        %li= link_to sort.title, { sort: sort.method }
+        %li= link_to sort[:title], { sort: sort[:key] }
 #books
   = render partial: 'books_grid', locals: { books: presenter.books }
 .text-center.mb-120#paginator

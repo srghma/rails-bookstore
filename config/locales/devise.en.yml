@@ -54,15 +54,15 @@ en:
       user:
         signed_up: :"devise.registrations.signed_up"
         signed_in: :"devise.sessions.signed_in"
-      new_registration:
-        title: 'Returning Customer'
-        message: 'Log In With Password'
-        submit: 'Log In with Password'
-      new_session:
+      quick_registration:
         title: 'New Customer'
         message: 'Quick Register'
         message_small: "You'll be able to create password later"
         submit: 'Continue to Checkout'
+      quick_session:
+        title: 'Returning Customer'
+        message: 'Log In With Password'
+        submit: 'Log In with Password'
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"

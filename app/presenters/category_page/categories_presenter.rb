@@ -1,20 +1,16 @@
 module CategoryPage
   class CategoriesPresenter < Rectify::Presenter
-    SortBy = Struct.new(:method, :title)
-
-    def initialize(books:, sort_methods:, current_sort_method:)
-      super
+    def initialize(books, sort_methods, current_sort_method)
       @books = CategoryPage::BooksDecorator.new(books)
       @sort_methods = sort_methods
       @current_sort_method = current_sort_method
+      super()
     end
 
     attr_reader :books
 
     def sort_methods
-      @_sort_methods ||= @sort_methods.map do |method|
-        SortBy.new(method, t("sort.#{method}"))
-      end
+      @sort_methods.map { |method| { key: method, title: t("sort.#{method}") } }
     end
 
     def current_sort_method

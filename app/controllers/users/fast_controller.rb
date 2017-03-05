@@ -1,13 +1,13 @@
 module Users
   class FastController < DeviseController
     before_action :create_customers
-    prepend_before_action :allow_params_authentication!, only: :new_session
+    prepend_before_action :allow_params_authentication!, only: :quick_session
 
-    def new
-      render 'devise/fast/new'
+    def show
+      render 'devise/fast/show'
     end
 
-    def new_session
+    def quick_session
       user = warden.authenticate(auth_options)
       if user
         sign_in(resource_name, user)
@@ -16,14 +16,14 @@ module Users
       else
         @old_customer = resource_class.new(sign_in_params)
         # TODO: still showing 'has already been taken'
-        @old_customer.skip_email_uniqueness_validation = true
+        # @old_customer.skip_email_uniqueness_validation = true
         @old_customer.valid?
         flash[:error] = t('devise.failure.invalid', authentication_keys: 'email')
-        render 'devise/fast/new'
+        render 'devise/fast/show'
       end
     end
 
-    def new_registration
+    def quick_registration
       @new_customer = resource_class.new(sign_up_params)
       @new_customer.skip_password_validation = true
       if @new_customer.save
@@ -32,7 +32,7 @@ module Users
         url = after_sign_in_path_for(@new_customer)
         redirect_to url
       else
-        render 'devise/fast/new'
+        render 'devise/fast/show'
       end
     end
 

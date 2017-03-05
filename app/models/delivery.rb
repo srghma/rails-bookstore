@@ -15,4 +15,8 @@ class Delivery < ApplicationRecord
   validates :max_days,
             presence: true,
             numericality: { less_than_or_equal_to: 100 }
+
+  def to_s
+    "Delivery #{id}"
+  end
 end

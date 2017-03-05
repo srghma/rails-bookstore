@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  before_create :generate_number
+
   belongs_to :user,     optional: true
   belongs_to :delivery, optional: true
 
@@ -51,8 +53,8 @@ class Order < ApplicationRecord
     item.save ? item : false
   end
 
-  def generate_delivery_hash
-    '#R'.ljust(10, rand.to_s)
+  def generate_number
+    self.number = '#R'.ljust(10, rand.to_s[2..-1])
   end
 
   def to_s

@@ -6,14 +6,14 @@ feature 'Fast authentication:' do
     expect(current_path).to eq user_fast_path
   end
 
-  context 'new_registration' do
+  context 'quick_registration' do
     let(:user) { attributes_for(:user) }
 
     before do
-      within '#new_registration' do
+      within '#quick_registration' do
         fill_in 'user[email]', with: email
       end
-      click_button I18n.t('devise.fast.new_registration.submit')
+      click_button I18n.t('devise.fast.quick_registration.submit')
     end
 
     context 'valid params' do
@@ -30,21 +30,21 @@ feature 'Fast authentication:' do
 
       it 'rerenders page' do
         expect(page.current_path).to eq user_fast_session_path
-        form = find('#new_registration')
+        form = find('#quick_registration')
         expect(form.find('.email .help-block').text).to eq 'is invalid'
       end
     end
   end
 
-  context 'new_session' do
+  context 'quick_session' do
     let(:user) { create(:user) }
 
     before do
-      within '#new_session' do
+      within '#quick_session' do
         fill_in 'user[email]',    with: email
         fill_in 'user[password]', with: password
       end
-      click_button I18n.t('devise.fast.new_session.submit')
+      click_button I18n.t('devise.fast.quick_session.submit')
     end
 
     context 'valid params' do
@@ -63,7 +63,7 @@ feature 'Fast authentication:' do
 
       it 'rerenders page' do
         expect(page.current_path).to eq user_fast_session_path
-        form = find('#new_session')
+        form = find('#quick_session')
         expect(form.find('.email .help-block').text).to eq 'is invalid'
         expect(form.find('.password span.help-block').text).to eq "can't be blank"
       end

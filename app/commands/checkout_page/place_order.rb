@@ -25,7 +25,8 @@ module CheckoutPage
 
     def place_order
       @order.place_order
-      @order.generate_delivery_hash
+      @order.completed_at = Time.current
+      @order.user = current_user
       @order.save
     end
   end

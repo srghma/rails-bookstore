@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # TODO: change, resource fast, only :show, :update
   devise_scope :user do
-    get  '/users/fast', to: 'users/fast#new',              as: :user_fast
-    put  '/users/fast', to: 'users/fast#new_session',      as: :user_fast_session
-    post '/users/fast', to: 'users/fast#new_registration', as: :user_fast_registration
+    get  '/users/fast', to: 'users/fast#show',              as: :user_fast
+    put  '/users/fast', to: 'users/fast#quick_session',     as: :user_fast_session
+    post '/users/fast', to: 'users/fast#quick_registration', as: :user_fast_registration
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -24,10 +24,6 @@ Rails.application.routes.draw do
     delete '/book/:id', to: 'cart#remove_product', as: :cart_remove_product
   end
 
-  resources :orders, only: [:index, :edit]
-
-  resources :order_item, only: [:create, :update, :destroy]
-
   get 'checkout/complete', to: 'checkout#complete', id: 'complete'
   resources :checkout, only: [:show, :update]
 
@@ -35,4 +31,6 @@ Rails.application.routes.draw do
     resource :address, only: [:show, :update]
     resource :profile, only: [:show, :update, :destroy], controller: 'profile'
   end
+
+  resources :orders, only: :index
 end

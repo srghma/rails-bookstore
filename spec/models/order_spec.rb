@@ -12,11 +12,11 @@ RSpec.describe Order, type: :model do
 
   it_behaves_like 'addressable'
 
-  describe '#generate_delivery_hash' do
+  describe '#generate_number' do
     it '...' do
-      hash = Order.new.generate_delivery_hash
-      expect(hash).to start_with('#R')
-      expect(hash.length).to eq 10
+      number = Order.create.number
+      expect(number).to start_with('#R')
+      expect(number.length).to eq 10
     end
   end
 

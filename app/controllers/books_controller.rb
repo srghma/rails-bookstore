@@ -25,4 +25,3 @@ class BooksController < ApplicationController
     params[:id]
   end
 end
-

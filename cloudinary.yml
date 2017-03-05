@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dddbogilk
+  api_key: '758838112249276'
+  api_secret: iyn2KoNaYLaPKknGl1FsuUaAMxQ
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dddbogilk
+  api_key: '758838112249276'
+  api_secret: iyn2KoNaYLaPKknGl1FsuUaAMxQ
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dddbogilk
+  api_key: '758838112249276'
+  api_secret: iyn2KoNaYLaPKknGl1FsuUaAMxQ
+  enhance_image_tag: true
+  static_image_support: false

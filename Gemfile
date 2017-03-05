@@ -38,6 +38,9 @@ gem 'mini_magick'
 
 gem 'rails-assets-tipsy', source: 'https://rails-assets.org'
 
+gem 'factory_girl_rails'
+gem 'ffaker'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
@@ -62,8 +65,6 @@ group :development, :test do
   gem 'capybara-screenshot'
   gem 'email_spec'
   gem 'shoulda-matchers'
-  gem 'factory_girl_rails'
-  gem 'ffaker'
   gem 'database_cleaner'
   gem 'fuubar', require: false
   gem 'show_me_the_cookies'

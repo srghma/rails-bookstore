@@ -1,5 +1,5 @@
-Rake::Task['bookstore:import_countries'].invoke
-Rake::Task['bookstore:import_books'].invoke
+# Rake::Task['bookstore:import_countries'].invoke
+# Rake::Task['bookstore:import_books'].invoke
 
 # create additional books without covers
 Category.find_each do |category|

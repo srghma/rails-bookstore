@@ -1,7 +1,7 @@
 - [:first_name, :last_name, :street, :city, :zip].each do |field|
   = sf.input field
 
-= sf.input :country_id, collection: presenter.countries, selected: 1
+= sf.input :country_id, collection: presenter.countries, selected: presenter.selected_country_id(type)
 
 = sf.input :phone
 

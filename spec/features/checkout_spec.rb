@@ -1,6 +1,7 @@
 feature 'Checkout page:' do
   populate_bookstore
-  before { sign_in create(:user) }
+  let!(:user) { create(:user) }
+  before { sign_in user }
   before { create_list :delivery, 3 }
 
   describe 'Address step' do
@@ -20,8 +21,8 @@ feature 'Checkout page:' do
 
       before do
         within '.edit_order' do
-          fill_address(:billing,  attributes_for(:address), countries.first)
-          fill_address(:shipping, attributes_for(:address), countries.second)
+          fill_address(:order, :billing,  attributes_for(:address), countries.first)
+          fill_address(:order, :shipping, attributes_for(:address), countries.second)
         end
       end
 
@@ -67,6 +68,18 @@ feature 'Checkout page:' do
           expect(page.current_path).to eq checkout_path(:address)
           expect(page).to have_content 'can\'t be blank'
         end
+      end
+    end
+
+    context 'when user have address in profile' do
+      let!(:billing) { create :billing_address, addressable: user }
+      let(:order) { create :order, :with_items }
+      before { stub_current_order_with(order) }
+
+      it 'show billing address from profile' do
+        visit checkout_path(:address)
+        fname = find('.edit_order').find('#order_billing_first_name').value
+        expect(fname).to eq billing.first_name
       end
     end
   end
@@ -185,31 +198,4 @@ feature 'Checkout page:' do
       end
     end
   end
-
-  # describe 'Complete' do
-  #   let(:order) do
-  #     create :order,
-  #            :with_items,
-  #            :with_addresses,
-  #            :with_delivery,
-  #            :with_credit_card,
-  #            state: :processing
-  #   end
-  #   before { stub_current_order_with(order) }
-
-  #   it 'permit you to go to complete page' do
-  #     visit checkout_path(:complete)
-  #     expect(page).to have_current_path checkout_path(:complete)
-  #   end
-
-  #   it 'forbit you to go to other pages' do
-  #     visit checkout_path(:address)
-  #     expect(page).to have_current_path checkout_path(:complete)
-  #   end
-
-  #   it 'forbit you to go to complete page if current_order not ' do
-  #     visit checkout_path(:address)
-  #     expect(page).to have_current_path checkout_path(:complete)
-  #   end
-  # end
 end

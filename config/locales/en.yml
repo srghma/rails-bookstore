@@ -36,6 +36,10 @@ en:
     messages:
       phone: 'Please enter phone number in format +355 66 123 4567'
 
+  books:
+    show:
+      add_to_cart: 'Add to Cart'
+
   checkout:
     failure:
       invalid_step: 'Invalid step'

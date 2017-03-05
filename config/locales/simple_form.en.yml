@@ -37,6 +37,7 @@ en:
         email: 'Enter Email'
         password: 'Password'
         password_confirmation: 'Confirm Password'
+        remove_account: I understand that all data will be lost
       order:
         shipping_address: :"simple_form.labels.address"
         billing_address: :"simple_form.labels.address"
@@ -64,6 +65,7 @@ en:
       sign_up: 'Sign up'
       required_fields: all fields are required
       place_order: Place Order
+      remove_account: Please Remove My Account
 
     # hints:
     #   defaults:

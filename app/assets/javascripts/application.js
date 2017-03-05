@@ -20,3 +20,4 @@
 //= require quantity_widget
 //= require slide_toggle
 //= require data_tipsy
+//= require control_disabled

@@ -1,7 +1,6 @@
 RSpec.shared_examples 'addressable' do
   it { should have_one(:billing_address).dependent(:destroy) }
   it { should have_one(:shipping_address).dependent(:destroy) }
-  it { should have_db_column(:use_billing) }
 
   describe 'addresses' do
     subject do

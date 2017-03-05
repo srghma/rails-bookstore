@@ -13,13 +13,13 @@
           %h3.general-subtitle= t('billing_address')
           %p.general-info-text= t('simple_form.titles.required_fields')
         = f.simple_fields_for :billing, presenter.billing do |sf|
-          = render partial: 'address_fields', locals: { sf: sf }
+          = render partial: 'address_fields', locals: { sf: sf, type: :billing }
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle= t('shipping_address')
         = f.simple_fields_for :shipping, presenter.shipping do |sf|
           #shipping_address_fields{style: presenter.shipping_fields_style}
-            = render partial: 'address_fields', locals: { sf: sf }
+            = render partial: 'address_fields', locals: { sf: sf, type: :shipping }
         = fields_for 'order' do |ub|
           .form-group.checkbox{'data-slide-toggle-for': '#shipping_address_fields'}
             %label.font-weight-light.pl-0

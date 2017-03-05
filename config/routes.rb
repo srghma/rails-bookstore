@@ -10,11 +10,7 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  resources :books, only: :show do
-    member do
-      post :add_to_cart
-    end
-  end
+  resources :books, only: [:show, :update]
 
   scope path: 'categories' do
     get '/',    to: 'categories#show', as: :categories

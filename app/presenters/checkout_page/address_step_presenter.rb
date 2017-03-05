@@ -20,6 +20,10 @@ module CheckoutPage
       current_order.use_billing
     end
 
+    def selected_country_id(type)
+      send(type).country_id || 1
+    end
+
     def countries
       Country.order(:name).pluck(:name, :id)
     end
@@ -33,6 +37,7 @@ module CheckoutPage
     def address(type)
       instance_variable_get("@#{type}_form")  ||
         current_order.send("#{type}_address") ||
+        current_user.send("#{type}_address")  ||
         "#{type.capitalize}Address".constantize.new
     end
   end

@@ -7,7 +7,7 @@ class BooksController < ApplicationController
     present BookPage::BookPresenter.new(book: @book, quantity: current_quantity)
   end
 
-  def add_to_cart
+  def update
     form = ProductForm.from_params(params)
     BookPage::AddToCart.call(form) do
       on(:invalid_product, :invalid_quantity) do |errors|

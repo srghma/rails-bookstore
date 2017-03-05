@@ -1,0 +1,46 @@
+= render layout: 'settings/shared/layout' do
+  .row.mb-60
+    .col-sm-5
+      %p.in-gold-500.font-18.mb-25 Email
+      = form_for current_user,
+                 url: settings_profile_path,
+                 method: :put,
+                 html: { id: 'edit_email' } do |f|
+        = f.simple_fields_for :email_form, presenter.email_form do |sf|
+          = sf.input :email
+          .general-text-align
+            = sf.submit t('simple_form.titles.save'), class: 'btn btn-default mb-20'
+
+    .col-sm-5.col-sm-offset-1
+      %p.in-gold-500.font-18.mb-25 Password
+      = form_for current_user,
+                 url: settings_profile_path,
+                 method: :put,
+                 html: { id: 'edit_password' } do |f|
+        = f.simple_fields_for :password_form, presenter.password_form do |sf|
+          = sf.input :current_password
+          = sf.input :password
+          = sf.input :password_confirmation
+        .general-text-align
+          = f.submit t('simple_form.titles.save'), class: 'btn btn-default mb-20'
+
+    .col-sm-12
+      %p.in-gold-500.font-18.mb-25 Remove Account
+      = form_for current_user,
+                 url: settings_profile_path,
+                 method: :delete,
+                 html: { id: 'remove_account' } do |f|
+        .general-settings-btn
+          = f.submit t('simple_form.titles.remove_account'),
+            class: 'btn btn-default mb-20',
+            disabled: true,
+            id: 'remove_account_btn'
+        .form-group.checkbox{'data-control-disabled-for': '#remove_account_btn'}
+          %label.font-weight-light.pl-0
+            = f.check_box 'confirm',
+              checked: false,
+              class: 'checkbox-input',
+              hidden: true
+            %span.checkbox-icon
+              %i.fa.fa-check
+            %span.checkbox-text= t('simple_form.labels.user.remove_account')

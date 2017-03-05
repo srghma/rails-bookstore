@@ -8,6 +8,7 @@ RSpec.describe Order, type: :model do
     it { should have_one(:credit_card).dependent(:destroy) }
     it { should have_many(:order_items).dependent(:destroy) }
   end
+  it { should have_db_column(:use_billing) }
 
   it_behaves_like 'addressable'
 

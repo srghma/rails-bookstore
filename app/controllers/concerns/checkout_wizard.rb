@@ -17,8 +17,6 @@ module CheckoutWizard
     @manager = CheckoutManager.new(current_order)
   end
 
-  alias update_manager set_manager
-
   def finish_wizard_path
     checkout_path(:complete)
   end

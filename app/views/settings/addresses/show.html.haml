@@ -1,0 +1,10 @@
+= render layout: 'settings/shared/layout' do
+  .hidden-xs.hidden-sm
+    .row
+      .col-md-5
+        %h3.general-subtitle= t('billing_address')
+      .col-md-5.col-md-offset-1
+        %h3.general-subtitle= t('shipping_address')
+  .row
+    = render partial: 'address', locals: { type: :billing }
+    = render partial: 'address', locals: { type: :shipping }

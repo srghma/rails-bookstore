@@ -22,7 +22,8 @@ module CheckoutPage
     end
 
     def address
-      CheckoutPage::AddressDecorator.new(@order.shipping_address).to_html
+      address = @order.use_billing ? @order.billing_address : @order.shipping_address
+      CheckoutPage::AddressDecorator.new(address).to_html
     end
   end
 end

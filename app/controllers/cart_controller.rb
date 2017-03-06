@@ -3,17 +3,20 @@ class CartController < ApplicationController
 
   def edit
     present CartPage::CartPresenter.new
+    present SummaryPresenter.new(current_order, current_order.coupon), for: :summary
   end
 
   def update
-    @cart = CartForm.from_params(params)
-    CartPage::UpdateCart.call(@cart) do
+    CartPage::UpdateCart.call(params, current_order) do
       on(:invalid_coupon)  { flash[:error] = 'Invalid coupon code' }
       on(:invalid_product) { flash[:error] = 'Invalid product quantity' }
-      on(:ok)              { flash[:success] = 'Cart was updated successfully' }
+      on(:validate) do |*attr|
+        present SummaryPresenter.new(current_order), for: :summary
+        present CartPage::CartPresenter.new(*attr)
+        render 'edit'
+      end
+      on(:ok) { redirect_to cart_path, flash: { success: 'Cart was updated successfully'  } }
     end
-    present CartPage::CartPresenter.new(@cart)
-    render :edit
   end
 
   def remove_product

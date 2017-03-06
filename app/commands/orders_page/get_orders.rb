@@ -2,7 +2,6 @@ module OrdersPage
   class GetOrders < Rectify::Command
     FILTERS = [
       :all,
-      :in_progress,
       :processing,
       :in_delivery,
       :delivered

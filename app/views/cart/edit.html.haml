@@ -14,27 +14,9 @@
             - if presenter.coupon.helper?
               %span.help-block= presenter.coupon.helper
           %div
-            -# %button.btn.btn-primary.mr-5.mb-15.visible-xs-inline-block Apply Coupon
             = button_tag 'Update Cart', class: 'btn btn-primary mt-30 mb-15 res-block'
       .col-sm-8
-        .text-center.general-text-right
-          %p.in-gold-500.font-18 Order Summary
-          %table.general-summary-table.general-summary-table-right.general-text-right
-            %tr
-              %td
-                %p.font-16 Subtotal:
-              %td
-                %p.font-16= presenter.subtotal
-            %tr
-              %td
-                %p.font-16 Coupon:
-              %td
-                %p.font-16= presenter.saved
-            %tr
-              %td
-                %strong.font-18 Order Total:
-              %td
-                %strong.font-18= presenter.order_total
-          = link_to 'Checkout', presenter.checkout_path, class: 'btn btn-default mb-20 visible-xs-inline-block'
+        = render partial: 'orders/summary'
+        = link_to 'Checkout', presenter.checkout_path, class: 'btn btn-default mb-20 visible-xs-inline-block'
 - unless presenter.cart_empty?
   = button_to 'Checkout', presenter.checkout_path, method: :get, class: 'btn btn-default mb-20 hidden-xs center-block'

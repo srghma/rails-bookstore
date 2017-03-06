@@ -57,6 +57,10 @@ class Order < ApplicationRecord
     self.number = '#R'.ljust(10, rand.to_s[2..-1])
   end
 
+  def subtotal
+    @_subtotal ||= order_items.inject(0) { |sum, item| sum + item.subtotal }
+  end
+
   def to_s
     "Order #{id}"
   end

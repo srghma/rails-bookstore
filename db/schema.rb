@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170224174654) do
     t.text     "description",                              default: ""
     t.decimal  "price",            precision: 8, scale: 2,              null: false
     t.integer  "publication_year"
+    t.integer  "in_stock",                                              null: false
     t.string   "materials"
     t.float    "height"
     t.float    "width"

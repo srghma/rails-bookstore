@@ -1,7 +1,8 @@
 module CartPage
   class CartPresenter < Rectify::Presenter
-    def initialize(cart_form = nil)
-      @cart_form = cart_form
+    def initialize(coupon_form = nil, products_form = nil)
+      @coupon_form = coupon_form
+      @products_form = products_form
     end
 
     def products
@@ -17,8 +18,8 @@ module CartPage
 
     def coupon
       @coupon ||= begin
-        code = @cart_form&.coupon&.code || current_order.coupon&.code
-        errors = @cart_form&.coupon&.errors
+        code = @coupon_form&.code || current_order.coupon&.code
+        errors = @coupon_form&.errors
 
         CartPage::CouponDecorator.new(code, errors)
       end
@@ -30,47 +31,15 @@ module CartPage
       @checkout_path = view_context.checkout_path(step)
     end
 
-    def subtotal
-      number_to_currency(_subtotal)
-    end
-
-    def saved
-      number_to_currency(_saved)
-    end
-
-    def order_total
-      number_to_currency(_subtotal - _saved)
-    end
-
     def cart_empty?
       current_order.order_items.empty?
     end
 
     private
 
-    def _saved
-      return 0 unless coupon_valid
-      @_saved ||= discount ? (_subtotal * discount / 100) : 0
-    end
-
-    def _subtotal
-      @_subtotal ||= products.inject(0) do |sum, product|
-        sum + product._subtotal
-      end
-    end
-
-    def coupon_valid
-      valid = @cart_form&.valid?(:coupon_code)
-      valid.nil? || valid == true
-    end
-
     def find_product_in_cart(id)
-      return nil unless @cart_form
-      @cart_form.products.detect { |product| product.id == id }
-    end
-
-    def discount
-      @discount ||= current_order.coupon&.discount
+      return nil unless @products_form
+      @products_form.detect { |product| product.id == id }
     end
   end
 end

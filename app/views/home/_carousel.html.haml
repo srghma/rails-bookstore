@@ -1,0 +1,28 @@
+#slider.carousel.slide{ 'data-ride': "carousel"}
+  %ol.carousel-indicators.general-carousel-indicators
+    - books.each do |book|
+      %li{class: book.active_class, 'data-target': "#slider", 'data-slide-to': book.index}
+  .carousel-inner{ role: "listbox"}
+    - books.each do |book|
+      .item{class: book.active_class}
+        .row
+          .col-sm-5
+            .general-img-wrap
+              = image_tag book.cover, class: 'img-shadow general-thumbnail-img width-full'
+          .col-sm-7
+            .mb-60
+              %h1= book.title
+              %p.lead= book.description
+              %p.in-grey-600.small= book.authors_names
+              .general-align.pt-20
+                = link_to t('.but_now'),
+                  cart_add_product_path(book),
+                  method: :post,
+                  remote: true,
+                  class: "btn btn-default #{book.disabled_class}"
+  %a.left.carousel-control{ href: "#slider", role: "button", 'data-slide': "prev"}
+    %span.icon-prev{ 'aria-hidden': "true"}
+    %span.sr-only Previous
+  %a.right.carousel-control{ href: "#slider", role: "button", 'data-slide': "next"}
+    %span.icon-next{ 'aria-hidden': "true"}
+    %span.sr-only Next

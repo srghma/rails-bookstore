@@ -3,6 +3,7 @@ FactoryGirl.define do
     title            { FFaker::Book.title }
     description      { FFaker::Book.description }
     price            { FFaker.numerify('#.##') }
+    in_stock         { rand(10) }
     height           { FFaker.numerify('#.#') }
     width            { FFaker.numerify('#.#') }
     depth            { FFaker.numerify('#.#') }

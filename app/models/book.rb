@@ -6,8 +6,20 @@ class Book < ApplicationRecord
   has_many :order_items, dependent: :destroy
 
   validates :title, presence: true
-  validates :price, numericality: { greater_than_or_equal_to: 0.00 }, presence: true
   validates :description, length: { maximum: 500 }
+
+  validates :price,
+            presence: true,
+            numericality: {
+              greater_than_or_equal_to: 0.00
+            }
+
+  validates :in_stock,
+            presence: true,
+            numericality: {
+              only_integer: true,
+              greater_than_or_equal_to: 0
+            }
 
   before_save do
     materials&.capitalize!
@@ -20,5 +32,9 @@ class Book < ApplicationRecord
 
   def to_s
     title
+  end
+
+  def in_stock?
+    in_stock.positive?
   end
 end

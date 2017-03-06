@@ -1,6 +1,9 @@
 # Rake::Task['bookstore:import_countries'].invoke
 # Rake::Task['bookstore:import_books'].invoke
 
+raise 'Category table is empty, run bookstore:import_books to populate categories first'\
+  if Category.all.empty?
+
 # create additional books without covers
 Category.find_each do |category|
   FactoryGirl.create_list(:book, 3, :with_authors, category: category)

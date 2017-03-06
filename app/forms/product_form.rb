@@ -8,9 +8,10 @@ class ProductForm < Rectify::Form
     greater_than_or_equal_to: 1
   }
 
-  validate :check_existence
+  validate :check_product_id
 
-  def check_existence
-    errors.add(:base, 'product doesn\'t exist') unless Book.exists?(id)
+  def check_product_id
+    return if context.order.order_items.find_by(book_id: id)
+    errors.add(:id, 'doesn\'t exist')
   end
 end

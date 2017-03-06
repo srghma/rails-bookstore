@@ -4,7 +4,7 @@ class CartController < ApplicationController
   before_action :set_summary_presenter
 
   def edit
-    present CartPage::CartPresenter.new
+    present CartPage::CartPresenter.new(current_order)
   end
 
   def update

@@ -18,14 +18,17 @@ module CartPage
 
     def set_products
       products = @params[:products]&.values
-      @products = products&.map { |product| ProductForm.new(product) }
+      @products = products&.map do |product|
+        ProductForm.new(product).with_context(order: @order)
+      end
     end
 
+    # never, never make like here, always your views must be representations of your models
     def update_products
-      @products.each do |product|
-        item = @order.order_items.find_by(book_id: product.id)
-        item.update(quantity: product.quantity)
-      end
+      book_ids = @products.map(&:id)
+      attributes = @products.map(&:attributes)
+      require 'pry'; ::Kernel.binding.pry;
+      @order.order_items.update(ids, attributes)
     end
   end
 end

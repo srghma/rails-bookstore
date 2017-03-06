@@ -1,12 +1,5 @@
 module CartPage
-  class CouponDecorator
-    def initialize(code, errors)
-      @code = code
-      @errors = errors
-    end
-
-    attr_reader :code
-
+  class CouponDecorator < SimpleDelegator
     def error_class
       'has-error' if error_message
     end
@@ -22,7 +15,7 @@ module CartPage
     private
 
     def error_message
-      @error_message ||= @errors&.full_messages_for(:code)&.first
+      @error_message ||= __getobj__.errors&.full_messages_for(:code)&.first
     end
   end
 end

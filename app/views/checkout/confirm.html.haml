@@ -17,5 +17,6 @@
       = presenter.edit_link(:payment)
       %p.general-address= presenter.payment
   = render partial: 'products/table', locals: { products: presenter.products }
+  = render partial: 'orders/summary'
   .text-center
     = link_to t('simple_form.titles.place_order'), checkout_path(:complete), class: 'btn btn-default mb-20'

@@ -1,25 +1,17 @@
 = render layout: 'checkout/layout' do
   .text-center.mb-40
-    %h3.general-subtitle Thank You for your Order!
-    %p.fw-300 An order confirmation has been has been sent to John Doe0411@gmail.com
+    %h3.general-subtitle= t('.thankyou')
+    %p.fw-300= t('.sent_to', email: presenter.email)
   .row.mb-20
     .col-sm-6
       .visible-xs
-        %p.general-order-number.mb-0 Order #R25314582
-        %p.general-address.mb-30 October 29, 2016
-      %p.general-address
-        John Doe
-        %br
-        44 Fifth Ave v231
-        %br
-        New York NY 1001
-        %br
-        United States
-        %br
-        Phone +16507599755
+        %p.general-order-number.mb-0= presenter.order_number
+        %p.general-address.mb-30= presenter.order_date
+      %p.general-address= presenter.address
     .col-sm-6.hidden-xs.text-right
-      %p.general-order-number.mb-0 Order #R25314582
-      %p.general-address.mb-30 October 29, 2016
+      %p.general-order-number.mb-0= presenter.order_number
+      %p.general-address.mb-30= presenter.order_date
 
   = render partial: 'products/table', locals: { products: presenter.products }
+  = render partial: 'orders/summary'
 

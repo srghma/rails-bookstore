@@ -72,7 +72,7 @@ feature 'Settings profile page:' do
       click_checkbox
       page.execute_script("$('#remove_account_btn').click()")
       expect(page).to have_current_path root_path
-      expect(User.exists?(user)).to be false
+      expect(User.exists?(user.id)).to be false
     end
   end
 end

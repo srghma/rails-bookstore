@@ -10,8 +10,6 @@ module CartPage
       products_result = @products_updater.call
       return broadcast(:ok) if coupon_result && products_result
 
-      p coupon_result
-      p products_result
       broadcast(:invalid_coupon) unless coupon_result
       broadcast(:invalid_product) unless products_result
       broadcast(:validate, @coupon_updater.coupon, @products_updater.products)

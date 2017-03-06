@@ -13,7 +13,7 @@
             = sf.input_field :cvv, class: 'form-control', as: :string
             %i.fa.fa-question-circle.general-form-help.font-18{'data-tipsy': true, 'title': t('checkout.cvv-help')}
     .general-text-align
-      = render partial: 'order_summary'
+      = render partial: 'orders/summary'
     .text-center
       = f.submit t('simple_form.titles.save_and_continue'),
         class: 'btn btn-default center-block mb-20'

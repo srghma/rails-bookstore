@@ -1,9 +1,10 @@
 class CartController < ApplicationController
   respond_to :js, only: [:add_product]
 
+  before_action :set_summary_presenter
+
   def edit
     present CartPage::CartPresenter.new
-    present SummaryPresenter.new(current_order, current_order.coupon), for: :summary
   end
 
   def update
@@ -11,7 +12,6 @@ class CartController < ApplicationController
       on(:invalid_coupon)  { flash[:error] = 'Invalid coupon code' }
       on(:invalid_product) { flash[:error] = 'Invalid product quantity' }
       on(:validate) do |*attr|
-        present SummaryPresenter.new(current_order), for: :summary
         present CartPage::CartPresenter.new(*attr)
         render 'edit'
       end
@@ -33,5 +33,11 @@ class CartController < ApplicationController
         return
       end
     end
+  end
+
+  private
+
+  def set_summary_presenter
+    present SummaryPresenter.new(current_order, deficit_method: :show_zero), for: :summary
   end
 end

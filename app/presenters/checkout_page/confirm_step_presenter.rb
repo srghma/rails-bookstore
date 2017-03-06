@@ -1,14 +1,22 @@
 module CheckoutPage
   class ConfirmStepPresenter < Rectify::Presenter
-    BR = '<br />'.html_safe.freeze
     STARS = '** ** ** '.freeze
+    BR = '<br />'.html_safe.freeze
 
     def billing_address
-      @billing_address ||= address(:billing)
+      @billing_address ||= CheckoutPage::AddressDecorator
+                           .new(current_order.billing_address)
+                           .to_html
     end
 
     def shipping_address
-      current_order.use_billing? ? billing_address : address(:shipping)
+      if current_order.use_billing?
+        billing_address
+      else
+        CheckoutPage::AddressDecorator
+          .new(current_order.shipping_address)
+          .to_html
+      end
     end
 
     def shipments
@@ -31,26 +39,6 @@ module CheckoutPage
 
     def edit_link(step)
       link_to t('checkout.edit'), wizard_path(step), class: 'general-edit'
-    end
-
-    private
-
-    def address(type)
-      address = current_order.send("#{type}_address")
-
-      full_name = attributes(%i(first_name last_name), address)
-      middle = attributes(%i(street city), address, BR)
-      country = address.country.name
-
-      phone_label = t('simple_form.labels.address.phone')
-      phone = safe_join([phone_label, address.phone], ' ')
-
-      safe_join([full_name, middle, country, phone], BR)
-    end
-
-    def attributes(attrs, target, joiner = ' ')
-      attrs.map! { |name| target.send(name) }
-      safe_join(attrs, joiner)
     end
   end
 end

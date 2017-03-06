@@ -8,5 +8,21 @@ module CheckoutPage
       @products ||= CheckoutPage::ProductDecorator
                     .for_collection(@order.order_items)
     end
+
+    def email
+      current_user.email
+    end
+
+    def order_number
+      @order.number
+    end
+
+    def order_date
+      @order.completed_at.strftime('%B %d, %Y')
+    end
+
+    def address
+      CheckoutPage::AddressDecorator.new(@order.shipping_address).to_html
+    end
   end
 end

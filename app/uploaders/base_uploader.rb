@@ -1,8 +1,10 @@
 class BaseUploader < CarrierWave::Uploader::Base
-  include Cloudinary::CarrierWave
+  include CarrierWave::MiniMagick
+
+  process convert: 'jpg'
 
   if Rails.env.production?
-    include CarrierWave::MiniMagick
+    storage :dropbox
   else
     storage :file
 

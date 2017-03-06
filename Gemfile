@@ -34,8 +34,9 @@ gem 'wicked'
 gem 'credit_card_validations'
 
 gem 'carrierwave'
+gem 'carrierwave-dropbox'
 gem 'mini_magick'
-gem 'cloudinary'
+# gem 'cloudinary'
 
 gem 'rails-assets-tipsy', source: 'https://rails-assets.org'
 

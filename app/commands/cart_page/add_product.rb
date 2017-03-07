@@ -2,7 +2,7 @@ module CartPage
   class AddProduct < Rectify::Command
     def initialize(params)
       @product_id = params[:id]
-      @quantity = 1
+      @quantity = params[:quantity] || 1
     end
 
     def call

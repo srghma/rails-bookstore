@@ -2,19 +2,23 @@
   .row.mb-20
     .col-sm-3
       %h3.general-subtitle= t('shipping_address')
-      = presenter.edit_link(:address)
+      - presenter.edit_link?
+        = presenter.edit_link(:address)
       %p.general-address= presenter.shipping_address
     .col-sm-3
       %h3.general-subtitle= t('billing_address')
-      = presenter.edit_link(:address)
+      - presenter.edit_link?
+        = presenter.edit_link(:address)
       %p.general-address= presenter.billing_address
     .col-sm-3
       %h3.general-subtitle= t('shipments')
-      = presenter.edit_link(:delivery)
+      - presenter.edit_link?
+        = presenter.edit_link(:delivery)
       %p.general-address= presenter.shipments
     .col-sm-3
       %h3.general-subtitle= t('payment_information')
-      = presenter.edit_link(:payment)
+      - presenter.edit_link?
+        = presenter.edit_link(:payment)
       %p.general-address= presenter.payment
   = render partial: 'order_item/table', locals: { items: presenter.items }
   = render partial: 'orders/summary'

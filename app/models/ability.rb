@@ -13,6 +13,7 @@ class Ability
       else
         can :crud, [BillingAddress, ShippingAddress]
         can :rud, User, id: user.id
+        can :read, Order, user_id: user.id
       end
     end
 

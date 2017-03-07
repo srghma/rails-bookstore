@@ -26,7 +26,7 @@
         - presenter.orders.each do |order|
           %tr
             %td
-              %span.general-order-number= order.number
+              = link_to order.number, order, class: 'general-order-number'
             %td
               %span.in-grey-900.font-16.fw-300= order.completed_at
             %td

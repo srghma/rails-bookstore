@@ -29,5 +29,5 @@ Rails.application.routes.draw do
     resource :profile, only: %i(show update destroy), controller: 'profile'
   end
 
-  resources :orders, only: :index
+  resources :orders, only: %i(index show)
 end

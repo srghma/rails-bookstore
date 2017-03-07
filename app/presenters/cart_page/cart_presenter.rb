@@ -3,14 +3,10 @@ module CartPage
     def initialize(order, coupon = nil)
       @order = order
       @coupon = CartPage::CouponDecorator.new(coupon || order.coupon || Coupon.new)
-      @items = order.order_items
+      @items = CartPage::ItemDecorator.for_collection(order.order_items)
     end
 
-    attr_reader :coupon
-
-    def products
-      @products ||= CartPage::ProductDecorator.for_collection(@items)
-    end
+    attr_reader :coupon, :items
 
     def checkout_path
       return @checkout_path if @checkout_path

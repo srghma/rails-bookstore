@@ -1,5 +1,5 @@
-class ProductForm < Rectify::Form
-  mimic Book
+class OrderItemForm < Rectify::Form
+
   attribute :quantity, Integer
   attribute :id, Integer
 
@@ -8,10 +8,10 @@ class ProductForm < Rectify::Form
     greater_than_or_equal_to: 1
   }
 
-  validate :check_product_id
+  validate :check_id
 
   def check_product_id
-    return if context.order.order_items.find_by(book_id: id)
+    return if context.order.order_items.find_by(id: id)
     errors.add(:id, 'doesn\'t exist')
   end
 end

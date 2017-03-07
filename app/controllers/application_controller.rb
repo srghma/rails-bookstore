@@ -8,10 +8,16 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |_|
-    redirect_to '/', alert: t('auth.access_denied')
+    redirect_to '/', alert: t('auth.access_denied'), status: :unauthorised
   end
 
   def not_found
     raise ActionController::RoutingError, 'Not Found'
+  end
+
+  private
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, current_order)
   end
 end

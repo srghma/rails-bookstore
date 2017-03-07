@@ -1,5 +1,5 @@
 module CartPage
-  class ProductDecorator < SimpleDelegator
+  class ItemDecorator < SimpleDelegator
     include ViewHelpers
     include BookCoverHelpers
 
@@ -12,9 +12,8 @@ module CartPage
       super(order_item.book)
     end
 
-    def quantity
-      @order_item.quantity
-    end
+    attr_reader :order_item
+    delegate :id, :quantity, to: :order_item
 
     def show_remove
       true
@@ -22,10 +21,6 @@ module CartPage
 
     def quantity_editable?
       true
-    end
-
-    def order_item_id
-      @order_item.id
     end
 
     def cover

@@ -44,7 +44,7 @@ feature 'Cart page:' do
       page.execute_script("$('.quantity-input').first().val(#{new_quantity})")
       click_button 'Update Cart'
       expect(page).to have_content 'Cart was updated successfully'
-      expect(order.order_items.first.quantity).to eq new_quantity
+      expect(order.reload.order_items.first.quantity).to eq new_quantity
     end
 
     it 'dont change items quantity if invalid' do
@@ -55,6 +55,12 @@ feature 'Cart page:' do
       click_button 'Update Cart'
       expect(page).not_to have_content 'Cart was updated successfully'
       expect(target.reload.quantity).to eq old_quantity
+    end
+
+    it 'can remove items' do
+      expect do
+        first('.close').click
+      end.to change { OrderItem.count }.by(-1)
     end
   end
 end

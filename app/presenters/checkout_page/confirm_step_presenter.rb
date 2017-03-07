@@ -32,8 +32,8 @@ module CheckoutPage
       safe_join [number, date], BR
     end
 
-    def products
-      @products ||= CheckoutPage::ProductDecorator
+    def items
+      @items ||= CheckoutPage::ItemDecorator
                     .for_collection(current_order.order_items)
     end
 

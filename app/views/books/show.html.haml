@@ -20,7 +20,7 @@
         %p.h1.in-gold-500.mt-10= presenter.book.price
       = form_tag book_path(presenter.book), method: :put do
         .col-xs-5.col-md-3
-          .input-group.general-position{data: {quantity: true}}
+          .input-group.general-position{class: presenter.book.error_class, data: {quantity: true}}
             %a.input-link{href: "#"}
               %i.fa.fa-minus.line-height-40
             = text_field_tag :quantity, presenter.quantity, class: 'form-control quantity-input'

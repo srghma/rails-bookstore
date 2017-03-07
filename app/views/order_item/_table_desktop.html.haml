@@ -11,7 +11,6 @@
       %span.in-grey-600 SubTotal
     %th.col-close
   - items.each do |item|
-    - require 'pry'; binding.pry;
     = fields_for 'items[]', item do |item_fields|
       %tr
         %td
@@ -35,5 +34,5 @@
           %span.font-16.in-gold-500= item.subtotal
         - if item.show_remove
           %td
-            = link_to order_item_path(id: item.id), method: :delete, class: 'close general-cart-close' do
+            = link_to order_item_path(item), method: :delete, class: 'close general-cart-close' do
               %span{'aria-hidden': "true"} &times;

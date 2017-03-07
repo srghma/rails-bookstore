@@ -11,18 +11,9 @@ module CartPage
       items_result = @items_updater.call
       return broadcast(:ok) if coupon_result && items_result
 
-      write_errors_products
-
       broadcast(:invalid_coupon) unless coupon_result
       broadcast(:invalid_product) unless items_result
-      broadcast(:validate, @order, @coupon_updater.coupon)
-    end
-
-    def write_errors_products
-      @order.order_items.zip(@items_updater.items) do |order_item, item|
-        item.errors.each { |k, v| order_item.errors.add(k, v) }
-        order_item.quantity = item.quantity
-      end
+      broadcast(:validate, @order, @coupon_updater.coupon, @items_updater.items)
     end
   end
 end

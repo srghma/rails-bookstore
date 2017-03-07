@@ -13,7 +13,7 @@ module CartPage
     end
 
     attr_reader :order_item
-    delegate :id, :quantity, to: :order_item
+    delegate :id, :quantity, :to_param, to: :order_item
 
     def show_remove
       true

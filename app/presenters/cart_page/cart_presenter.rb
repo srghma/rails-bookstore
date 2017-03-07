@@ -1,9 +1,9 @@
 module CartPage
   class CartPresenter < Rectify::Presenter
-    def initialize(order, coupon = nil)
+    def initialize(order, coupon = nil, items = nil)
       @order = order
       @coupon = CartPage::CouponDecorator.new(coupon || order.coupon || Coupon.new)
-      @items = CartPage::ItemDecorator.for_collection(order.order_items)
+      @items = CartPage::ItemDecorator.for_collection(items || order.order_items)
     end
 
     attr_reader :coupon, :items

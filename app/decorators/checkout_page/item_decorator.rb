@@ -1,5 +1,5 @@
 module CheckoutPage
-  class ProductDecorator < SimpleDelegator
+  class ItemDecorator < SimpleDelegator
     include ViewHelpers
     include BookCoverHelpers
 

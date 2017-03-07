@@ -1,27 +1,27 @@
 class BooksController < ApplicationController
-  load_and_authorize_resource only: [:show]
+  before_action :load_and_authorize_book
 
   def show
-    item = current_order.order_items.find_by(book: @book)
-    current_quantity = item&.quantity || 1
-    present BookPage::BookPresenter.new(book: @book, quantity: current_quantity)
+    quantity = current_order.order_items.find_by(book_id: @book.id)&.quantity
+    present BookPage::BookPresenter.new(@book, quantity)
   end
 
   def update
-    form = ProductForm.from_params(params)
-    BookPage::AddToCart.call(form) do
-      on(:invalid_product, :invalid_quantity) do |errors|
-        flash[:error] = errors.first
+    BookPage::AddToCart.call(@book, params) do
+      on(:invalid) do |quantity|
+        present BookPage::BookPresenter.new(@book, quantity, valid: false)
+        render 'show'
       end
-      on(:ok) { flash[:notice] = 'Book was added' }
+      on(:ok) { redirect_to book_path(@book), flash: { success: 'Book was added' } }
     end
-
-    redirect_to book_path(id)
   end
 
   private
 
-  def id
-    params[:id]
+  def load_and_authorize_book
+    @book = Book.find(params[:id])
+    authorize! :read, @book
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, flash: { error: 'Book not found' }
   end
 end

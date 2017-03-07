@@ -1,7 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user, order)
+  def initialize(user, order = nil)
     alias_action :create, :read, :update, :destroy, to: :crud
     alias_action :read, :update, :destroy, to: :rud
 
@@ -20,8 +20,7 @@ class Ability
     can :read, Category
     can :read, Author
     can [:update, :destroy], OrderItem do |item|
-      require 'pry'; ::Kernel.binding.pry;
-      item.order == order
+      order && item.order == order
     end
   end
 end

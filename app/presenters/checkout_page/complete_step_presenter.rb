@@ -4,8 +4,8 @@ module CheckoutPage
       @order = order
     end
 
-    def products
-      @products ||= CheckoutPage::ProductDecorator
+    def items
+      @items ||= CheckoutPage::ItemDecorator
                     .for_collection(@order.order_items)
     end
 

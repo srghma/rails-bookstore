@@ -5,6 +5,11 @@ module BookPage
     include BookAuthorsNames
     include ViewHelpers
 
+    def initialize(book, valid)
+      @valid = valid
+      super book
+    end
+
     def primary_cover
       covers.first || CoverUploader.new.default_url
     end
@@ -19,6 +24,10 @@ module BookPage
 
     def price
       helpers.number_to_currency(__getobj__.price)
+    end
+
+    def error_class
+      'has-error' unless @valid
     end
 
     private

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do |_|
-    redirect_to '/', alert: t('auth.access_denied'), status: :unauthorised
+    redirect_to '/', alert: t('auth.access_denied')
   end
 
   def not_found

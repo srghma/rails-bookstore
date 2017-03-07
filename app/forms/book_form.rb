@@ -1,5 +1,4 @@
-class OrderItemForm < Rectify::Form
-
+class BookForm < Rectify::Form
   attribute :quantity, Integer
   attribute :id, Integer
 
@@ -10,8 +9,8 @@ class OrderItemForm < Rectify::Form
 
   validate :check_id
 
-  def check_product_id
-    return if context.order.order_items.find_by(id: id)
+  def check_id
+    return if Book.exists?(id)
     errors.add(:id, 'doesn\'t exist')
   end
 end

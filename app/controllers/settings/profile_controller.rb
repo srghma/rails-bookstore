@@ -6,7 +6,10 @@ module Settings
 
     def update
       SettingsPage::UpdateProfile.call(params, current_user) do
-        on(:invalid) do |*attrs|
+        on(:invalid) do
+          redirect_to settings_profile_path, flash: { error: 'Invalid request' }
+        end
+        on(:validate) do |*attrs|
           present SettingsPage::ProfilePresenter.new(*attrs)
           render 'show'
         end

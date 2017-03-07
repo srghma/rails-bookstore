@@ -18,7 +18,8 @@
                  method: :put,
                  html: { id: 'edit_password' } do |f|
         = f.simple_fields_for :password_form, presenter.password_form do |sf|
-          = sf.input :current_password
+          - if presenter.show_current_password
+            = sf.input :current_password
           = sf.input :password
           = sf.input :password_confirmation
         .general-text-align

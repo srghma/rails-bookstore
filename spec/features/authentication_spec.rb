@@ -42,7 +42,7 @@ feature 'Authentication:' do
 
   context 'facebook registered' do
     let(:user) { build :user }
-    mock_facebook :user
+    facebook_register_user
 
     scenario 'with facebook' do
       visit new_user_registration_path

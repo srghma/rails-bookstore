@@ -11,5 +11,9 @@ module SettingsPage
     def password_form
       @password_form || current_user
     end
+
+    def show_current_password
+      current_user.provider.nil?
+    end
   end
 end

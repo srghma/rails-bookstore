@@ -6,29 +6,46 @@ module SettingsPage
     end
 
     def call
-      set_type
+      @email_params = params_for_email
+      @password_params = params_for_password
 
-      case @type
-      when :email
-        result = @user.update_without_password params_for(:email)
-        return broadcast(:invalid, @type, @user) unless result
-        broadcast(:ok, @type)
-      when :password
-        result = @user.update_with_password params_for(:password)
-        return broadcast(:invalid, @type, @user) unless result
-        bypass_sign_in(@user)
-        broadcast(:ok, @type)
+      if @email_params then update_email
+      elsif @password_params then update_password
+      else broadcast(:invalid)
       end
     end
 
-    def set_type
-      %i(email password).each do |type|
-        @type = type unless @params[:user]["#{type}_form"].blank?
+    def update_email
+      if @user.update_without_password @email_params
+        broadcast(:ok, @type)
+      else
+        broadcast(:validate, @type, @user)
       end
     end
 
-    def params_for(type)
-      @params.require(:user).require("#{type}_form").permit!.to_h
+    def update_password
+      result = if @user.provider
+                 @user.update_attributes(password: @password_params[:password])
+               else
+                 @user.update_with_password @password_params
+               end
+      return broadcast(:validate, @type, @user) unless result
+      bypass_sign_in(@user)
+      broadcast(:ok, @type)
+    end
+
+    def params_for_email
+      @params.require(:user).require(:email_form).permit(:email)
+    rescue ActionController::ParameterMissing
+      nil
+    end
+
+    def params_for_password
+      @params.require(:user)
+             .require(:password_form)
+             .permit(:current_password, :password, :password_confirmation)
+    rescue ActionController::ParameterMissing
+      nil
     end
   end
 end

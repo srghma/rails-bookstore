@@ -63,6 +63,27 @@ feature 'Settings profile page:' do
     end
   end
 
+  context 'fast authenticated user' do
+    let(:attrs) { attributes_for(:user) }
+    let(:email) { attrs[:email] }
+    let(:password) { attrs[:password] }
+
+    before { fast_register_user(attrs[:email]) }
+    before { visit settings_profile_path }
+
+    it 'no need to confirm password' do
+      within '#edit_password' do
+        fill_in 'user[password_form][password]', with: password
+        fill_in 'user[password_form][password_confirmation]', with: password
+        click_on 'Save'
+      end
+      expect(page).to have_current_path settings_profile_path
+
+      valid = User.find_by(email: email).valid_password?(password)
+      expect(valid).to eq true
+    end
+  end
+
   context 'delete me' do
     let(:user) { create :user }
     before { sign_in user }

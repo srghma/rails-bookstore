@@ -36,7 +36,6 @@ gem 'credit_card_validations'
 gem 'carrierwave'
 gem 'carrierwave-dropbox'
 gem 'mini_magick'
-# gem 'cloudinary'
 
 gem 'rails-assets-tipsy', source: 'https://rails-assets.org'
 
@@ -57,6 +56,9 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'sqlite3'
   gem 'dotenv-rails'
+
+  gem 'letter_opener_web'
+  gem 'capybara-email'
 
   # RSpec
   gem 'rspec-rails'

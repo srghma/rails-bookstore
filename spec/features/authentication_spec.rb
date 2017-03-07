@@ -12,6 +12,7 @@ feature 'Authentication:' do
         end
         click_button 'Log in'
         expect(current_path).to eq root_path
+        get_confirm_email(user.email)
       end
 
       scenario 'wrong password' do

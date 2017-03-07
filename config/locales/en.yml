@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  cancel: Cancel
   devise:
     recover_password_hint: 'Forgot password?'
   auth:
@@ -50,9 +51,8 @@ en:
     cvv-help: '3-digid seucrity code usually found on the back of your card'
     edit: 'edit'
     complete:
-      show:
-        thankyou: Thank You for your Order!
-        sent_to: "An order confirmation has been has been sent to %{email}"
+      thankyou: Thank You for your Order!
+      sent_to: "An order confirmation has been has been sent to %{email}"
 
   order:
     states:

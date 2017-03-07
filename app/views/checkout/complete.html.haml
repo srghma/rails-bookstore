@@ -1,7 +1,7 @@
 = render layout: 'checkout/layout' do
   .text-center.mb-40
-    %h3.general-subtitle= t('.thankyou')
-    %p.fw-300= t('.sent_to', email: presenter.email)
+    %h3.general-subtitle= t('checkout.complete.thankyou')
+    %p.fw-300= t('checkout.complete.sent_to', email: presenter.email)
   .row.mb-20
     .col-sm-6
       .visible-xs

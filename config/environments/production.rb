@@ -80,7 +80,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.app_domain = ENV['DOMAIN_NAME']
+  config.app_domain = 'tranquil-plains-56319.herokuapp.com'
   config.action_mailer.default_url_options = { host: config.app_domain }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

@@ -197,7 +197,7 @@ feature 'Checkout page:' do
         expect(page).to have_current_path cart_path
         expect(order.reload.processing?).to eq true
         # get_checkout_email(user.email)
-        expect(page).to have_current_path order_path(order)
+        # expect(page).to have_current_path order_path(order)
       end
     end
   end

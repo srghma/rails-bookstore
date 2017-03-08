@@ -20,7 +20,7 @@ module OrdersPage
 
     def order_summary
       @order_summary ||= OrderSummary::OrderDecorator
-                         .new(current_order, deficit_method: :hide, position: :right)
+                         .new(@order, deficit_method: :hide, position: :right)
     end
   end
 end

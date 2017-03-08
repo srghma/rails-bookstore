@@ -32,7 +32,7 @@ module CheckoutPage
     end
 
     def send_email
-      CheckoutMailer.complete(current_user, @order).deliver
+      CheckoutMailer.complete(current_user, @order).deliver_later
     end
   end
 end

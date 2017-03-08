@@ -42,6 +42,8 @@ gem 'rails-assets-tipsy', source: 'https://rails-assets.org'
 gem 'factory_girl_rails'
 gem 'ffaker'
 
+gem 'dotenv-rails'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
@@ -55,7 +57,6 @@ end
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'sqlite3'
-  gem 'dotenv-rails'
 
   gem 'letter_opener_web'
   gem 'capybara-email'

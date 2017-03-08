@@ -195,6 +195,7 @@ feature 'Checkout page:' do
         page.evaluate_script('window.location.reload()')
         expect(page).to have_current_path cart_path
         expect(order.reload.processing?).to eq true
+        sleep 2
         get_checkout_email(user.email)
         expect(page).to have_current_path order_path(order)
       end

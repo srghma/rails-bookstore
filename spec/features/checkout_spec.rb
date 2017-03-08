@@ -189,7 +189,6 @@ feature 'Checkout page:' do
       it 'should place order and render complete page only one time' do
         click_on I18n.t('simple_form.titles.place_order')
 
-        # will wait for redirection
         expect(page).to have_current_path checkout_path(:complete)
 
         page.evaluate_script('window.location.reload()')

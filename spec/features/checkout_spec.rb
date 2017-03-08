@@ -182,6 +182,7 @@ feature 'Checkout page:' do
 
     context 'when submitting' do
       before do
+        clear_emails
         visit checkout_path(:confirm)
         expect(page.current_path).to eq checkout_path(:confirm)
       end

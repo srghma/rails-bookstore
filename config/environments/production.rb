@@ -96,6 +96,7 @@ Rails.application.configure do
   #   password: ENV['GMAIL_PASSWORD']
   # }
 
+  config.action_mailer.default_url_options = { host: ENV['DOMAIN_NAME'] }
   config.action_mailer.smtp_settings = {
     port:            ENV['MAILGUN_SMTP_PORT'],
     address:         ENV['MAILGUN_SMTP_SERVER'],

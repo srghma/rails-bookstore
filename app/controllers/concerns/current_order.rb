@@ -52,15 +52,13 @@ module CurrentOrder
                                :with_credit_card,
                                delivery: delivery
 
-    order.billing_address  = FactoryGirl.create :billing_address,
-                                                country: country,
-                                                addressable: order
+    FactoryGirl.create :billing_address,
+                       country: country,
+                       addressable: order
 
-    order.shipping_address = FactoryGirl.create :shipping_address,
-                                                country: country,
-                                                addressable: order
-
-    order.save!
+    FactoryGirl.create :shipping_address,
+                       country: country,
+                       addressable: order
     order
   end
 end

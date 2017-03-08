@@ -32,6 +32,6 @@
               %span.checkbox-text= t('simple_form.labels.address.use_billing')
 
     .general-text-align.mb-60
-      = render partial: 'orders/summary'
+      = render partial: 'orders/summary', locals: { order: presenter.order_summary }
       = f.submit t('simple_form.titles.save_and_continue'),
         class: 'btn btn-default center-block mb-20'

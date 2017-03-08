@@ -13,5 +13,5 @@
       %p.general-address.mb-30= presenter.order_date
 
   = render partial: 'order_item/table', locals: { items: presenter.items }
-  = render partial: 'orders/summary'
+  = render partial: 'orders/summary', locals: { order: presenter.order_summary }
 

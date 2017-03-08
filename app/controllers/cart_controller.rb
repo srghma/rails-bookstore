@@ -1,8 +1,6 @@
 class CartController < ApplicationController
   respond_to :js, only: [:add_product]
 
-  before_action :set_summary_presenter
-
   def show
     present CartPage::CartPresenter.new(current_order)
   end
@@ -26,11 +24,5 @@ class CartController < ApplicationController
         return
       end
     end
-  end
-
-  private
-
-  def set_summary_presenter
-    present SummaryPresenter.new(current_order, deficit_method: :show_zero), for: :summary
   end
 end

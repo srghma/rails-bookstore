@@ -1,0 +1,21 @@
+.row.mb-20
+  .col-sm-3
+    %h3.general-subtitle= t('shipping_address')
+    - if order.edit_link?
+      = order.edit_link(:address)
+    %p.general-address= order.shipping_address
+  .col-sm-3
+    %h3.general-subtitle= t('billing_address')
+    - if order.edit_link?
+      = order.edit_link(:address)
+    %p.general-address= order.billing_address
+  .col-sm-3
+    %h3.general-subtitle= t('shipments')
+    - if order.edit_link?
+      = order.edit_link(:delivery)
+    %p.general-address= order.shipments
+  .col-sm-3
+    %h3.general-subtitle= t('payment_information')
+    - if order.edit_link?
+      = order.edit_link(:payment)
+    %p.general-address= order.payment

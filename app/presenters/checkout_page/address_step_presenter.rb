@@ -7,6 +7,11 @@ module CheckoutPage
       super()
     end
 
+    def order_summary
+      @order_summary ||= OrderSummary::OrderDecorator
+                         .new(current_order, deficit_method: :hide, position: :left)
+    end
+
     def billing
       address(:billing)
     end

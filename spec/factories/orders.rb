@@ -30,5 +30,13 @@ FactoryGirl.define do
         order.save
       end
     end
+
+    trait :use_billing do
+      use_billing true
+
+      after(:create) do |order|
+        create(:billing_address, addressable: order)
+      end
+    end
   end
 end

@@ -17,12 +17,14 @@
           .general-img-wrap-table
             = image_tag item.cover, class: 'cart-img-shadow pull-left width-full'
         %td
-          %p.title= item.title
+          %p.general-title= item.title
+          - if item.description
+            %p.in-grey-600.font-weight-light= item.description
         %td
           %span.font-16.in-gold-500= item.price
         %td
           .input-group.general-position{class: item.error_class, data: {quantity: true}}
-            - if item.quantity_editable?
+            - if item.editable
               %a.input-link{href: "#"}
                 %i.fa.fa-minus.line-height-40
               = item_fields.text_field :quantity, class: 'form-control quantity-input'
@@ -32,7 +34,7 @@
               %span.ml-30= item.quantity
         %td
           %span.font-16.in-gold-500= item.subtotal
-        - if item.show_remove
+        - if item.editable
           %td
             = link_to order_item_path(item), method: :delete, class: 'close general-cart-close' do
               %span{'aria-hidden': "true"} &times;

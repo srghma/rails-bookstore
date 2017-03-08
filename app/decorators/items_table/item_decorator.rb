@@ -1,30 +1,33 @@
-module CartPage
+module ItemsTable
   class ItemDecorator < SimpleDelegator
+    class << self
+      def for_collection(objects, editable: true, description: true)
+        @editable = editable
+        @description = description
+        objects.map { |object| new(object) }
+      end
+
+      attr_reader :editable, :description
+    end
+
     include ViewHelpers
     include BookCoverHelpers
-
-    def self.for_collection(objects)
-      objects.map { |object| new(object) }
-    end
 
     def initialize(order_item)
       @order_item = order_item
       super(order_item.book)
     end
 
-    attr_reader :order_item
     delegate :id, :quantity, :to_param, to: :order_item
-
-    def show_remove
-      true
-    end
-
-    def quantity_editable?
-      true
-    end
+    delegate :editable, :description, to: :class
+    attr_reader :order_item
 
     def cover
       cover_url_or_default(version: :thumb)
+    end
+
+    def description
+      __getobj__.description.truncate(50) if self.class.description
     end
 
     def error_class

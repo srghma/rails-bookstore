@@ -16,7 +16,7 @@
           %div
             = button_tag 'Update Cart', class: 'btn btn-primary mt-30 mb-15 res-block'
       .col-sm-8
-        = render partial: 'orders/summary'
+        = render partial: 'orders/summary', locals: { order: presenter.order_summary }
         = link_to 'Checkout', presenter.checkout_path, class: 'btn btn-default mb-20 visible-xs-inline-block'
 - unless presenter.cart_empty?
   = button_to 'Checkout', presenter.checkout_path, method: :get, class: 'btn btn-default mb-20 hidden-xs center-block'

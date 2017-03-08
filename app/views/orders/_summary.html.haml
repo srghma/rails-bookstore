@@ -1,27 +1,27 @@
-%div{class: "general-text-#{presenter(:summary).position}"}
+%div{class: "general-text-#{order.position}"}
   %p.in-gold-500.font-18 Order Summary
-  %table.general-summary-table{class: "general-summary-table-#{presenter(:summary).position} general-text-#{presenter(:summary).position}"}
-    - if presenter(:summary).subtotal
+  %table.general-summary-table{class: "general-summary-table-#{order.position} general-text-#{order.position}"}
+    - if order.subtotal
       %tr
         %td
           %p.font-16 Subtotal:
         %td
-          %p.font-16= presenter(:summary).subtotal
-    - if presenter(:summary).coupon
+          %p.font-16= order.subtotal
+    - if order.coupon
       %tr
         %td
           %p.font-16 Coupon:
         %td
-          %p.font-16= presenter(:summary).coupon
-    - if presenter(:summary).delivery
+          %p.font-16= order.coupon
+    - if order.delivery
       %tr
         %td
           %p.font-16 Delivery:
         %td
-          %p.font-16= presenter(:summary).delivery
-    - if presenter(:summary).order_total
+          %p.font-16= order.delivery
+    - if order.order_total
       %tr
         %td
           %strong.font-18 Order Total:
         %td
-          %strong.font-18= presenter(:summary).order_total
+          %strong.font-18= order.order_total

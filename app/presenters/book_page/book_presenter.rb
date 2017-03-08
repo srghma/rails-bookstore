@@ -1,6 +1,6 @@
 module BookPage
   class BookPresenter < Rectify::Presenter
-    def initialize(book, quantity = 1, valid: true)
+    def initialize(book, quantity = nil, valid: true)
       @book = BookPage::BookDecorator.new(book, valid)
       @quantity = quantity
     end

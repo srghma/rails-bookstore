@@ -11,6 +11,11 @@ module CheckoutPage
       end
     end
 
+    def order_summary
+      @order_summary ||= OrderSummary::OrderDecorator
+                         .new(current_order, deficit_method: :hide, position: :left)
+    end
+
     private
 
     def set_up_delivery_decorator

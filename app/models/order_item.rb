@@ -1,4 +1,6 @@
 class OrderItem < ApplicationRecord
+  include OrderItemArithmeticHelpers
+
   belongs_to :order
   belongs_to :book
 
@@ -7,10 +9,6 @@ class OrderItem < ApplicationRecord
     only_integer: true,
     greater_than_or_equal_to: 1
   }
-
-  def subtotal
-    @_subtotal ||= quantity * book.price
-  end
 
   def to_s
     "#{quantity} #{book.title}"

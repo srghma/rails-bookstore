@@ -33,10 +33,6 @@ module CheckoutPage
       @shipping = AddressForm.new params_for_address(:shipping)
     end
 
-    def set_shipping
-      @shipping = AddressForm.new params_for_address(:shipping)
-    end
-
     def create_billing
       @order.billing_address&.delete
       @order.create_billing_address(@billing.attributes)

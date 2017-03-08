@@ -16,8 +16,8 @@ RSpec.describe User, type: :model do
 
   describe '.from_omniauth' do
     let(:email) { FFaker::Internet.email }
-    let(:info) { double('Info', email: email) }
-    let(:auth) { double('Auth', info: info) }
+    let(:info) { double('Info', email: email, first_name: 'serg', last_name: 'serg') }
+    let(:auth) { double('Auth', provider: 'facebook', uid: 1, info: info) }
 
     context 'when user in database' do
       it 'should return user' do

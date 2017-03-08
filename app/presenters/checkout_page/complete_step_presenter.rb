@@ -4,13 +4,11 @@ module CheckoutPage
       @order = order
     end
 
-    def items
-      @items ||= CheckoutPage::ItemDecorator
-                    .for_collection(@order.order_items)
-    end
+    delegate :email, to: :current_user
 
-    def email
-      current_user.email
+    def items
+      @items ||= ItemsTable::ItemDecorator
+                 .for_collection(@order.order_items, editable: false)
     end
 
     def order_number
@@ -23,7 +21,12 @@ module CheckoutPage
 
     def address
       address = @order.use_billing ? @order.billing_address : @order.shipping_address
-      CheckoutPage::AddressDecorator.new(address).to_html
+      OrderDetails::AddressDecorator.new(address).to_html
+    end
+
+    def order_summary
+      @order_summary ||= OrderSummary::OrderDecorator
+                         .new(@order, deficit_method: :hide, position: :right)
     end
   end
 end

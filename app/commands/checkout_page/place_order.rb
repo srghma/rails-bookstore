@@ -10,6 +10,7 @@ module CheckoutPage
 
       place_order
       create_current_order
+      send_email
 
       broadcast(:ok, @order)
     end
@@ -28,6 +29,10 @@ module CheckoutPage
       @order.completed_at = Time.current
       @order.user = current_user
       @order.save
+    end
+
+    def send_email
+      CheckoutMailer.complete(current_user, @order).deliver_later
     end
   end
 end

@@ -1,6 +1,4 @@
 class Address < ApplicationRecord
-  self.inheritance_column = 'type'
-
   belongs_to :country
   belongs_to :addressable, polymorphic: true
 

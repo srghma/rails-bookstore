@@ -6,7 +6,6 @@ class CheckoutController < ApplicationController
   before_action :check_accesability, except: :complete
 
   before_action :set_progress_presenter
-  before_action :set_summary_presenter
 
   rescue_from Wicked::Wizard::InvalidStepError do |_|
     redirect_to cart_path, alert: t('checkout.failure.invalid_step')
@@ -40,6 +39,7 @@ class CheckoutController < ApplicationController
     CheckoutPage::PlaceOrder.call(params, current_order) do
       on(:invalid) { redirect_to cart_path, alert: t('checkout.failure.invalid_step') }
       on(:ok) do |old_order|
+
         present step_presenter.new(old_order)
         render_wizard
       end
@@ -47,15 +47,6 @@ class CheckoutController < ApplicationController
   end
 
   private
-
-  def set_summary_presenter
-    position = %i(confirm complete).include?(step) ? :right : :left
-    present SummaryPresenter.new(
-      current_order,
-      deficit_method: :hide,
-      position: position
-    ), for: :summary
-  end
 
   def set_progress_presenter
     select_up_to_step = minimal_accessible_step

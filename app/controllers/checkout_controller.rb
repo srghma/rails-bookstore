@@ -39,7 +39,6 @@ class CheckoutController < ApplicationController
     CheckoutPage::PlaceOrder.call(params, current_order) do
       on(:invalid) { redirect_to cart_path, alert: t('checkout.failure.invalid_step') }
       on(:ok) do |old_order|
-
         present step_presenter.new(old_order)
         render_wizard
       end

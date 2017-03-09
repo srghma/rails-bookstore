@@ -19,7 +19,7 @@ module ItemsTable
     end
 
     delegate :id, :quantity, :to_param, to: :order_item
-    delegate :editable, :description, to: :class
+    delegate :editable, to: :class
     attr_reader :order_item
 
     def cover
@@ -31,7 +31,8 @@ module ItemsTable
     end
 
     def error_class
-      'has-error' if @order_item.errors && @order_item.errors.any?
+      'has-error' if @order_item.errors&.any?
+      # 'has-error' if @order_item.errors && @order_item.errors.any?
     end
 
     def price

@@ -9,60 +9,49 @@ module CategoryPage
       :by_title_desc
     ].freeze
 
+    def initialize(params)
+      @params = params
+    end
+
     def call
-      return broadcast(:invalid_category) if broadcast_invalid_category?
-      @category_id = category_id
+      set_current_sort_method
+      set_category
+      set_page
 
-      broadcast(:invalid_sort) if broadcast_invalid_sort?
-      @current_sort_method = current_sort_method || SORT_METHODS.first
+      return broadcast(:invalid_category) unless @category
 
-      @page = page
+      broadcast(:invalid_sort) unless @current_sort_method
+      @current_sort_method ||= SORT_METHODS.first
 
       broadcast(:ok, sorted_books, SORT_METHODS, @current_sort_method)
     end
 
     def sorted_books
       SortedBooks.new(
-        sort_by:     @current_sort_method,
-        category_id: @category_id,
-        page:        @page
+        sort_by:  @current_sort_method,
+        category: @category,
+        page:     @page
       ).query
-    end
-
-    def broadcast_invalid_category?
-      # TODO: pass to validation
-      !category_id.nil? && !category_id_valid?(category_id)
-    end
-
-    def broadcast_invalid_sort?
-      !sort.nil? && !sort_valid?(sort)
-    end
-
-    def current_sort_method
-      return nil unless sort_valid?(sort)
-      sort
-    end
-
-    def category_id
-      @caller.params[:id]
-    end
-
-    def page
-      @caller.params[:page]
     end
 
     private
 
-    def sort
-      @caller.params[:sort]&.to_sym
+    def set_current_sort_method
+      sort = @params[:sort]&.to_sym
+      if sort
+        @current_sort_method = SORT_METHODS.detect { |s| s == sort }
+      else
+        @current_sort_method = SORT_METHODS.first
+      end
     end
 
-    def sort_valid?(sort)
-      SORT_METHODS.include?(sort)
+    def set_category
+      id = @params[:id]
+      @category = id ? Category.find_by(id: id) : :all
     end
 
-    def category_id_valid?(id)
-      Category.exists?(id)
+    def set_page
+      @page = @params[:page]
     end
   end
 end

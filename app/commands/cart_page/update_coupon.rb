@@ -39,7 +39,7 @@ module CartPage
     end
 
     def current_code
-      @order.coupon&.code.to_s
+      @order.coupon&.code&.to_s
     end
 
     def new_code

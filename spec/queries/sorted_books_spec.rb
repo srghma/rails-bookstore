@@ -25,7 +25,7 @@ RSpec.describe SortedBooks do
     context 'category specified' do
       it 'should return books in category' do
         books = SortedBooks
-                .new(sort_by: :by_popularity, category_id: category.id)
+                .new(sort_by: :by_popularity, category: category)
                 .query
         # TODO: sometimes this test don't pass, then I uncomment line below,
         # test pass, comment - still pass, why

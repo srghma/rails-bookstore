@@ -96,8 +96,6 @@ RSpec.describe Order, type: :model do
     end
 
     it 'return false if invalid product' do
-      # TODO: why last is nil, but not after reload
-      # item = subject.create_or_update_product(Book.last.id + 1, 10)
       item = subject.create_or_update_product(1000, 10)
       expect(item).to eq false
     end

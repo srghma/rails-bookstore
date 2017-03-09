@@ -1,14 +1,14 @@
 class SortedBooks < Rectify::Query
-  def initialize(sort_by:, category_id: nil, page: nil, paginates_per: 8)
+  def initialize(sort_by:, category: :all, page: nil, paginates_per: 8)
     raise ArgumentError unless sort_by
     @sort_by = sort_by
-    @category_id = category_id
+    @category = category
     @page = page
     @paginates_per = paginates_per
   end
 
   def query
-    @books = Category.find_by(id: @category_id)&.books || Book
+    @books = @category == :all ? Book : @category.books
     @books = @books.page(@page).per(@paginates_per)
     @books = send("sort_#{@sort_by}") if @sort_by
   end

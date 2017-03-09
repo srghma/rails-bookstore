@@ -1,24 +1,16 @@
 module OrdersPage
   class OrdersPresenter < Rectify::Presenter
     def initialize(orders, filter_methods, current_filter_method)
-      @orders = orders
-      @filter_methods = filter_methods
-      @current_filter_method = current_filter_method
-    end
+      @orders = OrdersPage::OrderDecorator.for_collection(orders)
 
-    def current_filter_method
-      t("order.states.#{@current_filter_method}")
-    end
-
-    def filter_methods
-      @_filter_methods ||= @filter_methods.map do |method|
+      @filter_methods = filter_methods.map do |method|
         { key: method, title: t("order.states.#{method}") }
       end
+
+      @current_filter_method = t("order.states.#{current_filter_method}")
     end
 
-    def orders
-      @_orders ||= OrdersPage::OrderDecorator.for_collection(@orders)
-    end
+    attr_reader :order, :filter_methods, :current_filter_method
 
     def empty?
       @orders.empty?

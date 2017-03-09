@@ -1,3 +1,7 @@
 dependencies:
   pre:
     - gem install bundler
+  post:
+    - chromedriver23:
+        background: true
+

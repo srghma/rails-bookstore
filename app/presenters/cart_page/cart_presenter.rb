@@ -11,8 +11,7 @@ module CartPage
     attr_reader :coupon, :items
 
     def order_summary
-      position = %i(confirm complete).include?(step) ? :right : :left
-      OrderSummaryDecorator.new(@order, deficit_method: :hide, position: position)
+      OrderSummary::OrderDecorator.new(current_order, deficit_method: :show_zero)
     end
 
     def order_details
@@ -20,17 +19,14 @@ module CartPage
     end
 
     def checkout_path
-      return @checkout_path if @checkout_path
-      step = CheckoutManager.new(current_order).minimal_accessible_step
-      @checkout_path = view_context.checkout_path(step)
+      @checkout_path ||= begin
+        step = CheckoutManager.new(@order).minimal_accessible_step
+        view_context.checkout_path(step)
+      end
     end
 
     def cart_empty?
       @order.order_items.empty?
-    end
-
-    def order_summary
-      OrderSummary::OrderDecorator.new(current_order, deficit_method: :show_zero)
     end
   end
 end

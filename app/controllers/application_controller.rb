@@ -11,10 +11,6 @@ class ApplicationController < ActionController::Base
     redirect_to '/', alert: t('auth.access_denied')
   end
 
-  def not_found
-    raise ActionController::RoutingError, 'Not Found'
-  end
-
   private
 
   def current_ability

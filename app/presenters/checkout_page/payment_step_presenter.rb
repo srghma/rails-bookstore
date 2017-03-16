@@ -1,19 +1,14 @@
 module CheckoutPage
   class PaymentStepPresenter < Rectify::Presenter
-    def initialize(credit_card_form = nil)
-      @credit_card_form = credit_card_form
+    def initialize(order, credit_card_form = nil)
+      credit_card = credit_card_form || order.credit_card || CreditCard.new
+      @card = CheckoutPage::CreditCardDecorator.new(credit_card)
+
+      @order_summary = OrderSummary::OrderDecorator.new(order,
+                                                        deficit_method: :hide,
+                                                        position: :right)
     end
 
-    def card
-      @card ||= begin
-        target = @credit_card_form || current_order.credit_card || CreditCard.new
-        CheckoutPage::CreditCardDecorator.new(target)
-      end
-    end
-
-    def order_summary
-      @order_summary ||= OrderSummary::OrderDecorator
-                         .new(current_order, deficit_method: :hide, position: :right)
-    end
+    attr_reader :card, :order_summary
   end
 end

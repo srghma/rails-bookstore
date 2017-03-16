@@ -98,6 +98,9 @@ feature 'Checkout page:' do
       click_button I18n.t('simple_form.titles.save_and_continue')
       expect(page.current_path).to eq checkout_path(:payment)
       expect(order.reload.delivery).to be_present
+      visit checkout_path(:delivery)
+
+      expect(find('#delivery_id_1', visible: false).value).to eq '1'
     end
 
     it 'dont redirect to next page unless click delivery' do

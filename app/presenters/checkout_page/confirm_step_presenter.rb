@@ -1,19 +1,18 @@
 module CheckoutPage
   class ConfirmStepPresenter < Rectify::Presenter
-    def items
-      @items ||= ItemsTable::ItemDecorator
-                 .for_collection(current_order.order_items, editable: false)
+    def initialize(order)
+      @order_summary = OrderSummary::OrderDecorator
+                       .new(order, deficit_method: :hide, position: :right)
+
+      @order_details = OrderDetails::OrderDecorator
+                       .new(order, edit_link: true)
+                       .attach(self)
+
+      @items = ItemsTable::ItemDecorator
+               .for_collection(order.order_items, editable: false)
+
     end
 
-    def order_details
-      @order_details ||= OrderDetails::OrderDecorator
-                         .new(current_order, edit_link: true)
-                         .attach(self)
-    end
-
-    def order_summary
-      @order_summary ||= OrderSummary::OrderDecorator
-                         .new(current_order, deficit_method: :hide, position: :right)
-    end
+    attr_reader :items, :order_summary, :order_details
   end
 end

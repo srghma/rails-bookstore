@@ -1,27 +1,14 @@
 module CheckoutPage
   class DeliveryStepPresenter < Rectify::Presenter
-    def initialize(id = nil)
-      @delivery_id = id
+    def initialize(order)
+      current_delivery_id = order.delivery&.id
+      @deliveries = CheckoutPage::DeliveryDecorator
+                    .for_collection(Delivery.all, current_delivery_id: current_delivery_id)
+
+      @order_summary = OrderSummary::OrderDecorator
+                       .new(order, deficit_method: :hide, position: :left)
     end
 
-    def deliveries
-      @deliveries ||= begin
-        set_up_delivery_decorator
-        CheckoutPage::DeliveryDecorator.for_collection(Delivery.all)
-      end
-    end
-
-    def order_summary
-      @order_summary ||= OrderSummary::OrderDecorator
-                         .new(current_order, deficit_method: :hide, position: :left)
-    end
-
-    private
-
-    def set_up_delivery_decorator
-      CheckoutPage::DeliveryDecorator.current_delivery_id =
-        @delivery_id ||
-        current_order.delivery&.id
-    end
+    attr_reader :deliveries, :order_summary
   end
 end

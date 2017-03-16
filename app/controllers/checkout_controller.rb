@@ -21,12 +21,12 @@ class CheckoutController < ApplicationController
   end
 
   def show
-    present step_presenter.new
+    present step_presenter.new(current_order)
     render_wizard
   end
 
   def update
-    CheckoutPage::ProceedCheckout.call(params, current_order, step) do
+    CheckoutPage::ProceedCheckout.call(current_order, params, step) do
       on(:invalid) do |*attrs|
         present step_presenter.new(*attrs)
         render_wizard
@@ -36,7 +36,7 @@ class CheckoutController < ApplicationController
   end
 
   def complete
-    CheckoutPage::PlaceOrder.call(params, current_order) do
+    CheckoutPage::PlaceOrder.call(current_order, params) do
       on(:invalid) { redirect_to cart_path, alert: t('checkout.failure.invalid_step') }
       on(:ok) do |old_order|
         present step_presenter.new(old_order)

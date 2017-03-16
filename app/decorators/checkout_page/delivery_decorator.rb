@@ -3,11 +3,12 @@ module CheckoutPage
     include ViewHelpers
 
     class << self
-      def for_collection(objects)
+      def for_collection(objects, current_delivery_id:)
+        @current_delivery_id = current_delivery_id
         objects.map { |object| new(object) }
       end
 
-      attr_accessor :current_delivery_id
+      attr_reader :current_delivery_id
     end
 
     def days

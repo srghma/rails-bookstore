@@ -1,8 +1,8 @@
 module CheckoutPage
   class PlaceOrder < Rectify::Command
-    def initialize(params, order)
-      @params = params
+    def initialize(order, params)
       @order = order
+      @params = params
     end
 
     def call

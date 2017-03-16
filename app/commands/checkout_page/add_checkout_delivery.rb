@@ -1,22 +1,16 @@
 module CheckoutPage
   class AddCheckoutDelivery < Rectify::Command
-    def initialize(params, order, step)
-      @params = params
+    def initialize(order, params)
       @order = order
+      @id = params[:delivery_id]
     end
 
     def call
-      @delivery = Delivery.find_by(id: id)
-      return broadcast(:invalid, id) unless @delivery
+      @delivery = Delivery.find_by(id: @id)
+      return broadcast(:invalid, @order) unless @delivery
       @order.delivery = @delivery
       @order.save
-      broadcast(:ok)
-    end
-
-    private
-
-    def id
-      @params[:delivery_id]
+      broadcast(:ok, @order)
     end
   end
 end

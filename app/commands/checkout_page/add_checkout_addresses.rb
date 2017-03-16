@@ -1,8 +1,8 @@
 module CheckoutPage
   class AddCheckoutAddresses < Rectify::Command
-    def initialize(params, order, step)
-      @params = params
+    def initialize(order, params)
       @order = order
+      @params = params
     end
 
     def call
@@ -12,7 +12,7 @@ module CheckoutPage
       set_shipping unless @use_billing
 
       unless [@billing, @shipping].compact.all?(&:valid?)
-        broadcast(:invalid, @billing, @shipping, @use_billing)
+        broadcast(:invalid, @order, @billing, @shipping, @use_billing)
         return
       end
 
@@ -20,7 +20,7 @@ module CheckoutPage
       create_shipping unless @use_billing
       save_use_billing
 
-      broadcast(:ok)
+      broadcast(:ok, @order)
     end
 
     private

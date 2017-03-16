@@ -2,10 +2,10 @@
 
 %ul.steps.list-inline
   - presenter(:progress).steps.each do |step|
-    %li{ class: step.classes }
-      %span.step-number= step.number
-      %span.step-text.hidden-xs= step.name
-    - if step.divider?
+    %li{ class: step[:classes] }
+      %span.step-number= step[:number]
+      %span.step-text.hidden-xs= step[:name]
+    - if step[:divider]
       %li.step-divider
 
 = yield

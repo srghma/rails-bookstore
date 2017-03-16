@@ -1,28 +1,32 @@
 module CheckoutPage
   class AddressStepPresenter < Rectify::Presenter
-    def initialize(billing_form = nil, shipping_form = nil, use_billing = nil)
+    def initialize(order, billing_form = nil, shipping_form = nil, use_billing = nil)
+      @order = order
       @billing_form  = billing_form
       @shipping_form = shipping_form
-      @use_billing   = use_billing
+      @use_billing   = use_billing || order.use_billing
       super()
     end
 
+    attr_reader :use_billing
+
     def order_summary
       @order_summary ||= OrderSummary::OrderDecorator
-                         .new(current_order, deficit_method: :hide, position: :left)
+                         .new(@order, deficit_method: :hide, position: :left)
     end
 
     def billing
-      address(:billing)
+      @billing = @billing_form ||
+                 @order.billing_address ||
+                 current_user.billing_address ||
+                 BillingAddress.new
     end
 
     def shipping
-      address(:shipping)
-    end
-
-    def use_billing
-      return @use_billing unless @use_billing.nil?
-      current_order.use_billing
+      @shipping = @shipping_form ||
+                  @order.shipping_address ||
+                  current_user.shipping_address ||
+                  ShippingAddress.new
     end
 
     def selected_country_id(type)
@@ -35,15 +39,6 @@ module CheckoutPage
 
     def shipping_fields_style
       'display: none;' if use_billing
-    end
-
-    private
-
-    def address(type)
-      instance_variable_get("@#{type}_form")  ||
-        current_order.send("#{type}_address") ||
-        current_user.send("#{type}_address")  ||
-        "#{type.capitalize}Address".constantize.new
     end
   end
 end

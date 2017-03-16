@@ -22,6 +22,7 @@
 
 .env
 tags
+coverage
 
 public/uploads
 public/test_uploads

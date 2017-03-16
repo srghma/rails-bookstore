@@ -60,6 +60,7 @@ group :development, :test do
 
   gem 'letter_opener_web'
   gem 'capybara-email'
+  gem 'simplecov', require: false
 
   # RSpec
   gem 'rspec-rails'

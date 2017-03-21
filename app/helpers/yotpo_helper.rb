@@ -16,8 +16,7 @@ module YotpoHelper
       'user-email':     options[:user_email],
       'signature':      options[:signature],
       'time-stamp':     options[:time_stamp],
-      'reviewer-type':  options[:reviewer_type],
-      'reviewer-badge': options[:reviewer_badge]
+      'reviewer-type':  options[:reviewer_type]
     }
     content_tag :div, nil, class: 'yotpo-signed-data', data: data
   end

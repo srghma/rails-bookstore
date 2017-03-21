@@ -24,6 +24,7 @@ module BookPage
     def signed_data_widget
       return unless user_signed_in?
 
+      user_name = current_user.first_name
       user_email = current_user.email
       reviewer_type = 'verified_reviewer'
       time_stamp = Time.zone.now.to_i
@@ -35,12 +36,11 @@ module BookPage
       )
 
       view_context.signed_data_widget(
-        user_name: current_user.first_name,
-        user_email: current_user.email,
-        signature: signature,
-        time_stamp: time_stamp,
-        reviewer_type: reviewer_type,
-        reviewer_badge: nil
+        user_name:      user_name,
+        user_email:     user_email,
+        signature:      signature,
+        time_stamp:     time_stamp,
+        reviewer_type:  reviewer_type
       )
     end
 

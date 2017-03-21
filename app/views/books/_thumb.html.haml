@@ -2,12 +2,13 @@
   .thumbnail.general-thumbnail
     = image_tag book.cover, class: 'img-shadow general-thumbnail-img'
     .thumb-hover
-      .general-thumb-link-wrap
+      .general-thumb-link-wrap.align-center
         = link_to book, class: 'thumb-hover-link' do
           %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
         = render partial: 'books/add_to_cart_link', locals: { book: book }
 .general-thumb-info
-  %p.title= book.title
-  %p.font-16.in-gold-500= number_to_currency(book.price)
+  .clearfix
+    %p.title= book.title
+    %p.font-16.in-gold-500= number_to_currency(book.price)
   %span.divider-sm
   %p.in-grey-600.small= book.authors_names

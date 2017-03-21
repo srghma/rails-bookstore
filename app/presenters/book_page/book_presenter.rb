@@ -22,7 +22,13 @@ module BookPage
     end
 
     def signed_data_widget
-      return unless user_signed_in?
+      return view_context.signed_data_widget(
+        user_name:      nil,
+        user_email:     nil,
+        signature:      nil,
+        time_stamp:     nil,
+        reviewer_type:  nil
+      ) unless user_signed_in?
 
       user_name = current_user.first_name
       user_email = current_user.email

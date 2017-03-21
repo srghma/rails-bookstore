@@ -8,7 +8,7 @@ feature 'Settings address page:' do
 
   context 'when signed' do
     let!(:countries) { create_list :country, 10 }
-    let!(:user) { create :user  }
+    let!(:user) { create :user }
     let(:address) { attributes_for(:address) }
 
     before { sign_in user }
@@ -49,6 +49,21 @@ feature 'Settings address page:' do
         opposite = reloaded.send("#{opposite_type}_address")
         expect(opposite).to eq nil
       end
+    end
+  end
+
+  context 'facebook signed' do
+    let!(:countries) { create_list :country, 10 }
+    let!(:user) { build :user }
+    facebook_register_user
+
+    before { visit settings_address_path }
+
+    it 'show names from facebook account' do
+      expect(find('#user_billing_first_name').value).to eq user.first_name
+      expect(find('#user_billing_last_name').value).to eq user.last_name
+      expect(find('#user_shipping_first_name').value).to eq user.first_name
+      expect(find('#user_shipping_last_name').value).to eq user.last_name
     end
   end
 end

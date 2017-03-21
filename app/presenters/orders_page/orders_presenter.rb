@@ -10,10 +10,6 @@ module OrdersPage
       @current_filter_method = t("order.states.#{current_filter_method}")
     end
 
-    attr_reader :order, :filter_methods, :current_filter_method
-
-    def empty?
-      @orders.empty?
-    end
+    attr_reader :orders, :filter_methods, :current_filter_method
   end
 end

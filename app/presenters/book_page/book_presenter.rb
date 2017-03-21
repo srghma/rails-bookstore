@@ -2,7 +2,7 @@ module BookPage
   class BookPresenter < Rectify::Presenter
     def initialize(book, quantity = nil, valid: true)
       @book = BookPage::BookDecorator.new(book, valid)
-      @quantity = quantity
+      @quantity = quantity || 1
     end
 
     attr_reader :book, :quantity
@@ -18,6 +18,29 @@ module BookPage
         title:       book.title,
         id:          book.id,
         url:         book_url(book)
+      )
+    end
+
+    def signed_data_widget
+      return unless user_signed_in?
+
+      user_email = current_user.email
+      reviewer_type = 'verified_reviewer'
+      time_stamp = Time.zone.now.to_i
+      secret = Rails.application.secrets.secret_key_base
+      signature = OpenSSL::HMAC.hexdigest(
+        OpenSSL::Digest::SHA256.new,
+        secret,
+        "#{user_email}#{reviewer_type}#{book.id}#{time_stamp}"
+      )
+
+      view_context.signed_data_widget(
+        user_name: current_user.first_name,
+        user_email: current_user.email,
+        signature: signature,
+        time_stamp: time_stamp,
+        reviewer_type: reviewer_type,
+        reviewer_badge: nil
       )
     end
 

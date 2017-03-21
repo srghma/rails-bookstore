@@ -8,7 +8,8 @@ module Users
         set_flash_message(:notice, :success, kind: 'Facebook')
       else
         session['devise.facebook_data'] = request.env['omniauth.auth']
-        set_flash_message(:alert, :failure, kind: 'Facebook')
+        set_flash_message(:alert, :failure, kind: 'Facebook',
+                                            reason: @user.errors.full_messages.first)
         redirect_to new_user_registration_path
       end
     end

@@ -46,9 +46,6 @@ feature 'Authentication:' do
     facebook_register_user
 
     scenario 'with facebook' do
-      visit new_user_registration_path
-      first('.general-login-icon').click
-      sleep 1
       expect(current_path).to eq root_path
     end
   end

@@ -16,17 +16,11 @@ module CheckoutPage
     end
 
     def billing
-      @billing = @billing_form ||
-                 @order.billing_address ||
-                 current_user.billing_address ||
-                 BillingAddress.new
+      @billing = address(:billing)
     end
 
     def shipping
-      @shipping = @shipping_form ||
-                  @order.shipping_address ||
-                  current_user.shipping_address ||
-                  ShippingAddress.new
+      @shipping = address(:shipping)
     end
 
     def selected_country_id(type)
@@ -39,6 +33,21 @@ module CheckoutPage
 
     def shipping_fields_style
       'display: none;' if use_billing
+    end
+
+    private
+
+    def address(type)
+      address = instance_variable_get("@#{type}_form") ||
+                current_order.send("#{type}_address")  ||
+                current_user.send("#{type}_address")
+
+      return address if address
+
+      "#{type.capitalize}Address".constantize.new(
+        first_name: current_user.first_name,
+        last_name:  current_user.last_name
+      )
     end
   end
 end

@@ -2,7 +2,14 @@ module AuthenticationGroupMacroses
   def facebook_register_user
     around(:each) do |example|
       OmniAuth.config.test_mode = true
-      OmniAuth.config.add_mock(:facebook, info: { email: user.email })
+      OmniAuth.config.add_mock(:facebook, info: {
+                                 email: user.email,
+                                 first_name: user.first_name,
+                                 last_name:  user.last_name
+                               })
+      visit new_user_registration_path
+      first('.general-login-icon').click
+      sleep 1
       example.run
       OmniAuth.config.test_mode = false
     end

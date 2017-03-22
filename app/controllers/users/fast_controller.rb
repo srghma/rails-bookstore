@@ -15,7 +15,6 @@ module Users
         redirect_to after_sign_in_path_for(user)
       else
         @old_customer = resource_class.new(sign_in_params)
-        @old_customer.valid?
         flash[:error] = t('devise.failure.invalid', authentication_keys: 'email')
         render 'devise/fast/show'
       end

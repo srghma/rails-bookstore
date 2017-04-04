@@ -32,7 +32,6 @@ module ItemsTable
 
     def error_class
       'has-error' if @order_item.errors&.any?
-      # 'has-error' if @order_item.errors && @order_item.errors.any?
     end
 
     def price

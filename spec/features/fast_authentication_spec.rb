@@ -63,9 +63,7 @@ feature 'Fast authentication:' do
 
       it 'rerenders page' do
         expect(page.current_path).to eq user_fast_session_path
-        form = find('#quick_session')
-        expect(form.find('.email .help-block').text).to eq 'is invalid'
-        expect(form.find('.password span.help-block').text).to eq "can't be blank"
+        expect(page).to have_content 'Invalid email or password'
       end
     end
   end

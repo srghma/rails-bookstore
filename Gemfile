@@ -65,7 +65,7 @@ group :development, :test do
   # RSpec
   gem 'rspec-rails'
   gem 'rails-controller-testing'
-  gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'capybara-screenshot'

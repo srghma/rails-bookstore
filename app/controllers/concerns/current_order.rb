@@ -1,7 +1,7 @@
 module CurrentOrder
   extend ActiveSupport::Concern
 
-  COOKIE_KEY = :current_order_id
+  KEY = :current_order_id
 
   included do
     helper_method :current_order
@@ -26,39 +26,19 @@ module CurrentOrder
   end
 
   def get_id
-    use_signed ? cookies.signed[COOKIE_KEY] : cookies[COOKIE_KEY]
+    use_signed ? cookies.signed[KEY] : cookies[KEY]
   end
 
   def set_id(id)
     hash = { value: id, expires: 5.hours.from_now }
     if use_signed
-      cookies.signed[COOKIE_KEY] = hash
+      cookies.signed[KEY] = hash
     else
-      cookies[COOKIE_KEY] = hash
+      cookies[KEY] = hash
     end
   end
 
-  # TODO: remove, only for development
   def create_order
-    Rails.env.development? ? create_with_factory : Order.create
-    # Order.create
-  end
-
-  def create_with_factory
-    delivery = Delivery.first
-    country = Country.first
-
-    order = FactoryGirl.create :order,
-                               :with_credit_card,
-                               delivery: delivery
-
-    FactoryGirl.create :billing_address,
-                       country: country,
-                       addressable: order
-
-    FactoryGirl.create :shipping_address,
-                       country: country,
-                       addressable: order
-    order
+    Rails.env.development? ? DeploymentHelpers.development_create_order : Order.create
   end
 end

@@ -38,11 +38,11 @@ module CategoryPage
 
     def set_current_sort_method
       sort = @params[:sort]&.to_sym
-      if sort
-        @current_sort_method = SORT_METHODS.detect { |s| s == sort }
-      else
-        @current_sort_method = SORT_METHODS.first
-      end
+      @current_sort_method = if sort
+                               SORT_METHODS.detect { |s| s == sort }
+                             else
+                               SORT_METHODS.first
+                             end
     end
 
     def set_category

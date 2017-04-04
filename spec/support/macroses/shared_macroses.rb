@@ -18,12 +18,11 @@ module SharedMacroses
   end
 
   def click_checkbox
-    case Capybara.default_driver
-    when :selenium_chrome
-      find('.checkbox-icon').click
-    when :webkit
-      find('.checkbox-icon').trigger('click')
-    end
+    find('.checkbox-icon').click
+  end
+
+  def reload_page
+    page.evaluate_script('window.location.reload()')
   end
 end
 

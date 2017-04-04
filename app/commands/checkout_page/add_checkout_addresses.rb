@@ -8,16 +8,16 @@ module CheckoutPage
     def call
       @use_billing = use_billing?
 
-      set_billing
-      set_shipping unless @use_billing
+      set_address(:billing)
+      set_address(:shipping) unless @use_billing
 
       unless [@billing, @shipping].compact.all?(&:valid?)
         broadcast(:invalid, @order, @billing, @shipping, @use_billing)
         return
       end
 
-      create_billing
-      create_shipping unless @use_billing
+      create_address(:billing)
+      create_address(:shipping) unless @use_billing
       save_use_billing
 
       broadcast(:ok, @order)
@@ -25,22 +25,15 @@ module CheckoutPage
 
     private
 
-    def set_billing
-      @billing = AddressForm.new params_for_address(:billing)
+    def set_address(type)
+      form = AddressForm.new params_for_address(type)
+      instance_variable_set("@#{type}", form)
     end
 
-    def set_shipping
-      @shipping = AddressForm.new params_for_address(:shipping)
-    end
-
-    def create_billing
-      @order.billing_address&.delete
-      @order.create_billing_address(@billing.attributes)
-    end
-
-    def create_shipping
-      @order.shipping_address&.delete
-      @order.create_shipping_address(@shipping.attributes)
+    def create_address(type)
+      attrs = instance_variable_get("@#{type}").attributes
+      @order.send("#{type}_address")&.delete
+      @order.send("create_#{type}_address", attrs)
     end
 
     def save_use_billing

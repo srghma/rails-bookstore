@@ -22,6 +22,7 @@ module SharedMacroses
   end
 
   def reload_page
+    sleep 0.1 if Capybara.current_driver == :poltergeist
     page.evaluate_script('window.location.reload()')
   end
 end

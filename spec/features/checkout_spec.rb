@@ -10,7 +10,7 @@ feature 'Checkout page:' do
     context 'without order items' do
       it 'should not allow to checkout page' do
         visit checkout_path(:address)
-        expect(page.current_path).to eq cart_path
+        expect(page).to have_current_path cart_path
       end
     end
 
@@ -46,7 +46,7 @@ feature 'Checkout page:' do
           click_button I18n.t('simple_form.titles.save_and_continue')
 
           expect(page).to have_current_path checkout_path(:delivery)
-          expect(page.current_path).to eq checkout_path(:delivery)
+          expect(page).to have_current_path checkout_path(:delivery)
           expect(Address.all.count).to eq 1
           expect(order.reload.use_billing).to eq true
         end
@@ -65,7 +65,7 @@ feature 'Checkout page:' do
           }.not_to change {
             Address.count
           }
-          expect(page.current_path).to eq checkout_path(:address)
+          expect(page).to have_current_path checkout_path(:address)
           expect(page).to have_content 'can\'t be blank'
         end
       end
@@ -96,7 +96,7 @@ feature 'Checkout page:' do
       radios.first.click
 
       click_button I18n.t('simple_form.titles.save_and_continue')
-      expect(page.current_path).to eq checkout_path(:payment)
+      expect(page).to have_current_path checkout_path(:payment)
       expect(order.reload.delivery).to be_present
       visit checkout_path(:delivery)
 
@@ -107,7 +107,7 @@ feature 'Checkout page:' do
       expect(order.reload.delivery).to be_nil
 
       click_button I18n.t('simple_form.titles.save_and_continue')
-      expect(page.current_path).to eq checkout_path(:delivery)
+      expect(page).to have_current_path checkout_path(:delivery)
       expect(order.reload.delivery).to be_nil
     end
   end
@@ -129,7 +129,7 @@ feature 'Checkout page:' do
       expect(order.reload.credit_card).to be_nil
       click_button I18n.t('simple_form.titles.save_and_continue')
 
-      expect(page.current_path).to eq checkout_path(:confirm)
+      expect(page).to have_current_path checkout_path(:confirm)
       expect(order.reload.credit_card).to be_present
     end
 
@@ -141,7 +141,7 @@ feature 'Checkout page:' do
       expect(order.reload.credit_card).to be_nil
       click_button I18n.t('simple_form.titles.save_and_continue')
 
-      expect(page.current_path).to eq checkout_path(:payment)
+      expect(page).to have_current_path checkout_path(:payment)
       expect(order.reload.credit_card).to be_nil
     end
   end
@@ -153,10 +153,10 @@ feature 'Checkout page:' do
     context 'editing' do
       before do
         visit checkout_path(:confirm)
-        expect(page.current_path).to eq checkout_path(:confirm)
+        expect(page).to have_current_path checkout_path(:confirm)
 
         find_link('edit', match: :first).click
-        expect(page.current_path).to eq checkout_path(:address)
+        expect(page).to have_current_path checkout_path(:address)
       end
 
       it 'can edit billing address and jump back' do
@@ -169,7 +169,7 @@ feature 'Checkout page:' do
         click_button I18n.t('simple_form.titles.save_and_continue')
 
         # if swap this two below - test will not pass, wha
-        expect(page.current_path).to eq checkout_path(:confirm)
+        expect(page).to have_current_path checkout_path(:confirm)
         expect(order.reload.billing_address.first_name).to eq newname
       end
 
@@ -179,7 +179,7 @@ feature 'Checkout page:' do
         end
 
         click_button I18n.t('simple_form.titles.save_and_continue')
-        expect(page.current_path).to eq checkout_path(:address)
+        expect(page).to have_current_path checkout_path(:address)
       end
     end
 
@@ -187,19 +187,18 @@ feature 'Checkout page:' do
       before do
         clear_emails
         visit checkout_path(:confirm)
-        expect(page.current_path).to eq checkout_path(:confirm)
+        expect(page).to have_current_path checkout_path(:confirm)
       end
 
       it 'should place order and render complete page only one time' do
         click_on I18n.t('simple_form.titles.place_order')
 
         expect(page).to have_current_path checkout_path(:complete)
-        # TODO: poltergeist error
-        # reload_page
-        # expect(page).to have_current_path cart_path
-        # expect(order.reload.processing?).to eq true
-        # get_checkout_email(user.email)
-        # expect(page).to have_current_path order_path(order)
+        reload_page
+        expect(page).to have_current_path cart_path
+        expect(order.reload.processing?).to eq true
+        get_checkout_email(user.email)
+        expect(page).to have_current_path order_path(order)
       end
     end
   end

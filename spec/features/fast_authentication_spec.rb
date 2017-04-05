@@ -20,7 +20,7 @@ feature 'Fast authentication:' do
       let(:email) { user[:email] }
 
       it 'register user' do
-        expect(page.current_path).to eq checkout_path(:address)
+        expect(page).to have_current_path checkout_path(:address)
         expect(page).to have_content(I18n.t('devise.registrations.signed_up'))
       end
     end
@@ -29,7 +29,7 @@ feature 'Fast authentication:' do
       let(:email)    { 'adsf' }
 
       it 'rerenders page' do
-        expect(page.current_path).to eq user_fast_session_path
+        expect(page).to have_current_path user_fast_session_path
         form = find('#quick_registration')
         expect(form.find('.email .help-block').text).to eq 'is invalid'
       end
@@ -52,7 +52,7 @@ feature 'Fast authentication:' do
       let(:password) { user.password }
 
       it 'sign in user' do
-        expect(page.current_path).to eq checkout_path(:address)
+        expect(page).to have_current_path checkout_path(:address)
         expect(page).to have_content(I18n.t('devise.sessions.signed_in'))
       end
     end
@@ -62,7 +62,7 @@ feature 'Fast authentication:' do
       let(:password) { '' }
 
       it 'rerenders page' do
-        expect(page.current_path).to eq user_fast_session_path
+        expect(page).to have_current_path user_fast_session_path
         expect(page).to have_content 'Invalid email or password'
       end
     end

@@ -10,27 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224174654) do
+ActiveRecord::Schema.define(version: 20170207150356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "addresses", force: :cascade do |t|
-    t.string   "first_name",       null: false
-    t.string   "last_name",        null: false
-    t.string   "street",           null: false
-    t.string   "city",             null: false
-    t.string   "zip",              null: false
-    t.string   "phone",            null: false
-    t.integer  "country_id",       null: false
-    t.string   "type",             null: false
-    t.string   "addressable_type", null: false
-    t.integer  "addressable_id",   null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
-    t.index ["country_id"], name: "index_addresses_on_country_id", using: :btree
-  end
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name", null: false
@@ -70,72 +53,12 @@ ActiveRecord::Schema.define(version: 20170224174654) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "countries", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "code",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_countries_on_name", unique: true, using: :btree
-  end
-
-  create_table "coupons", force: :cascade do |t|
-    t.integer  "order_id"
-    t.string   "code",       null: false
-    t.float    "discount",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_coupons_on_order_id", using: :btree
-  end
-
   create_table "covers", force: :cascade do |t|
     t.integer  "book_id",    null: false
     t.string   "file",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_covers_on_book_id", using: :btree
-  end
-
-  create_table "credit_cards", force: :cascade do |t|
-    t.string   "number",          null: false
-    t.string   "name",            null: false
-    t.date     "expiration_date", null: false
-    t.integer  "cvv",             null: false
-    t.integer  "order_id",        null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["order_id"], name: "index_credit_cards_on_order_id", using: :btree
-  end
-
-  create_table "deliveries", force: :cascade do |t|
-    t.string   "title",                              default: ""
-    t.integer  "min_days",                                        null: false
-    t.integer  "max_days",                                        null: false
-    t.decimal  "price",      precision: 8, scale: 2,              null: false
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-  end
-
-  create_table "order_items", force: :cascade do |t|
-    t.integer  "quantity",   default: 1, null: false
-    t.integer  "book_id",                null: false
-    t.integer  "order_id",               null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.index ["book_id"], name: "index_order_items_on_book_id", using: :btree
-    t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "delivery_id"
-    t.string   "number",       default: ""
-    t.datetime "completed_at"
-    t.boolean  "use_billing",  default: false, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "state",                        null: false
-    t.index ["delivery_id"], name: "index_orders_on_delivery_id", using: :btree
-    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -167,9 +90,5 @@ ActiveRecord::Schema.define(version: 20170224174654) do
   add_foreign_key "authorships", "authors"
   add_foreign_key "authorships", "books"
   add_foreign_key "books", "categories"
-  add_foreign_key "coupons", "orders"
   add_foreign_key "covers", "books"
-  add_foreign_key "credit_cards", "orders"
-  add_foreign_key "orders", "deliveries"
-  add_foreign_key "orders", "users"
 end

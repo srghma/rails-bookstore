@@ -26,7 +26,6 @@ gem 'aasm'
 gem 'kaminari'
 
 gem 'memoist'
-gem 'yotpo'
 gem 'rectify'
 gem 'simple_form'
 gem 'friendly_id'

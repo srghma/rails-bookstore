@@ -9,9 +9,9 @@ Category.find_each do |category|
   FactoryGirl.create_list(:book, 3, :with_authors, category: category)
 end
 
-Delivery.create(title: 'Delivery next day', min_days: 3, max_days: 7, price: 5)
-Delivery.create(title: 'Pick up In-Store',  min_days: 5, max_days: 20, price: 10)
-Delivery.create(title: 'Expressit',         min_days: 2, max_days: 3, price: 15)
+Shopper::Delivery.create(title: 'Delivery next day', min_days: 3, max_days: 7, price: 5)
+Shopper::Delivery.create(title: 'Pick up In-Store',  min_days: 5, max_days: 20, price: 10)
+Shopper::Delivery.create(title: 'Expressit',         min_days: 2, max_days: 3, price: 15)
 
 FactoryGirl.create_list(:coupon, 10)
 

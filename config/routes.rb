@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     post '/users/fast', to: 'users/fast#quick_registration', as: :user_fast_registration
   end
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine, at: '/admin', as: 'rails_admin'
   mount Shopper::Engine, at: '/', as: 'shopper'
 
   resources :books, only: %i(show update)

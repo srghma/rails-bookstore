@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Rectify::ControllerHelpers
-  include CurrentOrder
+  include Shopper::CurrentOrder
   include FastAuth
 
   before_action { present HeaderPresenter.new, for: :header }

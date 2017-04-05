@@ -5,7 +5,6 @@ class Book < ApplicationRecord
   has_many :authorships, dependent: :destroy
   has_many :authors, through: :authorships
   has_many :covers, dependent: :destroy
-  has_many :order_items, dependent: :destroy
 
   validates :title, presence: true
   validates :description, length: { maximum: 500 }

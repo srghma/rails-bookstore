@@ -1,8 +1,7 @@
 FactoryGirl.define do
-  factory :order_item do
+  factory :order_item, class: 'Shopper::OrderItem' do
     quantity 1
     order
-    book
-    # association :product, factory: :book
+    association :product, factory: :book
   end
 end

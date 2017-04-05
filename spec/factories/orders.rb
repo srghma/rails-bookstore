@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :order do
+  factory :order, class: 'Shopper::Order' do
     trait :with_items do
       transient do
         number_of_items 3

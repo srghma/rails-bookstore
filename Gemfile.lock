@@ -1,3 +1,9 @@
+PATH
+  remote: ../rails-bookstore-engine
+  specs:
+    shopper (0.1.0)
+      rails (~> 5.0.2)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -488,6 +494,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
+  shopper!
   shoulda-matchers
   show_me_the_cookies
   simple_form

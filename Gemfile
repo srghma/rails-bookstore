@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.0.2'
 gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
@@ -43,6 +43,7 @@ gem 'factory_girl_rails'
 gem 'ffaker'
 
 gem 'dotenv-rails'
+gem 'shopper', path: '/home/bjorn/projects/rails-bookstore-engine'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -56,7 +57,6 @@ end
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'sqlite3'
 
   gem 'letter_opener_web'
   gem 'capybara-email'

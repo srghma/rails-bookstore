@@ -13,7 +13,7 @@ module SharedMacroses
     fill_in 'order[card][number]',          with: card[:number]
     fill_in 'order[card][name]',            with: card[:name]
     fill_in 'order[card][expiration_date]', with: card[:expiration_date]
-      .strftime(CreditCardForm::DATE_FORMAT)
+      .strftime(Shopper::CreditCardForm::DATE_FORMAT)
     fill_in 'order[card][cvv]',             with: card[:cvv]
   end
 

@@ -23,7 +23,7 @@ module SettingsPage
 
     def set_address
       params = @params.require(:user).require(@type).permit!.to_h
-      @address = AddressForm.new(params)
+      @address = Shopper::AddressForm.new(params)
     end
 
     def create_address

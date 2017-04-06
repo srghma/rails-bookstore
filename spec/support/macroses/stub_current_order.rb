@@ -2,7 +2,7 @@ module CurrentOrderMacrosFeature
   def stub_current_order_with(order)
     # selenium cant set cookie without page, poltergeist - vice versa
     visit('/') if Capybara.current_driver == :selenium_chrome
-    create_cookie(CurrentOrder::KEY, order.id)
+    create_cookie(Shopper::CurrentOrder::KEY, order.id)
   end
 end
 

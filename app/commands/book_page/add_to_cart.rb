@@ -2,21 +2,15 @@ module BookPage
   class AddToCart < Rectify::Command
     def initialize(book, params)
       @book = book
-      @params = params
+      @quantity = params[:quantity]
     end
 
     def call
-      if current_order.create_or_update_product('Book', @book.id, quantity)
+      if current_order.create_or_update_product(@book.product_type, @book.id, @quantity)
         broadcast(:ok)
       else
-        broadcast(:invalid, quantity)
+        broadcast(:invalid, @quantity)
       end
-    end
-
-    private
-
-    def quantity
-      @params[:quantity]
     end
   end
 end

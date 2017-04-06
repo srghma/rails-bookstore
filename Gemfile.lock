@@ -3,13 +3,11 @@ PATH
   specs:
     shopper (0.1.0)
       aasm
-      coffee-rails (~> 4.2)
       haml
       haml-rails
-      puma (~> 3.0)
       rails (~> 5.0.2)
       rectify
-      uglifier (>= 1.3.0)
+      responders
       wicked
 
 GEM

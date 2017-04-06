@@ -1,7 +1,7 @@
 feature 'Book page:' do
   let!(:order) { create :order, :with_items }
   let(:item) { order.order_items.first }
-  let(:book) { item.book }
+  let(:book) { item.product }
   let(:new_quantity) { 3 }
 
   before { stub_current_order_with(order) }

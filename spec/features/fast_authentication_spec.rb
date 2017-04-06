@@ -2,7 +2,7 @@ feature 'Fast authentication:' do
   let(:order) { create :order, :with_items }
   before do
     stub_current_order_with(order)
-    visit checkout_path(:address)
+    visit shopper.checkout_path(:address)
     expect(current_path).to eq user_fast_path
   end
 
@@ -20,7 +20,7 @@ feature 'Fast authentication:' do
       let(:email) { user[:email] }
 
       it 'register user' do
-        expect(page).to have_current_path checkout_path(:address)
+        expect(page).to have_current_path shopper.checkout_path(:address)
         expect(page).to have_content(I18n.t('devise.registrations.signed_up'))
       end
     end
@@ -52,7 +52,7 @@ feature 'Fast authentication:' do
       let(:password) { user.password }
 
       it 'sign in user' do
-        expect(page).to have_current_path checkout_path(:address)
+        expect(page).to have_current_path shopper.checkout_path(:address)
         expect(page).to have_content(I18n.t('devise.sessions.signed_in'))
       end
     end

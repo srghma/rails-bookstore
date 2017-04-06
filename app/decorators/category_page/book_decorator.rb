@@ -1,6 +1,5 @@
 module CategoryPage
   class BookDecorator < SimpleDelegator
-    include BookCoverHelpers
     include BookAuthorsNames
 
     def cover

@@ -6,7 +6,7 @@ module BookPage
     end
 
     def call
-      if current_order.create_or_update_product(@book.id, quantity)
+      if current_order.create_or_update_product('Book', @book.id, quantity)
         broadcast(:ok)
       else
         broadcast(:invalid, quantity)

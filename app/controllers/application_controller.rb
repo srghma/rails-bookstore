@@ -11,6 +11,9 @@ class ApplicationController < ActionController::Base
     redirect_to '/', alert: t('auth.access_denied')
   end
 
+  alias current_customer current_user
+  helper_method :current_customer
+
   private
 
   def current_ability

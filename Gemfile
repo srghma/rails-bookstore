@@ -36,6 +36,7 @@ gem 'carrierwave'
 gem 'carrierwave-dropbox'
 gem 'mini_magick'
 
+gem 'rails-assets-jquery.inputmask', source: 'https://rails-assets.org'
 gem 'rails-assets-tipsy', source: 'https://rails-assets.org'
 
 gem 'factory_girl_rails'

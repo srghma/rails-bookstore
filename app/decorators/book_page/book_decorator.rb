@@ -1,6 +1,5 @@
 module BookPage
   class BookDecorator < SimpleDelegator
-    include BookCoverHelpers
     include BookDimensions
     include BookAuthorsNames
     include ViewHelpers

@@ -8,6 +8,9 @@ module OmniauthAuthenticable
       update(user.id, provider: auth.provider, uid: auth.uid)
     else
       create do |u|
+        u.provider = auth.provider
+        u.uid = auth.uid
+
         u.email = auth.info.email
         u.first_name = auth.info.first_name
         u.last_name = auth.info.last_name

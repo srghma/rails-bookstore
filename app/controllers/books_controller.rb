@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :load_and_authorize_book
 
   def show
-    quantity = current_order.order_items.find_by(book_id: @book.id)&.quantity
+    quantity = current_order.order_items.find_by(product_id: @book.id)&.quantity
     present BookPage::BookPresenter.new(@book, quantity)
   end
 

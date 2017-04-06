@@ -1,6 +1,5 @@
 module HomePage
   class BestsellerDecorator < SimpleDelegator
-    include BookCoverHelpers
     include BookAuthorsNames
 
     def self.for_collection(objects)

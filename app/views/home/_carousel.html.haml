@@ -16,7 +16,7 @@
               %p.in-grey-600.small= book.authors_names
               .general-align.pt-20
                 = link_to t('.but_now'),
-                  shopper_cart_add_product_path(book),
+                  shopper.cart_add_product_path(type: book.product_type, id: book.id),
                   method: :post,
                   remote: true,
                   class: "btn btn-default #{book.disabled_class}"

@@ -11,16 +11,16 @@ class Ability
         can :dashboard
         can :manage, :all
       else
-        can :crud, [BillingAddress, ShippingAddress]
+        can :crud, [::Shopper::BillingAddress, ::Shopper::ShippingAddress]
         can :rud, User, id: user.id
-        can :read, Order, user_id: user.id
+        can :read, ::Shopper::Order, customer_id: user.id
       end
     end
 
     can :read, Book
     can :read, Category
     can :read, Author
-    can [:update, :destroy], OrderItem do |item|
+    can [:update, :destroy], ::Shopper::OrderItem do |item|
       order && item.order == order
     end
   end

@@ -19,7 +19,7 @@ module SettingsPage
     end
 
     def countries
-      Country.order(:name).pluck(:name, :id)
+      Shopper::Country.order(:name).pluck(:name, :id)
     end
 
     private
@@ -30,7 +30,7 @@ module SettingsPage
       user_address = current_user.send("#{type}_address")
       return user_address if user_address
 
-      "#{type.capitalize}Address".constantize.new(
+      "Shopper::#{type.capitalize}Address".constantize.new(
         first_name: current_user.first_name,
         last_name:  current_user.last_name
       )

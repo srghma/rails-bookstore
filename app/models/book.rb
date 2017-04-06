@@ -1,6 +1,8 @@
 class Book < ApplicationRecord
   acts_as_product
 
+  include BookCoverHelpers
+
   belongs_to :category
   has_many :authorships, dependent: :destroy
   has_many :authors, through: :authorships

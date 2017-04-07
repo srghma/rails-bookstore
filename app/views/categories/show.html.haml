@@ -1,0 +1,36 @@
+%h1.general-title-margin Сatalog
+.hidden-xs.clearfix
+  .dropdown.pull-right
+    %a.dropdown-toggle.dropdown-btn.width-240{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+      = presenter.current_sort_method
+      %i.fa.fa-angle-down.dropdown-icon
+    %ul.dropdown-menu
+      - presenter.sort_methods.each do |sort|
+        %li= link_to sort[:title], { sort: sort[:key] }
+  %ul.list-inline.pt-10.mb-25.mr-240
+    - presenter.categories.each do |category|
+      %li.mr-35
+        = link_to category.path, class: 'filter-link' do
+          = category.title
+          %span.badge.general-badge= category.books_count
+.visible-xs.mb-40
+  %p.in-grey-600.small.mb-10 Filter by category
+  .dropdown.mb-20
+    %a.dropdown-toggle.dropdown-btn.width-100{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+      = presenter.current_sort_method
+      %i.fa.fa-angle-down.dropdown-icon
+    %ul.dropdown-menu
+      - presenter.categories.each do |category|
+        %li= link_to category.title, category.path
+  %p.in-grey-600.small.mb-10 Sort by
+  .dropdown.mb-20
+    %a.dropdown-toggle.dropdown-btn.width-100{href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false'}
+      = presenter.current_sort_method
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul.dropdown-menu
+      - presenter.sort_methods.each do |sort|
+        %li= link_to sort[:title], { sort: sort[:key] }
+#books
+  = render partial: 'books_grid', locals: { books: presenter.books }
+.text-center.mb-120#paginator
+  = presenter.next_page_link

@@ -1,0 +1,82 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    placeholders:
+      user:
+        email: 'Enter Email'
+        password: 'Password'
+        password_confirmation: 'Confirm Password'
+        new_password: 'New Password'
+      order:
+        shipping_address: :"simple_form.placeholders.address"
+        billing_address: :"simple_form.placeholders.address"
+      address:
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        street: 'Address'
+        city: 'City'
+        zip: 'Zip'
+        country: 'Select a country'
+        phone: 'Example +355 66 123 4567'
+      card:
+        number: 'Card Number'
+        name: 'Name on Card'
+        expiration_date: 'MM/YY'
+        cvv: 'CVV'
+
+    labels:
+      user:
+        email: 'Enter Email'
+        password: 'Password'
+        password_confirmation: 'Confirm Password'
+        remove_account: I understand that all data will be lost
+        new_password: 'New Password'
+      order:
+        shipping_address: :"simple_form.labels.address"
+        billing_address: :"simple_form.labels.address"
+      address:
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        street: 'Address'
+        city: 'City'
+        zip: 'Zip'
+        country: 'Country'
+        phone: 'Phone'
+        use_billing: 'Use Billing Address'
+      card:
+        number: 'Card Number'
+        name: 'Name on Card'
+        expiration_date: 'MM/YY'
+        cvv: 'CVV'
+    titles:
+      change: Change
+      save: Save
+      save_and_continue: Save and Continue
+      forgot_password?: Forgot password?
+      new_password: Set new password
+      log_in: 'Log in'
+      sign_up: 'Sign up'
+      required_fields: all fields are required
+      place_order: Place Order
+      remove_account: Please Remove My Account
+      new_password: New password
+
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

@@ -1,0 +1,13 @@
+= render partial: 'carousel', locals: { books: presenter.carousel_books }
+.jumbotron.text-center.mb-0
+  %h2.h1 Welcome to our amazing Bookstore!
+  .mb-res-50
+    %p.in-grey-600 We pore through hundreds of new books each month and select the five best we can find to share with our members.
+  = link_to 'Get Started', categories_path, class: 'btn btn-default'
+.mb-35
+  %h3 Best Sellers
+  - presenter.bestsellers.each_slice(4) do |slice|
+    .row
+      - slice.each do |bestseller|
+        .col-sm-6.col-md-3
+          = render partial: 'books/thumb', locals: { book: bestseller }

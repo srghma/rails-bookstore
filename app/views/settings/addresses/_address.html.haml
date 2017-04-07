@@ -1,0 +1,21 @@
+.col-md-5.mb-40
+  .visible-xs.visible-sm
+    %h3.general-subtitle= t("#{type}_address")
+
+  = form_for current_user,
+             url: settings_address_path,
+             method: :put,
+             html: { id: "edit_user_#{type}" } do |f|
+
+    = f.simple_fields_for type, presenter.send(type) do |sf|
+      - [:first_name, :last_name, :street, :city, :zip].each do |field|
+        = sf.input field
+
+      = sf.input :country_id, collection: presenter.countries, selected: presenter.selected_country_id(type)
+
+      = sf.input :phone
+
+    .general-text-align
+      = f.submit t('simple_form.titles.save'),
+        class: 'btn btn-default mb-20'
+

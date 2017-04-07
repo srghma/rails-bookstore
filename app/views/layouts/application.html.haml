@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }
+    %title RailsBookstore
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = render 'layouts/shared/yotpo'
+  %body{ class: controller_name }
+    = render 'layouts/shared/header'
+    = render 'layouts/shared/flash'
+    %main.container
+      = yield
+    = render 'layouts/shared/footer'
+

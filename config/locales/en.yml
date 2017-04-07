@@ -20,4 +20,45 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  cancel: Cancel
+  devise:
+    recover_password_hint: 'Forgot password?'
+  auth:
+    access_denied: 'Access denied'
+  sort:
+    by_creation_date: 'Newest first'
+    by_popularity: 'Popular first'
+    by_price: 'Price: Low to hight'
+    by_price_desc: 'Price: Hight to low'
+    by_title: 'Title: A-Z'
+    by_title_desc: 'Title: Z-A'
+
+  errors:
+    messages:
+      phone: 'Please enter phone number in format +355 66 123 4567'
+
+  books:
+    show:
+      add_to_cart: 'Add to Cart'
+
+  checkout:
+    failure:
+      invalid_step: 'Invalid step'
+      cart_empty: 'Cart is empty'
+      must_fill_previous: 'Must fill previous steps'
+    show:
+      invalid: 'Tmth was wrong'
+    cvv-help: '3-digid seucrity code usually found on the back of your card'
+    edit: 'edit'
+    complete:
+      thankyou: Thank You for your Order!
+      sent_to: "An order confirmation has been has been sent to %{email}"
+
+  order:
+    states:
+      all: All
+      in_progress: In progress
+      processing: Waiting for processing
+      in_delivery: In delivery
+      delivered: Delivered
+      canceled: Canceled

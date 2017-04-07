@@ -1,0 +1,5 @@
+- books  = render(partial: 'books_grid', object: presenter.books, as: 'books')
+- button = presenter.next_page_link.to_s
+:plain
+  $('#books').append('#{escape_javascript(books)}');
+  $('#paginator').html('#{escape_javascript(button)}');

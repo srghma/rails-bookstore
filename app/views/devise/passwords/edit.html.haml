@@ -1,0 +1,22 @@
+.text-center
+  %h3.general-login-title= t('simple_form.titles.new_password')
+
+= simple_form_for(resource, as: resource_name,
+  url: password_path(resource_name), html: { method: :put }) do |field|
+
+  = field.input :reset_password_token, as: :hidden
+  = field.full_error :reset_password_token
+
+  .form-group.mb-30
+    = field.input :password, placeholder: t('simple_form.labels.user.new_password'),
+      label: t('simple_form.labels.user.new_password'),
+      required: true, autofocus: true,
+      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+
+  .form-group.mb-40
+    = field.input :password_confirmation,
+      placeholder: t('simple_form.labels.user.password_confirmation'),
+      label: t('simple_form.labels.user.password_confirmation'), required: true
+
+  = field.button :submit, t('simple_form.titles.change'),
+    class: 'btn btn-default center-block mb-20'

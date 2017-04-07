@@ -13,4 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require bootstrap-sprockets
+//= require tipsy/src/javascripts/jquery.tipsy.js
+//= require jquery.inputmask/dist/inputmask/inputmask.js
+//= require jquery.inputmask/extra/bindings/inputmask.binding.js
+
+//= require read_more
+//= require quantity_widget
+//= require slide_toggle
+//= require data_tipsy
+//= require data_inputmask
+//= require control_disabled

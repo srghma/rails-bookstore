@@ -43,7 +43,7 @@ gem 'factory_girl_rails'
 gem 'ffaker'
 
 gem 'dotenv-rails'
-gem 'shopper', path: '/home/bjorn/projects/rails-bookstore-engine'
+gem 'shopper', git: 'https://github.com/BjornMelgaard/rails-bookstore-engine', branch: 'development'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

@@ -1,6 +1,5 @@
 module HomePage
   class CarouselBookDecorator < SimpleDelegator
-    include BookCoverHelpers
     include BookAuthorsNames
 
     def self.for_collection(objects)

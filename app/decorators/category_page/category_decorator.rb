@@ -1,6 +1,6 @@
 module CategoryPage
   class CategoryDecorator < SimpleDelegator
-    include ViewHelpers
+    include Shopper::ViewHelpers
 
     def self.for_collection(*objects)
       objects.flatten.map { |object| new(object) }

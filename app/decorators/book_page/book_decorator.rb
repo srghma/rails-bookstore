@@ -2,7 +2,7 @@ module BookPage
   class BookDecorator < SimpleDelegator
     include BookDimensions
     include BookAuthorsNames
-    include ViewHelpers
+    include Shopper::ViewHelpers
 
     def initialize(book, valid)
       @valid = valid

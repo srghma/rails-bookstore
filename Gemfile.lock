@@ -1,7 +1,5 @@
-GIT
-  remote: https://github.com/BjornMelgaard/rails-bookstore-engine
-  revision: 68818d2974834b4802ac24b9a0cd6cb7d6a2ee1a
-  branch: development
+PATH
+  remote: ../rails-bookstore-engine
   specs:
     shopper (0.1.0)
       aasm

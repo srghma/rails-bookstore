@@ -18,7 +18,7 @@
           = link_to 'Shop', main_app.categories_path, class: 'dropdown-toggle', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }
           %ul.dropdown-menu
             - presenter(:header).categories.each do |category|
-              %li= link_to category.title, main_app.categories_path(category)
+              %li= link_to category.title, main_app.category_path(category)
         - if user_signed_in?
           %li.dropdown
             %a.dropdown-toggle{ href: '#', role: 'button', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } } My account

@@ -1,5 +1,7 @@
-PATH
-  remote: ../rails-bookstore-engine
+GIT
+  remote: https://github.com/BjornMelgaard/rails-bookstore-engine
+  revision: fccbfca5af02f080948e118d1775852a0fd43d6d
+  branch: master
   specs:
     shopper (0.1.0)
       aasm
@@ -512,4 +514,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.14.4
+   1.14.6
